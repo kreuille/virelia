@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIRELIA ADVISORY | Clarifier. Decider. Avancer.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --white: #FFFFFF;
+            --off-white: #E8E8ED;
+            --text-muted: #8a8a9a;
+            --text-dim: #5a5a6a;
+            --accent: #D52B1E;
+            --accent-glow: rgba(213, 43, 30, 0.15);
+            --accent-soft: #ff4438;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--off-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-20px, 20px); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideRight {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Header ── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition-fast);
+        }
+        header.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            clip-path: polygon(40% 0%, 40% 40%, 0% 40%, 0% 60%, 40% 60%, 40% 100%, 60% 100%, 60% 60%, 100% 60%, 100% 40%, 60% 40%, 60% 0%);
+        }
+
+        nav { display: flex; align-items: center; gap: 2.5rem; }
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+        nav a:hover { color: var(--white); }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: var(--transition-fast);
+        }
+        nav a:hover::after { width: 100%; }
+
+        .btn-cta {
+            background: var(--accent);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-cta:hover {
+            background: var(--accent-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-hover);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent-soft);
+            background: var(--accent-glow);
+        }
+
+        /* ── Mobile Menu ── */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 200px 0 120px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 20s ease-in-out infinite;
+        }
+        .hero-orb-1 {
+            width: 500px; height: 500px;
+            background: var(--accent);
+            top: -100px; right: -100px;
+            animation-delay: 0s;
+        }
+        .hero-orb-2 {
+            width: 350px; height: 350px;
+            background: #4a90d9;
+            bottom: -50px; left: 10%;
+            animation-delay: -7s;
+        }
+        .hero-orb-3 {
+            width: 200px; height: 200px;
+            background: #8b5cf6;
+            top: 40%; left: 50%;
+            animation-delay: -14s;
+        }
+
+        .hero .container { position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.5rem 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        .hero-badge-dot {
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -4px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        h1 span { color: var(--accent); }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+        .hero-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 500px;
+        }
+        .hero-text strong { color: var(--white); font-weight: 600; }
+
+        .hero-right {
+            font-size: 1.05rem;
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+            color: var(--text-muted);
+        }
+        .hero-right strong { color: var(--white); font-weight: 600; }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        /* ── Clients Marquee ── */
+        .clients {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .clients-label {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .marquee-track {
+            display: flex;
+            gap: 4rem;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            transition: var(--transition-fast);
+        }
+        .marquee-track:hover .marquee-item { color: var(--text-muted); }
+
+        /* ── Section Headings ── */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* ── Results / Case Studies ── */
+        .results {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+        .results-header {
+            margin-bottom: 4rem;
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .result-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .result-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+        }
+        .result-card:hover::before { opacity: 1; }
+
+        .result-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--accent-glow);
+            border-radius: 4px;
+        }
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+        .result-problem {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .result-problem strong { color: var(--text-muted); font-weight: 600; }
+        .result-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .result-stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -2px;
+        }
+        .result-stat-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .results-counters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .counter-item {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-card);
+        }
+        .counter-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -2px;
+        }
+        .counter-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* ── Valeur / Why Us ── */
+        .value {
+            padding: 120px 0;
+        }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .value-card {
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-card);
+            transition: var(--transition);
+            position: relative;
+        }
+        .value-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+        }
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(213, 43, 30, 0.2);
+        }
+        .value-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+        .value-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ── Solutions / Ecosystem ── */
+        .solutions {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .solution-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 340px;
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+        }
+        .solution-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        .solution-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+        }
+        .solution-card:hover::after { transform: scaleX(1); }
+
+        .solution-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .solution-name {
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+        .solution-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .solution-link {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+            align-self: flex-start;
+        }
+        .solution-link:hover { color: var(--accent); gap: 12px; }
+        .solution-link span { transition: var(--transition-fast); }
+
+        /* ── Services ── */
+        .services {
+            padding: 120px 0;
+        }
+        .service-row {
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+            border-radius: 12px;
+            gap: 2rem;
+            align-items: center;
+        }
+        .service-row:last-child { border-bottom: 1px solid var(--border); }
+        .service-row:hover {
+            background: var(--bg-card);
+            border-color: var(--border-hover);
+            transform: translateX(10px);
+        }
+        .service-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+        }
+        .service-row h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        .service-row p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+        .service-arrow {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            transition: var(--transition-fast);
+        }
+        .service-row:hover .service-arrow {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        /* ── Method ── */
+        .method {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+        .method-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+        .step {
+            padding: 2rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-card);
+            transition: var(--transition);
+            position: relative;
+        }
+        .step:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+        }
+        .step-num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+            letter-spacing: -1px;
+            opacity: 0.6;
+        }
+        .step-title {
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── Why Choose Us ── */
+        .reasons {
+            padding: 120px 0;
+        }
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .reason-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-card);
+            transition: var(--transition);
+        }
+        .reason-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+        .reason-num {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+        .reason-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .reason-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── FAQ ── */
+        .faq {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+        .faq-list {
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--white);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            transition: var(--transition-fast);
+        }
+        .faq-question:hover { color: var(--accent); }
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            transition: var(--transition-fast);
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-icon { transform: rotate(45deg); color: var(--accent); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-bottom: 1.5rem;
+        }
+        .faq-answer p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ── CTA Banner ── */
+        .cta-banner {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, var(--accent-glow), transparent 70%);
+        }
+        .cta-banner .container { position: relative; z-index: 2; }
+        .cta-banner h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+        .cta-banner p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* ── Contact ── */
+        .contact {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+        .contact-info-item {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            background: var(--bg-card);
+            transition: var(--transition);
+        }
+        .contact-info-item:hover {
+            border-color: var(--border-hover);
+        }
+        .contact-info-item h4 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .contact-info-item p {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .contact-note {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .contact-note-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .contact-note-dot {
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ── Footer ── */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+        .footer-logo {
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 280px;
+            line-height: 1.7;
+        }
+        footer h5 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        footer ul { list-style: none; }
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        footer ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition-fast);
+        }
+        footer ul li a:hover { color: var(--white); }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .method-steps { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            h1 { letter-spacing: -2px; }
+            .hero { padding: 140px 0 80px; min-height: auto; }
+            .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-right { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 2rem; }
+            .hero-ctas { flex-direction: column; }
+
+            nav { display: none; }
+            .mobile-toggle { display: block; }
+
+            .results-grid { grid-template-columns: 1fr; }
+            .results-counters { grid-template-columns: 1fr; }
+            .value-grid { grid-template-columns: 1fr; }
+            .solutions-grid { grid-template-columns: 1fr; }
+            .method-steps { grid-template-columns: 1fr 1fr; }
+            .reasons-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+
+            .service-row {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 1.5rem;
+            }
+            .service-arrow { display: none; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .contact-note { flex-direction: column; }
+        }
+
+        @media (max-width: 480px) {
+            .method-steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-icon"></span>
+                VIRELIA ADVISORY
+            </div>
+            <nav>
+                <a href="#resultats">Resultats</a>
+                <a href="#solutions">Solutions</a>
+                <a href="#offres">Services</a>
+                <a href="#methode">Methode</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact" class="btn-cta">Planifier un Diagnostic</a>
+            </nav>
+            <button class="mobile-toggle" onclick="document.querySelector('nav').classList.toggle('show')">&#9776;</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-orb hero-orb-1"></div>
+                <div class="hero-orb hero-orb-2"></div>
+                <div class="hero-orb hero-orb-3"></div>
+            </div>
+            <div class="container">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Standards de securite Banque & Pharma
+                </div>
+                <h1>Clarifier.<br>Decider.<br><span>Avancer.</span></h1>
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <p>Arretez de subir votre organisation. Nous identifions ce qui vous freine, restructurons vos processus et accelerons votre transformation numerique pour <strong>vous rendre votre temps.</strong></p>
+                    </div>
+                    <div class="hero-right">
+                        Audit, Simplification, IA appliquee et Securite des donnees critiques pour PME, ETI et secteurs a haute conformite.
+                        <strong>ROI mesurable. Souverainete totale.</strong>
+                    </div>
+                </div>
+                <div class="hero-ctas">
+                    <a href="#contact" class="btn-cta">Decouvrir nos solutions <span>&rarr;</span></a>
+                    <a href="#contact" class="btn-outline">Parlons de votre projet</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIENTS MARQUEE -->
+        <section class="clients">
+            <div class="clients-label">Ils nous font confiance dans les secteurs les plus exigeants</div>
+            <div style="overflow: hidden;">
+                <div class="marquee-track">
+                    <span class="marquee-item">Banque Privee</span>
+                    <span class="marquee-item">Pharma Suisse</span>
+                    <span class="marquee-item">Assurance</span>
+                    <span class="marquee-item">Medtech</span>
+                    <span class="marquee-item">ETI Industrielle</span>
+                    <span class="marquee-item">Fonds PE</span>
+                    <span class="marquee-item">Service Public</span>
+                    <span class="marquee-item">Banque Privee</span>
+                    <span class="marquee-item">Pharma Suisse</span>
+                    <span class="marquee-item">Assurance</span>
+                    <span class="marquee-item">Medtech</span>
+                    <span class="marquee-item">ETI Industrielle</span>
+                    <span class="marquee-item">Fonds PE</span>
+                    <span class="marquee-item">Service Public</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS -->
+        <section class="results" id="resultats">
+            <div class="container">
+                <div class="results-header animate-on-scroll">
+                    <div class="section-label">Resultats Concrets</div>
+                    <h2 class="section-title">Des transformations mesurables<br>pour nos clients</h2>
+                    <p class="section-subtitle">Chaque intervention genere un impact quantifiable. Pas de slides, pas de rapports inutiles. Des resultats.</p>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card animate-on-scroll">
+                        <span class="result-tag">Audit & ERP &middot; Secteur Pharma</span>
+                        <h3 class="result-title">Automatisation Conformite Pharmaceutique</h3>
+                        <p class="result-problem"><strong>Probleme :</strong> Systeme d'information vieillissant et processus administratifs chronophages freinant la croissance. Conformite reglementaire geree manuellement.</p>
+                        <div class="result-stat">
+                            <span class="result-stat-value">-40%</span>
+                            <span class="result-stat-text">de temps administratif economise.<br>ROI atteint en 12 mois.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card animate-on-scroll">
+                        <span class="result-tag">Securite &middot; Secteur Bancaire</span>
+                        <h3 class="result-title">Infrastructure Souveraine GRC</h3>
+                        <p class="result-problem"><strong>Probleme :</strong> Architecture SI obsolete, dette technique critique et risques securite croissants dans un environnement hautement regule.</p>
+                        <div class="result-stat">
+                            <span class="result-stat-value">Zero</span>
+                            <span class="result-stat-text">faille de donnees.<br>100% de controle sur les flux sensibles.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card animate-on-scroll">
+                        <span class="result-tag">Lean &middot; Operations</span>
+                        <h3 class="result-title">Optimisation Flux & Personnel CHR</h3>
+                        <p class="result-problem"><strong>Probleme :</strong> Processus desynchronises entre sites, perte de visibilite et latence RH excessive freinant l'efficacite operationnelle.</p>
+                        <div class="result-stat">
+                            <span class="result-stat-value">+60%</span>
+                            <span class="result-stat-text">d'efficacite operationnelle.<br>Reduction drastique de la latence RH.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card animate-on-scroll">
+                        <span class="result-tag">Migration &middot; Souverainete</span>
+                        <h3 class="result-title">Migration Open Source Securisee</h3>
+                        <p class="result-problem"><strong>Probleme :</strong> Dependance a des editeurs proprietaires, couts croissants et risque de perte de souverainete sur les donnees critiques.</p>
+                        <div class="result-stat">
+                            <span class="result-stat-value">100%</span>
+                            <span class="result-stat-text">de souverainete retrouvee.<br>Infrastructure perenne et securisee.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-counters animate-on-scroll">
+                    <div class="counter-item">
+                        <div class="counter-value">100%</div>
+                        <div class="counter-label">Clients satisfaits</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value">15+</div>
+                        <div class="counter-label">Annees d'expertise</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value">300+</div>
+                        <div class="counter-label">Audits realises</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALEUR -->
+        <section class="value">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <div class="section-label">Notre Valeur</div>
+                    <h2 class="section-title">Pourquoi Virelia Advisory ?</h2>
+                    <p class="section-subtitle">Nous redonnons aux dirigeants le controle total sur leur destin technologique et organisationnel.</p>
+                </div>
+                <div class="value-grid">
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">&#9889;</div>
+                        <h3>Impact Immediat</h3>
+                        <p>Pas de cycles longs ni de rapports inutiles. Notre methode garantit des resultats rapides et mesurables. Vous voyez l'impact des les premieres semaines.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">&#127919;</div>
+                        <h3>ROI Garanti</h3>
+                        <p>Chaque franc investi est oriente vers un retour concret et mesurable. Nous identifions d'abord les leviers a fort impact avant d'engager des investissements.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">&#128737;&#65039;</div>
+                        <h3>Souverainete Totale</h3>
+                        <p>Solutions open source eprouvees garantissant transparence et maitrise des couts. Vous gardez le controle total sur vos donnees et systemes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS -->
+        <section class="solutions" id="solutions">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <div class="section-label">Ecosysteme & Realisations</div>
+                    <h2 class="section-title">Des solutions a impact mesurable</h2>
+                    <p class="section-subtitle">Nous ne vendons pas des services. Nous creons des resultats. Chaque plateforme est concue pour generer un ROI concret.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card animate-on-scroll">
+                        <div>
+                            <span class="solution-tag">Souverainete Pharma</span>
+                            <h3 class="solution-name">ClinicalOS</h3>
+                            <p class="solution-desc">Systeme d'exploitation proprietaire pour la gestion des donnees cliniques. Securite maximale et conformite reglementaire integree.</p>
+                        </div>
+                        <a href="https://clinicalos.guedou.ch" target="_blank" class="solution-link">Explorer la plateforme <span>&rarr;</span></a>
+                    </div>
+
+                    <div class="solution-card animate-on-scroll">
+                        <div>
+                            <span class="solution-tag">Securite Bancaire</span>
+                            <h3 class="solution-name">Aegis</h3>
+                            <p class="solution-desc">Hub de protection et de conformite (GRC) pour les institutions financieres. Audit en temps reel et gestion des risques cyber.</p>
+                        </div>
+                        <a href="https://aegis.guedou.ch" target="_blank" class="solution-link">Explorer la plateforme <span>&rarr;</span></a>
+                    </div>
+
+                    <div class="solution-card animate-on-scroll">
+                        <div>
+                            <span class="solution-tag">Operations & Flux</span>
+                            <h3 class="solution-name">CHR360</h3>
+                            <p class="solution-desc">Optimisation operationnelle et gestion des effectifs pour le secteur CHR. Simplification radicale des processus et des flux.</p>
+                        </div>
+                        <a href="https://chr360.ch/inscription.html" target="_blank" class="solution-link">Acceder au service <span>&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="services" id="offres">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <div class="section-label">Nos Leviers d'Impact</div>
+                    <h2 class="section-title">Des services concus<br>pour creer de la valeur</h2>
+                </div>
+                <div style="margin-top: 3rem;">
+                    <div class="service-row animate-on-scroll">
+                        <div class="service-tag">Audit</div>
+                        <div>
+                            <h3>Diagnostic 360&#176; & Cyber-securite</h3>
+                            <p>Cartographier les flux de donnees. Identifier les failles critiques et les dettes operationnelles dans les environnements regules.</p>
+                        </div>
+                        <div class="service-arrow">&rarr;</div>
+                    </div>
+
+                    <div class="service-row animate-on-scroll">
+                        <div class="service-tag">Ops</div>
+                        <div>
+                            <h3>Transformation IA & Data Trust</h3>
+                            <p>Urbanisation du SI et automatisation sous haute surveillance. Deploiement d'IA privees et souveraines (Zero Trust).</p>
+                        </div>
+                        <div class="service-arrow">&rarr;</div>
+                    </div>
+
+                    <div class="service-row animate-on-scroll">
+                        <div class="service-tag">Lean</div>
+                        <div>
+                            <h3>Performance & Conformite</h3>
+                            <p>Optimisation des processus industriels (Pharma/Medtech) en respectant les contraintes reglementaires strictes.</p>
+                        </div>
+                        <div class="service-arrow">&rarr;</div>
+                    </div>
+
+                    <div class="service-row animate-on-scroll">
+                        <div class="service-tag">Fractional</div>
+                        <div>
+                            <h3>Fractional CISO / CTO</h3>
+                            <p>Un expert Virelia pour piloter votre securite et votre roadmap technologique au niveau des standards bancaires.</p>
+                        </div>
+                        <div class="service-arrow">&rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- METHOD -->
+        <section class="method" id="methode">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <div class="section-label">Methode Virelia</div>
+                    <h2 class="section-title">Notre methodologie en 5 etapes</h2>
+                    <p class="section-subtitle">Une approche structuree pour des resultats mesurables. On ne digitalise pas le chaos.</p>
+                </div>
+                <div class="method-steps">
+                    <div class="step animate-on-scroll">
+                        <span class="step-num">01</span>
+                        <div class="step-title">Diagnostic</div>
+                        <p class="step-desc">Cadrage radical et audit de securite. Alignement sur vos enjeux business et vos priorites.</p>
+                    </div>
+                    <div class="step animate-on-scroll">
+                        <span class="step-num">02</span>
+                        <div class="step-title">Arbitrage</div>
+                        <p class="step-desc">Validation de la roadmap et des risques. Scenarios realistes avec chiffrage precis.</p>
+                    </div>
+                    <div class="step animate-on-scroll">
+                        <span class="step-num">03</span>
+                        <div class="step-title">Activation</div>
+                        <p class="step-desc">Deploiement sous standards Pharma & Banque. Quick wins pour eviter l'effet tunnel.</p>
+                    </div>
+                    <div class="step animate-on-scroll">
+                        <span class="step-num">04</span>
+                        <div class="step-title">Formation</div>
+                        <p class="step-desc">Transfert de competence et culture cyber. Autonomie durable de vos equipes.</p>
+                    </div>
+                    <div class="step animate-on-scroll">
+                        <span class="step-num">05</span>
+                        <div class="step-title">Suivi</div>
+                        <p class="step-desc">Maintien en condition de securite (MCS). Amelioration continue et veille.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section class="reasons">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <div class="section-label">Pourquoi Nous</div>
+                    <h2 class="section-title">5 raisons de nous choisir</h2>
+                    <p class="section-subtitle">Des engagements concrets qui font la difference.</p>
+                </div>
+                <div class="reasons-grid">
+                    <div class="reason-card animate-on-scroll">
+                        <span class="reason-num">01</span>
+                        <div>
+                            <h4>La Preuve par les Secteurs Regules</h4>
+                            <p>Nous sommes les experts que les banques privees et l'industrie pharma appellent pour obtenir un avis decisif. Cette confiance temoigne de notre rigueur.</p>
+                        </div>
+                    </div>
+                    <div class="reason-card animate-on-scroll">
+                        <span class="reason-num">02</span>
+                        <div>
+                            <h4>L'ADN d'Entrepreneur</h4>
+                            <p>Nos fondateurs ont cree et dirige plusieurs entreprises. Nous recommandons ce que nous avons nous-memes eprouve sur le terrain.</p>
+                        </div>
+                    </div>
+                    <div class="reason-card animate-on-scroll">
+                        <span class="reason-num">03</span>
+                        <div>
+                            <h4>Une Double Competence Rare</h4>
+                            <p>La ou il faut 3 ou 4 prestataires, nous reunissons audit, conseil strategique, deploiement technique et Lean. Vous restez maitre de votre strategie.</p>
+                        </div>
+                    </div>
+                    <div class="reason-card animate-on-scroll">
+                        <span class="reason-num">04</span>
+                        <div>
+                            <h4>Des Resultats, pas des Slides</h4>
+                            <p>Livrables courts, arbitrage par le client, valeur livree en continu. Pas de Big Bang, pas de cycles longs, pas de rapports inutiles.</p>
+                        </div>
+                    </div>
+                    <div class="reason-card animate-on-scroll">
+                        <span class="reason-num">05</span>
+                        <div>
+                            <h4>Ecosysteme Souverain</h4>
+                            <p>Avec ClinicalOS, Aegis et CHR360, nous possedons la capacite d'executer nos recommandations de A a Z. Solutions crees et hebergees en Suisse.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq">
+            <div class="container">
+                <div class="animate-on-scroll" style="text-align: center;">
+                    <div class="section-label" style="justify-content: center;">Questions Frequentes</div>
+                    <h2 class="section-title">Tout ce que vous devez savoir</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question">
+                            Comment garantissez-vous un ROI rapide et concret ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Chaque franc investi est oriente vers un retour concret, mesurable et rapide. Notre methode commence par identifier les leviers a fort impact avant d'engager tout investissement. Nous privilegions les quick wins et la creation de valeur continue plutot que les grands projets longs et couteux.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question">
+                            Pourquoi privilegiez-vous les solutions open source ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nous privilegions des solutions open source eprouvees qui garantissent transparence, flexibilite et maitrise des couts a long terme. Vous gardez la souverainete totale sur vos donnees et systemes, sans dependance a un editeur proprietaire. C'est un choix strategique pour votre independance.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question">
+                            Quelle est la duree typique d'une mission d'audit ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Une mission d'audit 360 complete dure generalement entre 2 et 4 semaines, selon la taille et la complexite de votre organisation. Nous adaptons toujours la profondeur de l'analyse a vos enjeux et contraintes. Des audits cibles plus courts sont egalement possibles.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question">
+                            Comment fonctionne le Fractional CISO/CTO ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Vous beneficiez de l'expertise d'un directeur securite ou technologique experimente, disponible quelques jours par mois selon vos besoins. C'est l'alternative ideale au recrutement d'un profil senior en CDI : vous accedez aux competences strategiques sans les couts d'un temps plein.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question">
+                            Evitez-vous de "faire de l'IA pour faire de l'IA" ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolument. Notre approche identifie d'abord vos vrais besoins business avant de recommander toute solution technique. Si l'IA n'est pas pertinente pour resoudre votre probleme, nous le disons clairement. Nous privilegions toujours l'impact concret sur l'effet de mode.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BANNER -->
+        <section class="cta-banner">
+            <div class="container animate-on-scroll">
+                <h2>Pret a transformer<br>votre organisation ?</h2>
+                <p>Discutons ensemble de vos defis et decouvrez comment notre expertise peut accelerer votre croissance. Sans engagement.</p>
+                <div class="cta-buttons">
+                    <a href="mailto:contact@virelia-advisory.ch" class="btn-cta">Planifier un Diagnostic <span>&rarr;</span></a>
+                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <div class="section-label">Contact</div>
+                    <h2 class="section-title">Contactez nos experts</h2>
+                    <p class="section-subtitle">Que vous ayez besoin d'un audit 360, d'une transformation organisationnelle ou d'un accompagnement securite, nous sommes la pour vous aider.</p>
+                </div>
+                <div class="contact-grid">
+                    <div>
+                        <div class="contact-info-item animate-on-scroll">
+                            <h4>Email</h4>
+                            <p>contact@virelia-advisory.ch</p>
+                        </div>
+                        <div class="contact-info-item animate-on-scroll">
+                            <h4>Bureaux</h4>
+                            <p>Geneve &middot; Zurich</p>
+                        </div>
+                        <div class="contact-info-item animate-on-scroll">
+                            <h4>Reseau</h4>
+                            <p>Europe &middot; Suisse Romande &middot; Suisse Alemanique</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contact-info-item animate-on-scroll" style="min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                            <h4 style="margin-bottom: 1.5rem;">Reponse garantie</h4>
+                            <p style="font-size: 3rem; font-weight: 900; color: var(--accent); letter-spacing: -2px;">&lt;24h</p>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Devis gratuit &middot; Sans engagement</p>
+                        </div>
+                        <div class="contact-note animate-on-scroll">
+                            <div class="contact-note-item">
+                                <span class="contact-note-dot"></span>
+                                Devis gratuit
+                            </div>
+                            <div class="contact-note-item">
+                                <span class="contact-note-dot"></span>
+                                Sans engagement
+                            </div>
+                            <div class="contact-note-item">
+                                <span class="contact-note-dot"></span>
+                                Confidentialite totale
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <span class="logo-icon"></span>
+                        VIRELIA ADVISORY
+                    </div>
+                    <p class="footer-desc">Securite haut de gamme. Performance radicale. Souverainete totale pour les secteurs les plus exigeants.</p>
+                </div>
+                <div>
+                    <h5>Ecosysteme</h5>
+                    <ul>
+                        <li><a href="https://clinicalos.guedou.ch" target="_blank">ClinicalOS (Pharma)</a></li>
+                        <li><a href="https://aegis.guedou.ch" target="_blank">Aegis (Banque/GRC)</a></li>
+                        <li><a href="https://chr360.ch/inscription.html" target="_blank">CHR360 (Operations)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Services</h5>
+                    <ul>
+                        <li><a href="#offres">Audit 360 & Cyber</a></li>
+                        <li><a href="#offres">Transformation IA</a></li>
+                        <li><a href="#offres">Performance Lean</a></li>
+                        <li><a href="#offres">Fractional CISO/CTO</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><a href="#">Geneve / Zurich</a></li>
+                        <li><a href="#">Reseau Europeen</a></li>
+                        <li><a href="#contact">Planifier un Diagnostic</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copy">&copy; 2024 VIRELIA ADVISORY S.A. | Data Security & Industrial Performance</span>
+                <span class="footer-copy">Geneve, Suisse</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
