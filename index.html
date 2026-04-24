@@ -1349,26 +1349,91 @@
             }
         }
 
+        /* ── Language Switcher ── */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-left: 1.5rem;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(213, 43, 30, 0.08);
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            border-right: 1px solid rgba(213, 43, 30, 0.25);
+            color: var(--off-white);
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .lang-btn:last-child {
+            border-right: none;
+        }
+        .lang-btn:hover {
+            color: var(--white);
+            background: rgba(213, 43, 30, 0.2);
+        }
+        .lang-btn.active {
+            color: var(--white);
+            background: var(--accent);
+            font-weight: 800;
+        }
+        .mobile-lang-switcher {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .mobile-lang-switcher .lang-btn {
+            font-size: 1rem;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid rgba(213, 43, 30, 0.3);
+            border-radius: 8px;
+            border-right: 2px solid rgba(213, 43, 30, 0.3);
+            color: var(--off-white);
+            font-weight: 700;
+        }
+        .mobile-lang-switcher .lang-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+        .mobile-lang-switcher .lang-btn:hover {
+            border-color: var(--accent);
+        }
     </style>
 </head>
 <body>
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-nav-close" id="mobileNavClose">&times;</button>
-        <a href="#services">Services</a>
-        <a href="#results">Resultats</a>
-        <a href="#valeur">Valeur</a>
+        <a href="#offres" data-i18n="mob_services">Services</a>
+        <a href="#resultats" data-i18n="mob_results">Resultats</a>
+        <a href="#valeur" data-i18n="mob_value">Valeur</a>
         <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+        <div class="mobile-lang-switcher">
+            <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('de')">DE</button>
+            <button class="lang-btn" onclick="setLanguage('it')">IT</button>
+        </div>
     </div>
 
     <!-- PWA Install Banner -->
     <div id="install-banner">
         <div id="install-banner-text">
-            <p>Installer VIRELIA ADVISORY</p>
-            <div class="sub">Acces rapide depuis votre ecran d'accueil</div>
+            <p data-i18n="pwa_install">Installer VIRELIA ADVISORY</p>
+            <div class="sub" data-i18n="pwa_sub">Acces rapide depuis votre ecran d'accueil</div>
         </div>
-        <button id="install-btn">Installer</button>
+        <button id="install-btn" data-i18n="pwa_btn">Installer</button>
         <button id="install-close">&times;</button>
     </div>
 
@@ -1381,13 +1446,19 @@
                 VIRELIA ADVISORY
             </div>
             <nav>
-                <a href="#resultats">Resultats</a>
+                <a href="#resultats" data-i18n="nav_results">Resultats</a>
                 <a href="#solutions">Solutions</a>
-                <a href="#offres">Services</a>
-                <a href="#methode">Methode</a>
+                <a href="#offres" data-i18n="nav_services">Services</a>
+                <a href="#methode" data-i18n="nav_method">Methode</a>
                 <a href="#contact">Contact</a>
-                <a href="#contact" class="btn-cta">Planifier un Diagnostic</a>
+                <a href="#contact" class="btn-cta" data-i18n="nav_cta">Planifier un Diagnostic</a>
             </nav>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="setLanguage('de')">DE</button>
+                <button class="lang-btn" onclick="setLanguage('it')">IT</button>
+            </div>
         <button class="mobile-toggle" id="mobileToggle">☰</button>
                     </div>
     </header>
@@ -1403,28 +1474,28 @@
             <div class="container">
                 <div class="hero-badge">
                     <span class="hero-badge-dot"></span>
-                    Standards de securite Banque & Pharma
+                    <span data-i18n="hero_badge">Standards de securite Banque & Pharma</span>
                 </div>
-                <h1>Clarifier.<br>Decider.<br><span>Avancer.</span></h1>
+                <h1 data-i18n-html="hero_title">Clarifier.<br>Decider.<br><span>Avancer.</span></h1>
                 <div class="hero-grid">
                     <div class="hero-text">
-                        <p>Arretez de subir votre organisation. Nous identifions ce qui vous freine, restructurons vos processus et accelerons votre transformation numerique pour <strong>vous rendre votre temps.</strong></p>
+                        <p data-i18n-html="hero_text">Arretez de subir votre organisation. Nous identifions ce qui vous freine, restructurons vos processus et accelerons votre transformation numerique pour <strong>vous rendre votre temps.</strong></p>
                     </div>
-                    <div class="hero-right">
+                    <div class="hero-right" data-i18n-html="hero_right">
                         Audit, Simplification, IA appliquee et Securite des donnees critiques pour PME, ETI et secteurs a haute conformite.
                         <strong>ROI mesurable. Souverainete totale.</strong>
                     </div>
                 </div>
                 <div class="hero-ctas">
-                    <a href="#contact" class="btn-cta">Decouvrir nos solutions <span>&rarr;</span></a>
-                    <a href="#contact" class="btn-outline">Parlons de votre projet</a>
+                    <a href="#contact" class="btn-cta" data-i18n-html="hero_cta1">Decouvrir nos solutions <span>&rarr;</span></a>
+                    <a href="#contact" class="btn-outline" data-i18n="hero_cta2">Parlons de votre projet</a>
                 </div>
             </div>
         </section>
 
         <!-- CLIENTS MARQUEE -->
         <section class="clients">
-            <div class="clients-label">Ils nous font confiance dans les secteurs les plus exigeants</div>
+            <div class="clients-label" data-i18n="clients_label">Ils nous font confiance dans les secteurs les plus exigeants</div>
             <div style="overflow: hidden;">
                 <div class="marquee-track">
                     <span class="marquee-item">Banque Privee</span>
@@ -1449,49 +1520,49 @@
         <section class="results" id="resultats">
             <div class="container">
                 <div class="results-header animate-on-scroll">
-                    <div class="section-label">Resultats Concrets</div>
-                    <h2 class="section-title">Des transformations mesurables<br>pour nos clients</h2>
-                    <p class="section-subtitle">Chaque intervention genere un impact quantifiable. Pas de slides, pas de rapports inutiles. Des resultats.</p>
+                    <div class="section-label" data-i18n="results_label">Resultats Concrets</div>
+                    <h2 class="section-title" data-i18n-html="results_title">Des transformations mesurables<br>pour nos clients</h2>
+                    <p class="section-subtitle" data-i18n="results_subtitle">Chaque intervention genere un impact quantifiable. Pas de slides, pas de rapports inutiles. Des resultats.</p>
                 </div>
 
                 <div class="results-grid">
                     <div class="result-card animate-on-scroll">
-                        <span class="result-tag">Audit & ERP &middot; Secteur Pharma</span>
-                        <h3 class="result-title">Automatisation Conformite Pharmaceutique</h3>
-                        <p class="result-problem"><strong>Probleme :</strong> Systeme d'information vieillissant et processus administratifs chronophages freinant la croissance. Conformite reglementaire geree manuellement.</p>
+                        <span class="result-tag" data-i18n="r1_tag">Audit & ERP &middot; Secteur Pharma</span>
+                        <h3 class="result-title" data-i18n="r1_title">Automatisation Conformite Pharmaceutique</h3>
+                        <p class="result-problem" data-i18n-html="r1_problem"><strong>Probleme :</strong> Systeme d'information vieillissant et processus administratifs chronophages freinant la croissance. Conformite reglementaire geree manuellement.</p>
                         <div class="result-stat">
                             <span class="result-stat-value">-40%</span>
-                            <span class="result-stat-text">de temps administratif economise.<br>ROI atteint en 12 mois.</span>
+                            <span class="result-stat-text" data-i18n-html="r1_stat">de temps administratif economise.<br>ROI atteint en 12 mois.</span>
                         </div>
                     </div>
 
                     <div class="result-card animate-on-scroll">
-                        <span class="result-tag">Securite &middot; Secteur Bancaire</span>
-                        <h3 class="result-title">Infrastructure Souveraine GRC</h3>
-                        <p class="result-problem"><strong>Probleme :</strong> Architecture SI obsolete, dette technique critique et risques securite croissants dans un environnement hautement regule.</p>
+                        <span class="result-tag" data-i18n="r2_tag">Securite &middot; Secteur Bancaire</span>
+                        <h3 class="result-title" data-i18n="r2_title">Infrastructure Souveraine GRC</h3>
+                        <p class="result-problem" data-i18n-html="r2_problem"><strong>Probleme :</strong> Architecture SI obsolete, dette technique critique et risques securite croissants dans un environnement hautement regule.</p>
                         <div class="result-stat">
-                            <span class="result-stat-value">Zero</span>
-                            <span class="result-stat-text">faille de donnees.<br>100% de controle sur les flux sensibles.</span>
+                            <span class="result-stat-value" data-i18n="r2_value">Zero</span>
+                            <span class="result-stat-text" data-i18n-html="r2_stat">faille de donnees.<br>100% de controle sur les flux sensibles.</span>
                         </div>
                     </div>
 
                     <div class="result-card animate-on-scroll">
-                        <span class="result-tag">Lean &middot; Operations</span>
-                        <h3 class="result-title">Optimisation Flux & Personnel CHR</h3>
-                        <p class="result-problem"><strong>Probleme :</strong> Processus desynchronises entre sites, perte de visibilite et latence RH excessive freinant l'efficacite operationnelle.</p>
+                        <span class="result-tag" data-i18n="r3_tag">Lean &middot; Operations</span>
+                        <h3 class="result-title" data-i18n="r3_title">Optimisation Flux & Personnel CHR</h3>
+                        <p class="result-problem" data-i18n-html="r3_problem"><strong>Probleme :</strong> Processus desynchronises entre sites, perte de visibilite et latence RH excessive freinant l'efficacite operationnelle.</p>
                         <div class="result-stat">
                             <span class="result-stat-value">+60%</span>
-                            <span class="result-stat-text">d'efficacite operationnelle.<br>Reduction drastique de la latence RH.</span>
+                            <span class="result-stat-text" data-i18n-html="r3_stat">d'efficacite operationnelle.<br>Reduction drastique de la latence RH.</span>
                         </div>
                     </div>
 
                     <div class="result-card animate-on-scroll">
-                        <span class="result-tag">Migration &middot; Souverainete</span>
-                        <h3 class="result-title">Migration Open Source Securisee</h3>
-                        <p class="result-problem"><strong>Probleme :</strong> Dependance a des editeurs proprietaires, couts croissants et risque de perte de souverainete sur les donnees critiques.</p>
+                        <span class="result-tag" data-i18n="r4_tag">Migration &middot; Souverainete</span>
+                        <h3 class="result-title" data-i18n="r4_title">Migration Open Source Securisee</h3>
+                        <p class="result-problem" data-i18n-html="r4_problem"><strong>Probleme :</strong> Dependance a des editeurs proprietaires, couts croissants et risque de perte de souverainete sur les donnees critiques.</p>
                         <div class="result-stat">
                             <span class="result-stat-value">100%</span>
-                            <span class="result-stat-text">de souverainete retrouvee.<br>Infrastructure perenne et securisee.</span>
+                            <span class="result-stat-text" data-i18n-html="r4_stat">de souverainete retrouvee.<br>Infrastructure perenne et securisee.</span>
                         </div>
                     </div>
                 </div>
@@ -1499,15 +1570,15 @@
                 <div class="results-counters animate-on-scroll">
                     <div class="counter-item">
                         <div class="counter-value">100%</div>
-                        <div class="counter-label">Clients satisfaits</div>
+                        <div class="counter-label" data-i18n="counter1">Clients satisfaits</div>
                     </div>
                     <div class="counter-item">
                         <div class="counter-value">15+</div>
-                        <div class="counter-label">Annees d'expertise</div>
+                        <div class="counter-label" data-i18n="counter2">Annees d'expertise</div>
                     </div>
                     <div class="counter-item">
                         <div class="counter-value">300+</div>
-                        <div class="counter-label">Audits realises</div>
+                        <div class="counter-label" data-i18n="counter3">Audits realises</div>
                     </div>
                 </div>
             </div>
@@ -1517,25 +1588,25 @@
         <section class="value">
             <div class="container">
                 <div class="animate-on-scroll">
-                    <div class="section-label">Notre Valeur</div>
-                    <h2 class="section-title">Pourquoi Virelia Advisory ?</h2>
-                    <p class="section-subtitle">Nous redonnons aux dirigeants le controle total sur leur destin technologique et organisationnel.</p>
+                    <div class="section-label" data-i18n="value_label">Notre Valeur</div>
+                    <h2 class="section-title" data-i18n="value_title">Pourquoi Virelia Advisory ?</h2>
+                    <p class="section-subtitle" data-i18n="value_subtitle">Nous redonnons aux dirigeants le controle total sur leur destin technologique et organisationnel.</p>
                 </div>
                 <div class="value-grid">
                     <div class="value-card animate-on-scroll">
                         <div class="value-icon">&#9889;</div>
-                        <h3>Impact Immediat</h3>
-                        <p>Pas de cycles longs ni de rapports inutiles. Notre methode garantit des resultats rapides et mesurables. Vous voyez l'impact des les premieres semaines.</p>
+                        <h3 data-i18n="v1_title">Impact Immediat</h3>
+                        <p data-i18n="v1_desc">Pas de cycles longs ni de rapports inutiles. Notre methode garantit des resultats rapides et mesurables. Vous voyez l'impact des les premieres semaines.</p>
                     </div>
                     <div class="value-card animate-on-scroll">
                         <div class="value-icon">&#127919;</div>
-                        <h3>ROI Garanti</h3>
-                        <p>Chaque franc investi est oriente vers un retour concret et mesurable. Nous identifions d'abord les leviers a fort impact avant d'engager des investissements.</p>
+                        <h3 data-i18n="v2_title">ROI Garanti</h3>
+                        <p data-i18n="v2_desc">Chaque franc investi est oriente vers un retour concret et mesurable. Nous identifions d'abord les leviers a fort impact avant d'engager des investissements.</p>
                     </div>
                     <div class="value-card animate-on-scroll">
                         <div class="value-icon">&#128737;&#65039;</div>
-                        <h3>Souverainete Totale</h3>
-                        <p>Solutions open source eprouvees garantissant transparence et maitrise des couts. Vous gardez le controle total sur vos donnees et systemes.</p>
+                        <h3 data-i18n="v3_title">Souverainete Totale</h3>
+                        <p data-i18n="v3_desc">Solutions open source eprouvees garantissant transparence et maitrise des couts. Vous gardez le controle total sur vos donnees et systemes.</p>
                     </div>
                 </div>
             </div>
@@ -1545,36 +1616,36 @@
         <section class="solutions" id="solutions">
             <div class="container">
                 <div class="animate-on-scroll">
-                    <div class="section-label">Ecosysteme & Realisations</div>
-                    <h2 class="section-title">Des solutions a impact mesurable</h2>
-                    <p class="section-subtitle">Nous ne vendons pas des services. Nous creons des resultats. Chaque plateforme est concue pour generer un ROI concret.</p>
+                    <div class="section-label" data-i18n="sol_label">Ecosysteme & Realisations</div>
+                    <h2 class="section-title" data-i18n="sol_title">Des solutions a impact mesurable</h2>
+                    <p class="section-subtitle" data-i18n="sol_subtitle">Nous ne vendons pas des services. Nous creons des resultats. Chaque plateforme est concue pour generer un ROI concret.</p>
                 </div>
                 <div class="solutions-grid">
                     <div class="solution-card animate-on-scroll">
                         <div>
-                            <span class="solution-tag">Souverainete Pharma</span>
+                            <span class="solution-tag" data-i18n="s1_tag">Souverainete Pharma</span>
                             <h3 class="solution-name">ClinicalOS</h3>
-                            <p class="solution-desc">Systeme d'exploitation proprietaire pour la gestion des donnees cliniques. Securite maximale et conformite reglementaire integree.</p>
+                            <p class="solution-desc" data-i18n="s1_desc">Systeme d'exploitation proprietaire pour la gestion des donnees cliniques. Securite maximale et conformite reglementaire integree.</p>
                         </div>
-                        <a href="https://clinicalos.guedou.ch" target="_blank" class="solution-link">Explorer la plateforme <span>&rarr;</span></a>
+                        <a href="https://clinicalos.guedou.ch" target="_blank" class="solution-link" data-i18n-html="s1_link">Explorer la plateforme <span>&rarr;</span></a>
                     </div>
 
                     <div class="solution-card animate-on-scroll">
                         <div>
-                            <span class="solution-tag">Securite Bancaire</span>
+                            <span class="solution-tag" data-i18n="s2_tag">Securite Bancaire</span>
                             <h3 class="solution-name">Aegis</h3>
-                            <p class="solution-desc">Hub de protection et de conformite (GRC) pour les institutions financieres. Audit en temps reel et gestion des risques cyber.</p>
+                            <p class="solution-desc" data-i18n="s2_desc">Hub de protection et de conformite (GRC) pour les institutions financieres. Audit en temps reel et gestion des risques cyber.</p>
                         </div>
-                        <a href="https://aegis.guedou.ch" target="_blank" class="solution-link">Explorer la plateforme <span>&rarr;</span></a>
+                        <a href="https://aegis.guedou.ch" target="_blank" class="solution-link" data-i18n-html="s2_link">Explorer la plateforme <span>&rarr;</span></a>
                     </div>
 
                     <div class="solution-card animate-on-scroll">
                         <div>
-                            <span class="solution-tag">Operations & Flux</span>
+                            <span class="solution-tag" data-i18n="s3_tag">Operations & Flux</span>
                             <h3 class="solution-name">CHR360</h3>
-                            <p class="solution-desc">Optimisation operationnelle et gestion des effectifs pour le secteur CHR. Simplification radicale des processus et des flux.</p>
+                            <p class="solution-desc" data-i18n="s3_desc">Optimisation operationnelle et gestion des effectifs pour le secteur CHR. Simplification radicale des processus et des flux.</p>
                         </div>
-                        <a href="https://chr360.ch/inscription.html" target="_blank" class="solution-link">Acceder au service <span>&rarr;</span></a>
+                        <a href="https://chr360.ch/inscription.html" target="_blank" class="solution-link" data-i18n-html="s3_link">Acceder au service <span>&rarr;</span></a>
                     </div>
                 </div>
             </div>
@@ -1584,15 +1655,15 @@
         <section class="services" id="offres">
             <div class="container">
                 <div class="animate-on-scroll">
-                    <div class="section-label">Nos Leviers d'Impact</div>
-                    <h2 class="section-title">Des services concus<br>pour creer de la valeur</h2>
+                    <div class="section-label" data-i18n="svc_label">Nos Leviers d'Impact</div>
+                    <h2 class="section-title" data-i18n-html="svc_title">Des services concus<br>pour creer de la valeur</h2>
                 </div>
                 <div style="margin-top: 3rem;">
                     <div class="service-row animate-on-scroll">
                         <div class="service-tag">Audit</div>
                         <div>
-                            <h3>Diagnostic 360&#176; & Cyber-securite</h3>
-                            <p>Cartographier les flux de donnees. Identifier les failles critiques et les dettes operationnelles dans les environnements regules.</p>
+                            <h3 data-i18n="svc1_title">Diagnostic 360&#176; & Cyber-securite</h3>
+                            <p data-i18n="svc1_desc">Cartographier les flux de donnees. Identifier les failles critiques et les dettes operationnelles dans les environnements regules.</p>
                         </div>
                         <div class="service-arrow">&rarr;</div>
                     </div>
@@ -1600,8 +1671,8 @@
                     <div class="service-row animate-on-scroll">
                         <div class="service-tag">Ops</div>
                         <div>
-                            <h3>Transformation IA & Data Trust</h3>
-                            <p>Urbanisation du SI et automatisation sous haute surveillance. Deploiement d'IA privees et souveraines (Zero Trust).</p>
+                            <h3 data-i18n="svc2_title">Transformation IA & Data Trust</h3>
+                            <p data-i18n="svc2_desc">Urbanisation du SI et automatisation sous haute surveillance. Deploiement d'IA privees et souveraines (Zero Trust).</p>
                         </div>
                         <div class="service-arrow">&rarr;</div>
                     </div>
@@ -1609,8 +1680,8 @@
                     <div class="service-row animate-on-scroll">
                         <div class="service-tag">Lean</div>
                         <div>
-                            <h3>Performance & Conformite</h3>
-                            <p>Optimisation des processus industriels (Pharma/Medtech) en respectant les contraintes reglementaires strictes.</p>
+                            <h3 data-i18n="svc3_title">Performance & Conformite</h3>
+                            <p data-i18n="svc3_desc">Optimisation des processus industriels (Pharma/Medtech) en respectant les contraintes reglementaires strictes.</p>
                         </div>
                         <div class="service-arrow">&rarr;</div>
                     </div>
@@ -1619,7 +1690,7 @@
                         <div class="service-tag">Fractional</div>
                         <div>
                             <h3>Fractional CISO / CTO</h3>
-                            <p>Un expert Virelia pour piloter votre securite et votre roadmap technologique au niveau des standards bancaires.</p>
+                            <p data-i18n="svc4_desc">Un expert Virelia pour piloter votre securite et votre roadmap technologique au niveau des standards bancaires.</p>
                         </div>
                         <div class="service-arrow">&rarr;</div>
                     </div>
@@ -1631,35 +1702,35 @@
         <section class="method" id="methode">
             <div class="container">
                 <div class="animate-on-scroll">
-                    <div class="section-label">Methode Virelia</div>
-                    <h2 class="section-title">Notre methodologie en 5 etapes</h2>
-                    <p class="section-subtitle">Une approche structuree pour des resultats mesurables. On ne digitalise pas le chaos.</p>
+                    <div class="section-label" data-i18n="method_label">Methode Virelia</div>
+                    <h2 class="section-title" data-i18n="method_title">Notre methodologie en 5 etapes</h2>
+                    <p class="section-subtitle" data-i18n="method_subtitle">Une approche structuree pour des resultats mesurables. On ne digitalise pas le chaos.</p>
                 </div>
                 <div class="method-steps">
                     <div class="step animate-on-scroll">
                         <span class="step-num">01</span>
-                        <div class="step-title">Diagnostic</div>
-                        <p class="step-desc">Cadrage radical et audit de securite. Alignement sur vos enjeux business et vos priorites.</p>
+                        <div class="step-title" data-i18n="m1_title">Diagnostic</div>
+                        <p class="step-desc" data-i18n="m1_desc">Cadrage radical et audit de securite. Alignement sur vos enjeux business et vos priorites.</p>
                     </div>
                     <div class="step animate-on-scroll">
                         <span class="step-num">02</span>
-                        <div class="step-title">Arbitrage</div>
-                        <p class="step-desc">Validation de la roadmap et des risques. Scenarios realistes avec chiffrage precis.</p>
+                        <div class="step-title" data-i18n="m2_title">Arbitrage</div>
+                        <p class="step-desc" data-i18n="m2_desc">Validation de la roadmap et des risques. Scenarios realistes avec chiffrage precis.</p>
                     </div>
                     <div class="step animate-on-scroll">
                         <span class="step-num">03</span>
-                        <div class="step-title">Activation</div>
-                        <p class="step-desc">Deploiement sous standards Pharma & Banque. Quick wins pour eviter l'effet tunnel.</p>
+                        <div class="step-title" data-i18n="m3_title">Activation</div>
+                        <p class="step-desc" data-i18n="m3_desc">Deploiement sous standards Pharma & Banque. Quick wins pour eviter l'effet tunnel.</p>
                     </div>
                     <div class="step animate-on-scroll">
                         <span class="step-num">04</span>
-                        <div class="step-title">Formation</div>
-                        <p class="step-desc">Transfert de competence et culture cyber. Autonomie durable de vos equipes.</p>
+                        <div class="step-title" data-i18n="m4_title">Formation</div>
+                        <p class="step-desc" data-i18n="m4_desc">Transfert de competence et culture cyber. Autonomie durable de vos equipes.</p>
                     </div>
                     <div class="step animate-on-scroll">
                         <span class="step-num">05</span>
-                        <div class="step-title">Suivi</div>
-                        <p class="step-desc">Maintien en condition de securite (MCS). Amelioration continue et veille.</p>
+                        <div class="step-title" data-i18n="m5_title">Suivi</div>
+                        <p class="step-desc" data-i18n="m5_desc">Maintien en condition de securite (MCS). Amelioration continue et veille.</p>
                     </div>
                 </div>
             </div>
@@ -1669,44 +1740,44 @@
         <section class="reasons">
             <div class="container">
                 <div class="animate-on-scroll">
-                    <div class="section-label">Pourquoi Nous</div>
-                    <h2 class="section-title">5 raisons de nous choisir</h2>
-                    <p class="section-subtitle">Des engagements concrets qui font la difference.</p>
+                    <div class="section-label" data-i18n="why_label">Pourquoi Nous</div>
+                    <h2 class="section-title" data-i18n="why_title">5 raisons de nous choisir</h2>
+                    <p class="section-subtitle" data-i18n="why_subtitle">Des engagements concrets qui font la difference.</p>
                 </div>
                 <div class="reasons-grid">
                     <div class="reason-card animate-on-scroll">
                         <span class="reason-num">01</span>
                         <div>
-                            <h4>La Preuve par les Secteurs Regules</h4>
-                            <p>Nous sommes les experts que les banques privees et l'industrie pharma appellent pour obtenir un avis decisif. Cette confiance temoigne de notre rigueur.</p>
+                            <h4 data-i18n="w1_title">La Preuve par les Secteurs Regules</h4>
+                            <p data-i18n="w1_desc">Nous sommes les experts que les banques privees et l'industrie pharma appellent pour obtenir un avis decisif. Cette confiance temoigne de notre rigueur.</p>
                         </div>
                     </div>
                     <div class="reason-card animate-on-scroll">
                         <span class="reason-num">02</span>
                         <div>
-                            <h4>L'ADN d'Entrepreneur</h4>
-                            <p>Nos fondateurs ont cree et dirige plusieurs entreprises. Nous recommandons ce que nous avons nous-memes eprouve sur le terrain.</p>
+                            <h4 data-i18n="w2_title">L'ADN d'Entrepreneur</h4>
+                            <p data-i18n="w2_desc">Nos fondateurs ont cree et dirige plusieurs entreprises. Nous recommandons ce que nous avons nous-memes eprouve sur le terrain.</p>
                         </div>
                     </div>
                     <div class="reason-card animate-on-scroll">
                         <span class="reason-num">03</span>
                         <div>
-                            <h4>Une Double Competence Rare</h4>
-                            <p>La ou il faut 3 ou 4 prestataires, nous reunissons audit, conseil strategique, deploiement technique et Lean. Vous restez maitre de votre strategie.</p>
+                            <h4 data-i18n="w3_title">Une Double Competence Rare</h4>
+                            <p data-i18n="w3_desc">La ou il faut 3 ou 4 prestataires, nous reunissons audit, conseil strategique, deploiement technique et Lean. Vous restez maitre de votre strategie.</p>
                         </div>
                     </div>
                     <div class="reason-card animate-on-scroll">
                         <span class="reason-num">04</span>
                         <div>
-                            <h4>Des Resultats, pas des Slides</h4>
-                            <p>Livrables courts, arbitrage par le client, valeur livree en continu. Pas de Big Bang, pas de cycles longs, pas de rapports inutiles.</p>
+                            <h4 data-i18n="w4_title">Des Resultats, pas des Slides</h4>
+                            <p data-i18n="w4_desc">Livrables courts, arbitrage par le client, valeur livree en continu. Pas de Big Bang, pas de cycles longs, pas de rapports inutiles.</p>
                         </div>
                     </div>
                     <div class="reason-card animate-on-scroll">
                         <span class="reason-num">05</span>
                         <div>
-                            <h4>Ecosysteme Souverain</h4>
-                            <p>Avec ClinicalOS, Aegis et CHR360, nous possedons la capacite d'executer nos recommandations de A a Z. Solutions crees et hebergees en Suisse.</p>
+                            <h4 data-i18n="w5_title">Ecosysteme Souverain</h4>
+                            <p data-i18n="w5_desc">Avec ClinicalOS, Aegis et CHR360, nous possedons la capacite d'executer nos recommandations de A a Z. Solutions crees et hebergees en Suisse.</p>
                         </div>
                     </div>
                 </div>
@@ -1717,53 +1788,53 @@
         <section class="faq">
             <div class="container">
                 <div class="animate-on-scroll" style="text-align: center;">
-                    <div class="section-label" style="justify-content: center;">Questions Frequentes</div>
-                    <h2 class="section-title">Tout ce que vous devez savoir</h2>
+                    <div class="section-label" style="justify-content: center;" data-i18n="faq_label">Questions Frequentes</div>
+                    <h2 class="section-title" data-i18n="faq_title">Tout ce que vous devez savoir</h2>
                 </div>
                 <div class="faq-list">
                     <div class="faq-item animate-on-scroll">
                         <button class="faq-question">
-                            Comment garantissez-vous un ROI rapide et concret ?
+                            <span data-i18n="fq1_q">Comment garantissez-vous un ROI rapide et concret ?</span>
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Chaque franc investi est oriente vers un retour concret, mesurable et rapide. Notre methode commence par identifier les leviers a fort impact avant d'engager tout investissement. Nous privilegions les quick wins et la creation de valeur continue plutot que les grands projets longs et couteux.</p>
+                            <p data-i18n="fq1_a">Chaque franc investi est oriente vers un retour concret, mesurable et rapide. Notre methode commence par identifier les leviers a fort impact avant d'engager tout investissement. Nous privilegions les quick wins et la creation de valeur continue plutot que les grands projets longs et couteux.</p>
                         </div>
                     </div>
                     <div class="faq-item animate-on-scroll">
                         <button class="faq-question">
-                            Pourquoi privilegiez-vous les solutions open source ?
+                            <span data-i18n="fq2_q">Pourquoi privilegiez-vous les solutions open source ?</span>
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Nous privilegions des solutions open source eprouvees qui garantissent transparence, flexibilite et maitrise des couts a long terme. Vous gardez la souverainete totale sur vos donnees et systemes, sans dependance a un editeur proprietaire. C'est un choix strategique pour votre independance.</p>
+                            <p data-i18n="fq2_a">Nous privilegions des solutions open source eprouvees qui garantissent transparence, flexibilite et maitrise des couts a long terme. Vous gardez la souverainete totale sur vos donnees et systemes, sans dependance a un editeur proprietaire. C'est un choix strategique pour votre independance.</p>
                         </div>
                     </div>
                     <div class="faq-item animate-on-scroll">
                         <button class="faq-question">
-                            Quelle est la duree typique d'une mission d'audit ?
+                            <span data-i18n="fq3_q">Quelle est la duree typique d'une mission d'audit ?</span>
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Une mission d'audit 360 complete dure generalement entre 2 et 4 semaines, selon la taille et la complexite de votre organisation. Nous adaptons toujours la profondeur de l'analyse a vos enjeux et contraintes. Des audits cibles plus courts sont egalement possibles.</p>
+                            <p data-i18n="fq3_a">Une mission d'audit 360 complete dure generalement entre 2 et 4 semaines, selon la taille et la complexite de votre organisation. Nous adaptons toujours la profondeur de l'analyse a vos enjeux et contraintes. Des audits cibles plus courts sont egalement possibles.</p>
                         </div>
                     </div>
                     <div class="faq-item animate-on-scroll">
                         <button class="faq-question">
-                            Comment fonctionne le Fractional CISO/CTO ?
+                            <span data-i18n="fq4_q">Comment fonctionne le Fractional CISO/CTO ?</span>
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Vous beneficiez de l'expertise d'un directeur securite ou technologique experimente, disponible quelques jours par mois selon vos besoins. C'est l'alternative ideale au recrutement d'un profil senior en CDI : vous accedez aux competences strategiques sans les couts d'un temps plein.</p>
+                            <p data-i18n="fq4_a">Vous beneficiez de l'expertise d'un directeur securite ou technologique experimente, disponible quelques jours par mois selon vos besoins. C'est l'alternative ideale au recrutement d'un profil senior en CDI : vous accedez aux competences strategiques sans les couts d'un temps plein.</p>
                         </div>
                     </div>
                     <div class="faq-item animate-on-scroll">
                         <button class="faq-question">
-                            Evitez-vous de "faire de l'IA pour faire de l'IA" ?
+                            <span data-i18n="fq5_q">Evitez-vous de "faire de l'IA pour faire de l'IA" ?</span>
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer">
-                            <p>Absolument. Notre approche identifie d'abord vos vrais besoins business avant de recommander toute solution technique. Si l'IA n'est pas pertinente pour resoudre votre probleme, nous le disons clairement. Nous privilegions toujours l'impact concret sur l'effet de mode.</p>
+                            <p data-i18n="fq5_a">Absolument. Notre approche identifie d'abord vos vrais besoins business avant de recommander toute solution technique. Si l'IA n'est pas pertinente pour resoudre votre probleme, nous le disons clairement. Nous privilegions toujours l'impact concret sur l'effet de mode.</p>
                         </div>
                     </div>
                 </div>
@@ -1773,11 +1844,11 @@
         <!-- CTA BANNER -->
         <section class="cta-banner">
             <div class="container animate-on-scroll">
-                <h2>Pret a transformer<br>votre organisation ?</h2>
-                <p>Discutons ensemble de vos defis et decouvrez comment notre expertise peut accelerer votre croissance. Sans engagement.</p>
+                <h2 data-i18n-html="cta_title">Pret a transformer<br>votre organisation ?</h2>
+                <p data-i18n="cta_text">Discutons ensemble de vos defis et decouvrez comment notre expertise peut accelerer votre croissance. Sans engagement.</p>
                 <div class="cta-buttons">
-                    <a href="mailto:contact@virelia.guedou.ch" class="btn-cta">Planifier un Diagnostic <span>&rarr;</span></a>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="mailto:contact@virelia.guedou.ch" class="btn-cta" data-i18n-html="cta_btn1">Planifier un Diagnostic <span>&rarr;</span></a>
+                    <a href="#contact" class="btn-outline" data-i18n="cta_btn2">En savoir plus</a>
                 </div>
             </div>
         </section>
@@ -1787,8 +1858,8 @@
             <div class="container">
                 <div class="animate-on-scroll">
                     <div class="section-label">Contact</div>
-                    <h2 class="section-title">Contactez nos experts</h2>
-                    <p class="section-subtitle">Que vous ayez besoin d'un audit 360, d'une transformation organisationnelle ou d'un accompagnement securite, nous sommes la pour vous aider.</p>
+                    <h2 class="section-title" data-i18n="contact_title">Contactez nos experts</h2>
+                    <p class="section-subtitle" data-i18n="contact_subtitle">Que vous ayez besoin d'un audit 360, d'une transformation organisationnelle ou d'un accompagnement securite, nous sommes la pour vous aider.</p>
                 </div>
                 <div class="contact-grid">
                     <div>
@@ -1797,32 +1868,32 @@
                             <p>contact@virelia.guedou.ch</p>
                         </div>
                         <div class="contact-info-item animate-on-scroll">
-                            <h4>Bureaux</h4>
+                            <h4 data-i18n="contact_offices">Bureaux</h4>
                             <p>Geneve &middot; Lausanne</p>
                         </div>
                         <div class="contact-info-item animate-on-scroll">
-                            <h4>Reseau</h4>
-                            <p>Europe &middot; Suisse Romande &middot; Suisse Alemanique</p>
+                            <h4 data-i18n="contact_network">Reseau</h4>
+                            <p data-i18n="contact_network_val">Europe &middot; Suisse Romande &middot; Suisse Alemanique</p>
                         </div>
                     </div>
                     <div>
                         <div class="contact-info-item animate-on-scroll" style="min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                            <h4 style="margin-bottom: 1.5rem;">Reponse garantie</h4>
+                            <h4 style="margin-bottom: 1.5rem;" data-i18n="contact_response">Reponse garantie</h4>
                             <p style="font-size: 3rem; font-weight: 900; color: var(--accent); letter-spacing: -2px;">&lt;24h</p>
-                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Devis gratuit &middot; Sans engagement</p>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;" data-i18n="contact_free">Devis gratuit &middot; Sans engagement</p>
                         </div>
                         <div class="contact-note animate-on-scroll">
                             <div class="contact-note-item">
                                 <span class="contact-note-dot"></span>
-                                Devis gratuit
+                                <span data-i18n="note1">Devis gratuit</span>
                             </div>
                             <div class="contact-note-item">
                                 <span class="contact-note-dot"></span>
-                                Sans engagement
+                                <span data-i18n="note2">Sans engagement</span>
                             </div>
                             <div class="contact-note-item">
                                 <span class="contact-note-dot"></span>
-                                Confidentialite totale
+                                <span data-i18n="note3">Confidentialite totale</span>
                             </div>
                         </div>
                     </div>
@@ -1840,10 +1911,10 @@
                         <span class="logo-icon"></span>
                         VIRELIA ADVISORY
                     </div>
-                    <p class="footer-desc">Securite haut de gamme. Performance radicale. Souverainete totale pour les secteurs les plus exigeants.</p>
+                    <p class="footer-desc" data-i18n="footer_desc">Securite haut de gamme. Performance radicale. Souverainete totale pour les secteurs les plus exigeants.</p>
                 </div>
                 <div>
-                    <h5>Ecosysteme</h5>
+                    <h5 data-i18n="footer_ecosystem">Ecosysteme</h5>
                     <ul>
                         <li><a href="https://clinicalos.guedou.ch" target="_blank">ClinicalOS (Pharma)</a></li>
                         <li><a href="https://aegis.guedou.ch" target="_blank">Aegis (Banque/GRC)</a></li>
@@ -1853,9 +1924,9 @@
                 <div>
                     <h5>Services</h5>
                     <ul>
-                        <li><a href="#offres">Audit 360 & Cyber</a></li>
-                        <li><a href="#offres">Transformation IA</a></li>
-                        <li><a href="#offres">Performance Lean</a></li>
+                        <li><a href="#offres" data-i18n="f_svc1">Audit 360 & Cyber</a></li>
+                        <li><a href="#offres" data-i18n="f_svc2">Transformation IA</a></li>
+                        <li><a href="#offres" data-i18n="f_svc3">Performance Lean</a></li>
                         <li><a href="#offres">Fractional CISO/CTO</a></li>
                     </ul>
                 </div>
@@ -1863,8 +1934,8 @@
                     <h5>Contact</h5>
                     <ul>
                         <li><a href="#">Geneve / Lausanne</a></li>
-                        <li><a href="#">Reseau Europeen</a></li>
-                        <li><a href="#contact">Planifier un Diagnostic</a></li>
+                        <li><a href="#" data-i18n="f_network">Reseau Europeen</a></li>
+                        <li><a href="#contact" data-i18n="f_diag">Planifier un Diagnostic</a></li>
                     </ul>
                 </div>
             </div>
@@ -1912,6 +1983,406 @@
                 }
             });
         });
+
+        // ── Multi-language System ──
+        const translations = {
+            fr: {
+                // Nav
+                nav_results: "Resultats", nav_services: "Services", nav_method: "Methode", nav_cta: "Planifier un Diagnostic", nav_contact: "Contact",
+                mob_services: "Services", mob_results: "Resultats", mob_value: "Valeur",
+                // PWA
+                pwa_install: "Installer VIRELIA ADVISORY", pwa_sub: "Acces rapide depuis votre ecran d'accueil", pwa_btn: "Installer",
+                // Hero
+                hero_badge: "Standards de securite Banque & Pharma",
+                hero_title: 'Clarifier.<br>Decider.<br><span>Avancer.</span>',
+                hero_text: 'Arretez de subir votre organisation. Nous identifions ce qui vous freine, restructurons vos processus et accelerons votre transformation numerique pour <strong>vous rendre votre temps.</strong>',
+                hero_right: 'Audit, Simplification, IA appliquee et Securite des donnees critiques pour PME, ETI et secteurs a haute conformite. <strong>ROI mesurable. Souverainete totale.</strong>',
+                hero_cta1: 'Decouvrir nos solutions <span>&rarr;</span>', hero_cta2: "Parlons de votre projet",
+                // Clients
+                clients_label: "Ils nous font confiance dans les secteurs les plus exigeants",
+                // Results
+                results_label: "Resultats Concrets", results_title: "Des transformations mesurables<br>pour nos clients",
+                results_subtitle: "Chaque intervention genere un impact quantifiable. Pas de slides, pas de rapports inutiles. Des resultats.",
+                r1_tag: "Audit & ERP \u00b7 Secteur Pharma", r1_title: "Automatisation Conformite Pharmaceutique",
+                r1_problem: "<strong>Probleme :</strong> Systeme d'information vieillissant et processus administratifs chronophages freinant la croissance. Conformite reglementaire geree manuellement.",
+                r1_stat: "de temps administratif economise.<br>ROI atteint en 12 mois.",
+                r2_tag: "Securite \u00b7 Secteur Bancaire", r2_title: "Infrastructure Souveraine GRC",
+                r2_problem: "<strong>Probleme :</strong> Architecture SI obsolete, dette technique critique et risques securite croissants dans un environnement hautement regule.",
+                r2_value: "Zero", r2_stat: "faille de donnees.<br>100% de controle sur les flux sensibles.",
+                r3_tag: "Lean \u00b7 Operations", r3_title: "Optimisation Flux & Personnel CHR",
+                r3_problem: "<strong>Probleme :</strong> Processus desynchronises entre sites, perte de visibilite et latence RH excessive freinant l'efficacite operationnelle.",
+                r3_stat: "d'efficacite operationnelle.<br>Reduction drastique de la latence RH.",
+                r4_tag: "Migration \u00b7 Souverainete", r4_title: "Migration Open Source Securisee",
+                r4_problem: "<strong>Probleme :</strong> Dependance a des editeurs proprietaires, couts croissants et risque de perte de souverainete sur les donnees critiques.",
+                r4_stat: "de souverainete retrouvee.<br>Infrastructure perenne et securisee.",
+                counter1: "Clients satisfaits", counter2: "Annees d'expertise", counter3: "Audits realises",
+                // Value
+                value_label: "Notre Valeur", value_title: "Pourquoi Virelia Advisory ?",
+                value_subtitle: "Nous redonnons aux dirigeants le controle total sur leur destin technologique et organisationnel.",
+                v1_title: "Impact Immediat", v1_desc: "Pas de cycles longs ni de rapports inutiles. Notre methode garantit des resultats rapides et mesurables. Vous voyez l'impact des les premieres semaines.",
+                v2_title: "ROI Garanti", v2_desc: "Chaque franc investi est oriente vers un retour concret et mesurable. Nous identifions d'abord les leviers a fort impact avant d'engager des investissements.",
+                v3_title: "Souverainete Totale", v3_desc: "Solutions open source eprouvees garantissant transparence et maitrise des couts. Vous gardez le controle total sur vos donnees et systemes.",
+                // Solutions
+                sol_label: "Ecosysteme & Realisations", sol_title: "Des solutions a impact mesurable",
+                sol_subtitle: "Nous ne vendons pas des services. Nous creons des resultats. Chaque plateforme est concue pour generer un ROI concret.",
+                s1_tag: "Souverainete Pharma", s1_desc: "Systeme d'exploitation proprietaire pour la gestion des donnees cliniques. Securite maximale et conformite reglementaire integree.",
+                s1_link: 'Explorer la plateforme <span>&rarr;</span>',
+                s2_tag: "Securite Bancaire", s2_desc: "Hub de protection et de conformite (GRC) pour les institutions financieres. Audit en temps reel et gestion des risques cyber.",
+                s2_link: 'Explorer la plateforme <span>&rarr;</span>',
+                s3_tag: "Operations & Flux", s3_desc: "Optimisation operationnelle et gestion des effectifs pour le secteur CHR. Simplification radicale des processus et des flux.",
+                s3_link: 'Acceder au service <span>&rarr;</span>',
+                // Services
+                svc_label: "Nos Leviers d'Impact", svc_title: "Des services concus<br>pour creer de la valeur",
+                svc1_title: "Diagnostic 360\u00b0 & Cyber-securite", svc1_desc: "Cartographier les flux de donnees. Identifier les failles critiques et les dettes operationnelles dans les environnements regules.",
+                svc2_title: "Transformation IA & Data Trust", svc2_desc: "Urbanisation du SI et automatisation sous haute surveillance. Deploiement d'IA privees et souveraines (Zero Trust).",
+                svc3_title: "Performance & Conformite", svc3_desc: "Optimisation des processus industriels (Pharma/Medtech) en respectant les contraintes reglementaires strictes.",
+                svc4_desc: "Un expert Virelia pour piloter votre securite et votre roadmap technologique au niveau des standards bancaires.",
+                // Method
+                method_label: "Methode Virelia", method_title: "Notre methodologie en 5 etapes",
+                method_subtitle: "Une approche structuree pour des resultats mesurables. On ne digitalise pas le chaos.",
+                m1_title: "Diagnostic", m1_desc: "Cadrage radical et audit de securite. Alignement sur vos enjeux business et vos priorites.",
+                m2_title: "Arbitrage", m2_desc: "Validation de la roadmap et des risques. Scenarios realistes avec chiffrage precis.",
+                m3_title: "Activation", m3_desc: "Deploiement sous standards Pharma & Banque. Quick wins pour eviter l'effet tunnel.",
+                m4_title: "Formation", m4_desc: "Transfert de competence et culture cyber. Autonomie durable de vos equipes.",
+                m5_title: "Suivi", m5_desc: "Maintien en condition de securite (MCS). Amelioration continue et veille.",
+                // Why us
+                why_label: "Pourquoi Nous", why_title: "5 raisons de nous choisir", why_subtitle: "Des engagements concrets qui font la difference.",
+                w1_title: "La Preuve par les Secteurs Regules", w1_desc: "Nous sommes les experts que les banques privees et l'industrie pharma appellent pour obtenir un avis decisif. Cette confiance temoigne de notre rigueur.",
+                w2_title: "L'ADN d'Entrepreneur", w2_desc: "Nos fondateurs ont cree et dirige plusieurs entreprises. Nous recommandons ce que nous avons nous-memes eprouve sur le terrain.",
+                w3_title: "Une Double Competence Rare", w3_desc: "La ou il faut 3 ou 4 prestataires, nous reunissons audit, conseil strategique, deploiement technique et Lean. Vous restez maitre de votre strategie.",
+                w4_title: "Des Resultats, pas des Slides", w4_desc: "Livrables courts, arbitrage par le client, valeur livree en continu. Pas de Big Bang, pas de cycles longs, pas de rapports inutiles.",
+                w5_title: "Ecosysteme Souverain", w5_desc: "Avec ClinicalOS, Aegis et CHR360, nous possedons la capacite d'executer nos recommandations de A a Z. Solutions crees et hebergees en Suisse.",
+                // FAQ
+                faq_label: "Questions Frequentes", faq_title: "Tout ce que vous devez savoir",
+                fq1_q: "Comment garantissez-vous un ROI rapide et concret ?",
+                fq1_a: "Chaque franc investi est oriente vers un retour concret, mesurable et rapide. Notre methode commence par identifier les leviers a fort impact avant d'engager tout investissement. Nous privilegions les quick wins et la creation de valeur continue plutot que les grands projets longs et couteux.",
+                fq2_q: "Pourquoi privilegiez-vous les solutions open source ?",
+                fq2_a: "Nous privilegions des solutions open source eprouvees qui garantissent transparence, flexibilite et maitrise des couts a long terme. Vous gardez la souverainete totale sur vos donnees et systemes, sans dependance a un editeur proprietaire. C'est un choix strategique pour votre independance.",
+                fq3_q: "Quelle est la duree typique d'une mission d'audit ?",
+                fq3_a: "Une mission d'audit 360 complete dure generalement entre 2 et 4 semaines, selon la taille et la complexite de votre organisation. Nous adaptons toujours la profondeur de l'analyse a vos enjeux et contraintes. Des audits cibles plus courts sont egalement possibles.",
+                fq4_q: "Comment fonctionne le Fractional CISO/CTO ?",
+                fq4_a: "Vous beneficiez de l'expertise d'un directeur securite ou technologique experimente, disponible quelques jours par mois selon vos besoins. C'est l'alternative ideale au recrutement d'un profil senior en CDI : vous accedez aux competences strategiques sans les couts d'un temps plein.",
+                fq5_q: 'Evitez-vous de "faire de l\'IA pour faire de l\'IA" ?',
+                fq5_a: "Absolument. Notre approche identifie d'abord vos vrais besoins business avant de recommander toute solution technique. Si l'IA n'est pas pertinente pour resoudre votre probleme, nous le disons clairement. Nous privilegions toujours l'impact concret sur l'effet de mode.",
+                // CTA
+                cta_title: "Pret a transformer<br>votre organisation ?",
+                cta_text: "Discutons ensemble de vos defis et decouvrez comment notre expertise peut accelerer votre croissance. Sans engagement.",
+                cta_btn1: 'Planifier un Diagnostic <span>&rarr;</span>', cta_btn2: "En savoir plus",
+                // Contact
+                contact_title: "Contactez nos experts",
+                contact_subtitle: "Que vous ayez besoin d'un audit 360, d'une transformation organisationnelle ou d'un accompagnement securite, nous sommes la pour vous aider.",
+                contact_offices: "Bureaux", contact_network: "Reseau",
+                contact_network_val: "Europe \u00b7 Suisse Romande \u00b7 Suisse Alemanique",
+                contact_response: "Reponse garantie", contact_free: "Devis gratuit \u00b7 Sans engagement",
+                note1: "Devis gratuit", note2: "Sans engagement", note3: "Confidentialite totale",
+                // Footer
+                footer_desc: "Securite haut de gamme. Performance radicale. Souverainete totale pour les secteurs les plus exigeants.",
+                footer_ecosystem: "Ecosysteme",
+                f_svc1: "Audit 360 & Cyber", f_svc2: "Transformation IA", f_svc3: "Performance Lean",
+                f_network: "Reseau Europeen", f_diag: "Planifier un Diagnostic",
+                // Meta
+                meta_title: "VIRELIA ADVISORY | Clarifier. Decider. Avancer.",
+                meta_desc: "VIRELIA ADVISORY - Securite haut de gamme. Performance radicale. Souverainete totale pour les secteurs les plus exigeants."
+            },
+            en: {
+                nav_results: "Results", nav_services: "Services", nav_method: "Method", nav_cta: "Schedule a Diagnostic", nav_contact: "Contact",
+                mob_services: "Services", mob_results: "Results", mob_value: "Value",
+                pwa_install: "Install VIRELIA ADVISORY", pwa_sub: "Quick access from your home screen", pwa_btn: "Install",
+                hero_badge: "Banking & Pharma Security Standards",
+                hero_title: 'Clarify.<br>Decide.<br><span>Advance.</span>',
+                hero_text: 'Stop enduring your organization. We identify what holds you back, restructure your processes and accelerate your digital transformation to <strong>give you back your time.</strong>',
+                hero_right: 'Audit, Simplification, Applied AI and Critical Data Security for SMEs, mid-caps and high-compliance sectors. <strong>Measurable ROI. Total sovereignty.</strong>',
+                hero_cta1: 'Discover our solutions <span>&rarr;</span>', hero_cta2: "Let's talk about your project",
+                clients_label: "Trusted by the most demanding industries",
+                results_label: "Concrete Results", results_title: "Measurable transformations<br>for our clients",
+                results_subtitle: "Every engagement generates quantifiable impact. No slides, no useless reports. Results.",
+                r1_tag: "Audit & ERP \u00b7 Pharma Sector", r1_title: "Pharmaceutical Compliance Automation",
+                r1_problem: "<strong>Problem:</strong> Aging information system and time-consuming administrative processes hindering growth. Regulatory compliance managed manually.",
+                r1_stat: "administrative time saved.<br>ROI achieved in 12 months.",
+                r2_tag: "Security \u00b7 Banking Sector", r2_title: "Sovereign GRC Infrastructure",
+                r2_problem: "<strong>Problem:</strong> Obsolete IT architecture, critical technical debt and growing security risks in a highly regulated environment.",
+                r2_value: "Zero", r2_stat: "data breaches.<br>100% control over sensitive flows.",
+                r3_tag: "Lean \u00b7 Operations", r3_title: "CHR Flow & Staff Optimization",
+                r3_problem: "<strong>Problem:</strong> Desynchronized processes between sites, loss of visibility and excessive HR latency hindering operational efficiency.",
+                r3_stat: "operational efficiency gain.<br>Drastic reduction of HR latency.",
+                r4_tag: "Migration \u00b7 Sovereignty", r4_title: "Secure Open Source Migration",
+                r4_problem: "<strong>Problem:</strong> Dependency on proprietary vendors, rising costs and risk of losing sovereignty over critical data.",
+                r4_stat: "sovereignty recovered.<br>Sustainable and secure infrastructure.",
+                counter1: "Satisfied clients", counter2: "Years of expertise", counter3: "Audits completed",
+                value_label: "Our Value", value_title: "Why Virelia Advisory?",
+                value_subtitle: "We give executives full control over their technological and organizational destiny.",
+                v1_title: "Immediate Impact", v1_desc: "No long cycles or useless reports. Our method guarantees fast and measurable results. You see the impact from the very first weeks.",
+                v2_title: "Guaranteed ROI", v2_desc: "Every franc invested is directed towards a concrete and measurable return. We first identify high-impact levers before committing investments.",
+                v3_title: "Total Sovereignty", v3_desc: "Proven open source solutions ensuring transparency and cost control. You keep total control over your data and systems.",
+                sol_label: "Ecosystem & Achievements", sol_title: "Solutions with measurable impact",
+                sol_subtitle: "We don't sell services. We create results. Each platform is designed to generate concrete ROI.",
+                s1_tag: "Pharma Sovereignty", s1_desc: "Proprietary operating system for clinical data management. Maximum security and integrated regulatory compliance.",
+                s1_link: 'Explore the platform <span>&rarr;</span>',
+                s2_tag: "Banking Security", s2_desc: "Protection and compliance hub (GRC) for financial institutions. Real-time audit and cyber risk management.",
+                s2_link: 'Explore the platform <span>&rarr;</span>',
+                s3_tag: "Operations & Flow", s3_desc: "Operational optimization and workforce management for the hospitality sector. Radical process simplification.",
+                s3_link: 'Access the service <span>&rarr;</span>',
+                svc_label: "Our Impact Levers", svc_title: "Services designed<br>to create value",
+                svc1_title: "360\u00b0 Diagnostic & Cybersecurity", svc1_desc: "Map data flows. Identify critical vulnerabilities and operational debts in regulated environments.",
+                svc2_title: "AI Transformation & Data Trust", svc2_desc: "IS urbanization and automation under high surveillance. Deployment of private and sovereign AI (Zero Trust).",
+                svc3_title: "Performance & Compliance", svc3_desc: "Industrial process optimization (Pharma/Medtech) while respecting strict regulatory constraints.",
+                svc4_desc: "A Virelia expert to lead your security and technology roadmap to banking standards.",
+                method_label: "Virelia Method", method_title: "Our 5-step methodology",
+                method_subtitle: "A structured approach for measurable results. We don't digitize chaos.",
+                m1_title: "Diagnostic", m1_desc: "Radical scoping and security audit. Alignment with your business challenges and priorities.",
+                m2_title: "Arbitration", m2_desc: "Roadmap and risk validation. Realistic scenarios with precise costing.",
+                m3_title: "Activation", m3_desc: "Deployment under Pharma & Banking standards. Quick wins to avoid tunnel effect.",
+                m4_title: "Training", m4_desc: "Skills transfer and cyber culture. Lasting autonomy for your teams.",
+                m5_title: "Follow-up", m5_desc: "Security maintenance (MCS). Continuous improvement and monitoring.",
+                why_label: "Why Us", why_title: "5 reasons to choose us", why_subtitle: "Concrete commitments that make the difference.",
+                w1_title: "Proven in Regulated Sectors", w1_desc: "We are the experts that private banks and pharma industry call for decisive advice. This trust reflects our rigor.",
+                w2_title: "Entrepreneurial DNA", w2_desc: "Our founders have created and managed multiple companies. We recommend what we have tested ourselves in the field.",
+                w3_title: "A Rare Dual Expertise", w3_desc: "Where it takes 3 or 4 providers, we combine audit, strategic consulting, technical deployment and Lean. You stay in control of your strategy.",
+                w4_title: "Results, not Slides", w4_desc: "Short deliverables, client arbitration, continuously delivered value. No Big Bang, no long cycles, no useless reports.",
+                w5_title: "Sovereign Ecosystem", w5_desc: "With ClinicalOS, Aegis and CHR360, we have the ability to execute our recommendations end-to-end. Solutions created and hosted in Switzerland.",
+                faq_label: "Frequently Asked Questions", faq_title: "Everything you need to know",
+                fq1_q: "How do you guarantee a fast and concrete ROI?",
+                fq1_a: "Every franc invested is directed towards a concrete, measurable and fast return. Our method starts by identifying high-impact levers before committing any investment. We favor quick wins and continuous value creation over long and costly projects.",
+                fq2_q: "Why do you favor open source solutions?",
+                fq2_a: "We favor proven open source solutions that guarantee transparency, flexibility and long-term cost control. You keep total sovereignty over your data and systems, without dependency on a proprietary vendor. It's a strategic choice for your independence.",
+                fq3_q: "What is the typical duration of an audit mission?",
+                fq3_a: "A complete 360 audit mission typically lasts between 2 and 4 weeks, depending on the size and complexity of your organization. We always adapt the depth of analysis to your challenges and constraints. Shorter targeted audits are also possible.",
+                fq4_q: "How does the Fractional CISO/CTO work?",
+                fq4_a: "You benefit from the expertise of an experienced security or technology director, available a few days per month according to your needs. It's the ideal alternative to recruiting a senior profile full-time: you access strategic skills without the costs of a permanent position.",
+                fq5_q: 'Do you avoid "doing AI for the sake of AI"?',
+                fq5_a: "Absolutely. Our approach first identifies your real business needs before recommending any technical solution. If AI is not relevant to solving your problem, we say so clearly. We always prioritize concrete impact over trends.",
+                cta_title: "Ready to transform<br>your organization?",
+                cta_text: "Let's discuss your challenges together and discover how our expertise can accelerate your growth. No commitment.",
+                cta_btn1: 'Schedule a Diagnostic <span>&rarr;</span>', cta_btn2: "Learn more",
+                contact_title: "Contact our experts",
+                contact_subtitle: "Whether you need a 360 audit, an organizational transformation or security support, we are here to help.",
+                contact_offices: "Offices", contact_network: "Network",
+                contact_network_val: "Europe \u00b7 Western Switzerland \u00b7 German-speaking Switzerland",
+                contact_response: "Guaranteed response", contact_free: "Free quote \u00b7 No commitment",
+                note1: "Free quote", note2: "No commitment", note3: "Total confidentiality",
+                footer_desc: "Premium security. Radical performance. Total sovereignty for the most demanding sectors.",
+                footer_ecosystem: "Ecosystem",
+                f_svc1: "360 Audit & Cyber", f_svc2: "AI Transformation", f_svc3: "Lean Performance",
+                f_network: "European Network", f_diag: "Schedule a Diagnostic",
+                meta_title: "VIRELIA ADVISORY | Clarify. Decide. Advance.",
+                meta_desc: "VIRELIA ADVISORY - Premium security. Radical performance. Total sovereignty for the most demanding sectors."
+            },
+            de: {
+                nav_results: "Ergebnisse", nav_services: "Leistungen", nav_method: "Methode", nav_cta: "Diagnose planen", nav_contact: "Kontakt",
+                mob_services: "Leistungen", mob_results: "Ergebnisse", mob_value: "Mehrwert",
+                pwa_install: "VIRELIA ADVISORY installieren", pwa_sub: "Schnellzugriff vom Startbildschirm", pwa_btn: "Installieren",
+                hero_badge: "Sicherheitsstandards Bank & Pharma",
+                hero_title: 'Kl\u00e4ren.<br>Entscheiden.<br><span>Voranschreiten.</span>',
+                hero_text: 'H\u00f6ren Sie auf, Ihre Organisation zu erleiden. Wir identifizieren, was Sie bremst, strukturieren Ihre Prozesse um und beschleunigen Ihre digitale Transformation, um <strong>Ihnen Ihre Zeit zur\u00fcckzugeben.</strong>',
+                hero_right: 'Audit, Vereinfachung, angewandte KI und Sicherheit kritischer Daten f\u00fcr KMU, Mittelstand und hochregulierte Branchen. <strong>Messbarer ROI. Vollst\u00e4ndige Souver\u00e4nit\u00e4t.</strong>',
+                hero_cta1: 'Unsere L\u00f6sungen entdecken <span>&rarr;</span>', hero_cta2: "Sprechen wir \u00fcber Ihr Projekt",
+                clients_label: "Vertrauen aus den anspruchsvollsten Branchen",
+                results_label: "Konkrete Ergebnisse", results_title: "Messbare Transformationen<br>f\u00fcr unsere Kunden",
+                results_subtitle: "Jeder Einsatz erzeugt quantifizierbare Wirkung. Keine Folien, keine unn\u00f6tigen Berichte. Ergebnisse.",
+                r1_tag: "Audit & ERP \u00b7 Pharmabereich", r1_title: "Pharmazeutische Compliance-Automatisierung",
+                r1_problem: "<strong>Problem:</strong> Veraltetes Informationssystem und zeitaufw\u00e4ndige Verwaltungsprozesse, die das Wachstum bremsen. Regulatorische Compliance manuell verwaltet.",
+                r1_stat: "Verwaltungszeit eingespart.<br>ROI in 12 Monaten erreicht.",
+                r2_tag: "Sicherheit \u00b7 Bankensektor", r2_title: "Souver\u00e4ne GRC-Infrastruktur",
+                r2_problem: "<strong>Problem:</strong> Veraltete IT-Architektur, kritische technische Schulden und wachsende Sicherheitsrisiken in einem hochregulierten Umfeld.",
+                r2_value: "Null", r2_stat: "Datenlecks.<br>100% Kontrolle \u00fcber sensible Datenfl\u00fcsse.",
+                r3_tag: "Lean \u00b7 Operations", r3_title: "CHR-Fluss- & Personaloptimierung",
+                r3_problem: "<strong>Problem:</strong> Desynchronisierte Prozesse zwischen Standorten, Sichtbarkeitsverlust und \u00fcberm\u00e4ssige HR-Latenz.",
+                r3_stat: "betriebliche Effizienzsteigerung.<br>Drastische Reduktion der HR-Latenz.",
+                r4_tag: "Migration \u00b7 Souver\u00e4nit\u00e4t", r4_title: "Sichere Open-Source-Migration",
+                r4_problem: "<strong>Problem:</strong> Abh\u00e4ngigkeit von propriet\u00e4ren Anbietern, steigende Kosten und Risiko des Souver\u00e4nit\u00e4tsverlusts \u00fcber kritische Daten.",
+                r4_stat: "Souver\u00e4nit\u00e4t wiederhergestellt.<br>Nachhaltige und sichere Infrastruktur.",
+                counter1: "Zufriedene Kunden", counter2: "Jahre Erfahrung", counter3: "Durchgef\u00fchrte Audits",
+                value_label: "Unser Mehrwert", value_title: "Warum Virelia Advisory?",
+                value_subtitle: "Wir geben F\u00fchrungskr\u00e4ften die volle Kontrolle \u00fcber ihr technologisches und organisatorisches Schicksal zur\u00fcck.",
+                v1_title: "Sofortige Wirkung", v1_desc: "Keine langen Zyklen oder unn\u00f6tigen Berichte. Unsere Methode garantiert schnelle und messbare Ergebnisse. Sie sehen die Wirkung ab den ersten Wochen.",
+                v2_title: "Garantierter ROI", v2_desc: "Jeder investierte Franken ist auf eine konkrete und messbare Rendite ausgerichtet. Wir identifizieren zuerst die Hebel mit hoher Wirkung.",
+                v3_title: "Vollst\u00e4ndige Souver\u00e4nit\u00e4t", v3_desc: "Bew\u00e4hrte Open-Source-L\u00f6sungen f\u00fcr Transparenz und Kostenkontrolle. Sie behalten die volle Kontrolle \u00fcber Ihre Daten und Systeme.",
+                sol_label: "\u00d6kosystem & Erfolge", sol_title: "L\u00f6sungen mit messbarer Wirkung",
+                sol_subtitle: "Wir verkaufen keine Dienstleistungen. Wir schaffen Ergebnisse. Jede Plattform ist darauf ausgelegt, konkreten ROI zu generieren.",
+                s1_tag: "Pharma-Souver\u00e4nit\u00e4t", s1_desc: "Propriet\u00e4res Betriebssystem f\u00fcr das Management klinischer Daten. Maximale Sicherheit und integrierte regulatorische Compliance.",
+                s1_link: 'Plattform entdecken <span>&rarr;</span>',
+                s2_tag: "Banksicherheit", s2_desc: "Schutz- und Compliance-Hub (GRC) f\u00fcr Finanzinstitute. Echtzeit-Audit und Cyber-Risikomanagement.",
+                s2_link: 'Plattform entdecken <span>&rarr;</span>',
+                s3_tag: "Operations & Abl\u00e4ufe", s3_desc: "Betriebliche Optimierung und Personalmanagement f\u00fcr den CHR-Sektor. Radikale Prozessvereinfachung.",
+                s3_link: 'Zum Service <span>&rarr;</span>',
+                svc_label: "Unsere Wirkungshebel", svc_title: "Leistungen f\u00fcr<br>Wertsch\u00f6pfung",
+                svc1_title: "360\u00b0-Diagnose & Cybersicherheit", svc1_desc: "Datenfl\u00fcsse kartieren. Kritische Schwachstellen und betriebliche Schulden in regulierten Umgebungen identifizieren.",
+                svc2_title: "KI-Transformation & Data Trust", svc2_desc: "IS-Urbanisierung und Automatisierung unter hoher \u00dcberwachung. Einsatz privater und souver\u00e4ner KI (Zero Trust).",
+                svc3_title: "Leistung & Compliance", svc3_desc: "Optimierung industrieller Prozesse (Pharma/Medtech) unter Einhaltung strenger regulatorischer Auflagen.",
+                svc4_desc: "Ein Virelia-Experte f\u00fcr die Steuerung Ihrer Sicherheits- und Technologie-Roadmap auf Bankenstandard-Niveau.",
+                method_label: "Virelia-Methode", method_title: "Unsere 5-Schritte-Methodik",
+                method_subtitle: "Ein strukturierter Ansatz f\u00fcr messbare Ergebnisse. Wir digitalisieren kein Chaos.",
+                m1_title: "Diagnose", m1_desc: "Radikale Eingrenzung und Sicherheitsaudit. Ausrichtung auf Ihre gesch\u00e4ftlichen Herausforderungen und Priorit\u00e4ten.",
+                m2_title: "Entscheidung", m2_desc: "Validierung der Roadmap und Risiken. Realistische Szenarien mit pr\u00e4ziser Kalkulation.",
+                m3_title: "Aktivierung", m3_desc: "Bereitstellung nach Pharma- & Bankenstandards. Quick Wins gegen den Tunneleffekt.",
+                m4_title: "Schulung", m4_desc: "Wissenstransfer und Cyberkultur. Nachhaltige Autonomie f\u00fcr Ihre Teams.",
+                m5_title: "Nachverfolgung", m5_desc: "Sicherheitswartung (MCS). Kontinuierliche Verbesserung und \u00dcberwachung.",
+                why_label: "Warum Wir", why_title: "5 Gr\u00fcnde, uns zu w\u00e4hlen", why_subtitle: "Konkrete Zusagen, die den Unterschied machen.",
+                w1_title: "Beweis durch regulierte Sektoren", w1_desc: "Wir sind die Experten, die Privatbanken und die Pharmaindustrie f\u00fcr entscheidende Gutachten rufen. Dieses Vertrauen zeugt von unserer Strenge.",
+                w2_title: "Unternehmer-DNA", w2_desc: "Unsere Gr\u00fcnder haben mehrere Unternehmen gegr\u00fcndet und gef\u00fchrt. Wir empfehlen, was wir selbst im Feld erprobt haben.",
+                w3_title: "Seltene Doppelkompetenz", w3_desc: "Wo 3 oder 4 Dienstleister n\u00f6tig sind, vereinen wir Audit, strategische Beratung, technische Umsetzung und Lean. Sie behalten die Kontrolle.",
+                w4_title: "Ergebnisse, keine Folien", w4_desc: "Kurze Lieferungen, Kundenentscheidung, kontinuierlich gelieferter Wert. Kein Big Bang, keine langen Zyklen.",
+                w5_title: "Souver\u00e4nes \u00d6kosystem", w5_desc: "Mit ClinicalOS, Aegis und CHR360 k\u00f6nnen wir unsere Empfehlungen von A bis Z umsetzen. L\u00f6sungen in der Schweiz erstellt und gehostet.",
+                faq_label: "H\u00e4ufig gestellte Fragen", faq_title: "Alles, was Sie wissen m\u00fcssen",
+                fq1_q: "Wie garantieren Sie einen schnellen und konkreten ROI?",
+                fq1_a: "Jeder investierte Franken ist auf eine konkrete, messbare und schnelle Rendite ausgerichtet. Unsere Methode identifiziert zuerst die Hebel mit hoher Wirkung. Wir bevorzugen Quick Wins und kontinuierliche Wertsch\u00f6pfung gegen\u00fcber langen und kostspieligen Projekten.",
+                fq2_q: "Warum bevorzugen Sie Open-Source-L\u00f6sungen?",
+                fq2_a: "Wir bevorzugen bew\u00e4hrte Open-Source-L\u00f6sungen, die Transparenz, Flexibilit\u00e4t und langfristige Kostenkontrolle garantieren. Sie behalten die volle Souver\u00e4nit\u00e4t \u00fcber Ihre Daten und Systeme.",
+                fq3_q: "Wie lange dauert eine typische Audit-Mission?",
+                fq3_a: "Ein komplettes 360-Audit dauert in der Regel 2 bis 4 Wochen, je nach Gr\u00f6sse und Komplexit\u00e4t Ihrer Organisation. K\u00fcrzere gezielte Audits sind ebenfalls m\u00f6glich.",
+                fq4_q: "Wie funktioniert der Fractional CISO/CTO?",
+                fq4_a: "Sie profitieren von der Expertise eines erfahrenen Sicherheits- oder Technologiedirektors, verf\u00fcgbar einige Tage pro Monat. Die ideale Alternative zur Vollzeit-Rekrutierung eines Senior-Profils.",
+                fq5_q: 'Vermeiden Sie es, "KI um der KI willen" zu machen?',
+                fq5_a: "Absolut. Unser Ansatz identifiziert zuerst Ihre echten Gesch\u00e4ftsbed\u00fcrfnisse. Wenn KI nicht relevant ist, sagen wir das klar. Wir priorisieren immer konkrete Wirkung \u00fcber Trends.",
+                cta_title: "Bereit, Ihre Organisation<br>zu transformieren?",
+                cta_text: "Lassen Sie uns gemeinsam Ihre Herausforderungen besprechen und entdecken Sie, wie unsere Expertise Ihr Wachstum beschleunigen kann. Unverbindlich.",
+                cta_btn1: 'Diagnose planen <span>&rarr;</span>', cta_btn2: "Mehr erfahren",
+                contact_title: "Kontaktieren Sie unsere Experten",
+                contact_subtitle: "Ob Sie ein 360-Audit, eine organisatorische Transformation oder Sicherheitsbegleitung ben\u00f6tigen \u2013 wir sind f\u00fcr Sie da.",
+                contact_offices: "B\u00fcros", contact_network: "Netzwerk",
+                contact_network_val: "Europa \u00b7 Westschweiz \u00b7 Deutschschweiz",
+                contact_response: "Garantierte Antwort", contact_free: "Kostenloses Angebot \u00b7 Unverbindlich",
+                note1: "Kostenloses Angebot", note2: "Unverbindlich", note3: "Vollst\u00e4ndige Vertraulichkeit",
+                footer_desc: "Premium-Sicherheit. Radikale Leistung. Vollst\u00e4ndige Souver\u00e4nit\u00e4t f\u00fcr die anspruchsvollsten Branchen.",
+                footer_ecosystem: "\u00d6kosystem",
+                f_svc1: "360-Audit & Cyber", f_svc2: "KI-Transformation", f_svc3: "Lean-Leistung",
+                f_network: "Europ\u00e4isches Netzwerk", f_diag: "Diagnose planen",
+                meta_title: "VIRELIA ADVISORY | Kl\u00e4ren. Entscheiden. Voranschreiten.",
+                meta_desc: "VIRELIA ADVISORY - Premium-Sicherheit. Radikale Leistung. Vollst\u00e4ndige Souver\u00e4nit\u00e4t f\u00fcr die anspruchsvollsten Branchen."
+            },
+            it: {
+                nav_results: "Risultati", nav_services: "Servizi", nav_method: "Metodo", nav_cta: "Pianificare una Diagnosi", nav_contact: "Contatto",
+                mob_services: "Servizi", mob_results: "Risultati", mob_value: "Valore",
+                pwa_install: "Installare VIRELIA ADVISORY", pwa_sub: "Accesso rapido dalla schermata iniziale", pwa_btn: "Installare",
+                hero_badge: "Standard di sicurezza Banca & Pharma",
+                hero_title: 'Chiarire.<br>Decidere.<br><span>Avanzare.</span>',
+                hero_text: 'Smettete di subire la vostra organizzazione. Identifichiamo ci\u00f2 che vi frena, ristrutturiamo i vostri processi e acceleriamo la trasformazione digitale per <strong>restituirvi il vostro tempo.</strong>',
+                hero_right: 'Audit, Semplificazione, IA applicata e Sicurezza dei dati critici per PMI, ETI e settori ad alta conformit\u00e0. <strong>ROI misurabile. Sovranit\u00e0 totale.</strong>',
+                hero_cta1: 'Scoprire le nostre soluzioni <span>&rarr;</span>', hero_cta2: "Parliamo del vostro progetto",
+                clients_label: "Si fidano di noi nei settori pi\u00f9 esigenti",
+                results_label: "Risultati Concreti", results_title: "Trasformazioni misurabili<br>per i nostri clienti",
+                results_subtitle: "Ogni intervento genera un impatto quantificabile. Niente slide, niente report inutili. Risultati.",
+                r1_tag: "Audit & ERP \u00b7 Settore Pharma", r1_title: "Automazione Conformit\u00e0 Farmaceutica",
+                r1_problem: "<strong>Problema:</strong> Sistema informativo obsoleto e processi amministrativi dispendiosi che frenano la crescita. Conformit\u00e0 normativa gestita manualmente.",
+                r1_stat: "di tempo amministrativo risparmiato.<br>ROI raggiunto in 12 mesi.",
+                r2_tag: "Sicurezza \u00b7 Settore Bancario", r2_title: "Infrastruttura Sovrana GRC",
+                r2_problem: "<strong>Problema:</strong> Architettura IT obsoleta, debito tecnico critico e rischi di sicurezza crescenti in un ambiente altamente regolamentato.",
+                r2_value: "Zero", r2_stat: "violazioni dei dati.<br>100% di controllo sui flussi sensibili.",
+                r3_tag: "Lean \u00b7 Operations", r3_title: "Ottimizzazione Flussi & Personale CHR",
+                r3_problem: "<strong>Problema:</strong> Processi desincronizzati tra sedi, perdita di visibilit\u00e0 e latenza HR eccessiva.",
+                r3_stat: "di efficienza operativa.<br>Riduzione drastica della latenza HR.",
+                r4_tag: "Migrazione \u00b7 Sovranit\u00e0", r4_title: "Migrazione Open Source Sicura",
+                r4_problem: "<strong>Problema:</strong> Dipendenza da fornitori proprietari, costi crescenti e rischio di perdita di sovranit\u00e0 sui dati critici.",
+                r4_stat: "di sovranit\u00e0 recuperata.<br>Infrastruttura sostenibile e sicura.",
+                counter1: "Clienti soddisfatti", counter2: "Anni di esperienza", counter3: "Audit realizzati",
+                value_label: "Il Nostro Valore", value_title: "Perch\u00e9 Virelia Advisory?",
+                value_subtitle: "Restituiamo ai dirigenti il controllo totale sul loro destino tecnologico e organizzativo.",
+                v1_title: "Impatto Immediato", v1_desc: "Nessun ciclo lungo n\u00e9 report inutili. Il nostro metodo garantisce risultati rapidi e misurabili. Vedrete l'impatto dalle prime settimane.",
+                v2_title: "ROI Garantito", v2_desc: "Ogni franco investito \u00e8 orientato verso un ritorno concreto e misurabile. Identifichiamo prima le leve ad alto impatto.",
+                v3_title: "Sovranit\u00e0 Totale", v3_desc: "Soluzioni open source collaudate per trasparenza e controllo dei costi. Mantenete il controllo totale sui vostri dati e sistemi.",
+                sol_label: "Ecosistema & Realizzazioni", sol_title: "Soluzioni a impatto misurabile",
+                sol_subtitle: "Non vendiamo servizi. Creiamo risultati. Ogni piattaforma \u00e8 progettata per generare un ROI concreto.",
+                s1_tag: "Sovranit\u00e0 Pharma", s1_desc: "Sistema operativo proprietario per la gestione dei dati clinici. Sicurezza massima e conformit\u00e0 normativa integrata.",
+                s1_link: 'Esplorare la piattaforma <span>&rarr;</span>',
+                s2_tag: "Sicurezza Bancaria", s2_desc: "Hub di protezione e conformit\u00e0 (GRC) per istituzioni finanziarie. Audit in tempo reale e gestione del rischio cyber.",
+                s2_link: 'Esplorare la piattaforma <span>&rarr;</span>',
+                s3_tag: "Operations & Flussi", s3_desc: "Ottimizzazione operativa e gestione del personale per il settore CHR. Semplificazione radicale dei processi.",
+                s3_link: 'Accedere al servizio <span>&rarr;</span>',
+                svc_label: "Le Nostre Leve d'Impatto", svc_title: "Servizi progettati<br>per creare valore",
+                svc1_title: "Diagnosi 360\u00b0 & Cybersicurezza", svc1_desc: "Mappare i flussi di dati. Identificare le vulnerabilit\u00e0 critiche e i debiti operativi negli ambienti regolamentati.",
+                svc2_title: "Trasformazione IA & Data Trust", svc2_desc: "Urbanizzazione del SI e automazione sotto alta sorveglianza. Implementazione di IA private e sovrane (Zero Trust).",
+                svc3_title: "Performance & Conformit\u00e0", svc3_desc: "Ottimizzazione dei processi industriali (Pharma/Medtech) nel rispetto dei vincoli normativi.",
+                svc4_desc: "Un esperto Virelia per guidare la vostra sicurezza e roadmap tecnologica ai livelli degli standard bancari.",
+                method_label: "Metodo Virelia", method_title: "La nostra metodologia in 5 fasi",
+                method_subtitle: "Un approccio strutturato per risultati misurabili. Non digitalizziamo il caos.",
+                m1_title: "Diagnosi", m1_desc: "Inquadramento radicale e audit di sicurezza. Allineamento sulle vostre sfide e priorit\u00e0.",
+                m2_title: "Arbitraggio", m2_desc: "Validazione della roadmap e dei rischi. Scenari realistici con calcolo preciso.",
+                m3_title: "Attivazione", m3_desc: "Implementazione secondo standard Pharma & Banca. Quick wins per evitare l'effetto tunnel.",
+                m4_title: "Formazione", m4_desc: "Trasferimento di competenze e cultura cyber. Autonomia duratura per i vostri team.",
+                m5_title: "Seguito", m5_desc: "Mantenimento in condizione di sicurezza (MCS). Miglioramento continuo e monitoraggio.",
+                why_label: "Perch\u00e9 Noi", why_title: "5 ragioni per sceglierci", why_subtitle: "Impegni concreti che fanno la differenza.",
+                w1_title: "La Prova nei Settori Regolamentati", w1_desc: "Siamo gli esperti che le banche private e l'industria pharma chiamano per un parere decisivo. Questa fiducia testimonia il nostro rigore.",
+                w2_title: "DNA Imprenditoriale", w2_desc: "I nostri fondatori hanno creato e diretto diverse aziende. Raccomandiamo ci\u00f2 che abbiamo testato personalmente sul campo.",
+                w3_title: "Una Doppia Competenza Rara", w3_desc: "Dove servono 3 o 4 fornitori, noi riuniamo audit, consulenza strategica, implementazione tecnica e Lean. Voi mantenete il controllo.",
+                w4_title: "Risultati, non Slide", w4_desc: "Deliverable brevi, arbitraggio del cliente, valore consegnato in continuo. Nessun Big Bang, nessun ciclo lungo.",
+                w5_title: "Ecosistema Sovrano", w5_desc: "Con ClinicalOS, Aegis e CHR360, abbiamo la capacit\u00e0 di eseguire le nostre raccomandazioni dalla A alla Z. Soluzioni create e ospitate in Svizzera.",
+                faq_label: "Domande Frequenti", faq_title: "Tutto quello che dovete sapere",
+                fq1_q: "Come garantite un ROI rapido e concreto?",
+                fq1_a: "Ogni franco investito \u00e8 orientato verso un ritorno concreto, misurabile e rapido. Il nostro metodo identifica prima le leve ad alto impatto. Privilegiamo i quick wins e la creazione di valore continua.",
+                fq2_q: "Perch\u00e9 privilegiate le soluzioni open source?",
+                fq2_a: "Privilegiamo soluzioni open source collaudate che garantiscono trasparenza, flessibilit\u00e0 e controllo dei costi a lungo termine. Mantenete la sovranit\u00e0 totale sui vostri dati e sistemi.",
+                fq3_q: "Qual \u00e8 la durata tipica di una missione di audit?",
+                fq3_a: "Un audit 360 completo dura generalmente tra 2 e 4 settimane, a seconda delle dimensioni e complessit\u00e0 della vostra organizzazione. Audit mirati pi\u00f9 brevi sono ugualmente possibili.",
+                fq4_q: "Come funziona il Fractional CISO/CTO?",
+                fq4_a: "Beneficiate dell'esperienza di un direttore sicurezza o tecnologico esperto, disponibile alcuni giorni al mese. L'alternativa ideale all'assunzione a tempo pieno di un profilo senior.",
+                fq5_q: 'Evitate di "fare IA per fare IA"?',
+                fq5_a: "Assolutamente. Il nostro approccio identifica prima i vostri veri bisogni business. Se l'IA non \u00e8 pertinente, lo diciamo chiaramente. Privilegiamo sempre l'impatto concreto sulle tendenze.",
+                cta_title: "Pronti a trasformare<br>la vostra organizzazione?",
+                cta_text: "Discutiamo insieme le vostre sfide e scoprite come la nostra esperienza pu\u00f2 accelerare la vostra crescita. Senza impegno.",
+                cta_btn1: 'Pianificare una Diagnosi <span>&rarr;</span>', cta_btn2: "Saperne di pi\u00f9",
+                contact_title: "Contattate i nostri esperti",
+                contact_subtitle: "Che abbiate bisogno di un audit 360, di una trasformazione organizzativa o di un accompagnamento sicurezza, siamo qui per aiutarvi.",
+                contact_offices: "Uffici", contact_network: "Rete",
+                contact_network_val: "Europa \u00b7 Svizzera Romanda \u00b7 Svizzera Tedesca",
+                contact_response: "Risposta garantita", contact_free: "Preventivo gratuito \u00b7 Senza impegno",
+                note1: "Preventivo gratuito", note2: "Senza impegno", note3: "Riservatezza totale",
+                footer_desc: "Sicurezza premium. Performance radicale. Sovranit\u00e0 totale per i settori pi\u00f9 esigenti.",
+                footer_ecosystem: "Ecosistema",
+                f_svc1: "Audit 360 & Cyber", f_svc2: "Trasformazione IA", f_svc3: "Performance Lean",
+                f_network: "Rete Europea", f_diag: "Pianificare una Diagnosi",
+                meta_title: "VIRELIA ADVISORY | Chiarire. Decidere. Avanzare.",
+                meta_desc: "VIRELIA ADVISORY - Sicurezza premium. Performance radicale. Sovranit\u00e0 totale per i settori pi\u00f9 esigenti."
+            }
+        };
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            const t = translations[lang];
+
+            // Update text content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+
+            // Update HTML content (for elements with <strong>, <br>, <span>)
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                if (t[key]) el.innerHTML = t[key];
+            });
+
+            // Update meta tags
+            document.documentElement.lang = lang;
+            document.title = t.meta_title || document.title;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc && t.meta_desc) metaDesc.setAttribute('content', t.meta_desc);
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle && t.meta_title) ogTitle.setAttribute('content', t.meta_title);
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc && t.meta_desc) ogDesc.setAttribute('content', t.meta_desc);
+
+            // Update active lang buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+            });
+
+            // Save preference
+            localStorage.setItem('virelia-lang', lang);
+        }
+
+        // Initialize language on load
+        (function() {
+            const saved = localStorage.getItem('virelia-lang');
+            if (saved && translations[saved]) {
+                setLanguage(saved);
+            } else {
+                const browserLang = (navigator.language || navigator.userLanguage || 'fr').substring(0, 2).toLowerCase();
+                if (translations[browserLang]) {
+                    setLanguage(browserLang);
+                }
+                // else stays in FR (default HTML)
+            }
+        })();
     </script>
 
 
