@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TimeTrack PWA — Pointage | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .device-wrap { display: grid; grid-template-columns: 360px 1fr; gap: 2rem; align-items: start; }
+  @media (max-width: 900px) { .device-wrap { grid-template-columns: 1fr; justify-items: center; } }
+  .phone {
+    width: 320px; height: 640px; border-radius: 36px;
+    background: linear-gradient(180deg, #1a1a24, #12121a);
+    padding: 12px; border: 2px solid var(--border);
+    box-shadow: 0 30px 80px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.03);
+    position: relative;
+  }
+  .phone::before {
+    content:''; position:absolute; top:18px; left:50%; transform:translateX(-50%);
+    width: 100px; height: 24px; background: #050508; border-radius: 20px;
+  }
+  .screen {
+    width: 100%; height: 100%; border-radius: 24px;
+    background: var(--bg-primary); overflow: hidden; padding: 2.3rem 1rem 1rem;
+    display: flex; flex-direction: column;
+  }
+  .clock {
+    font-size: 2.5rem; font-weight: 200; text-align: center;
+    letter-spacing: -1px; font-feature-settings: 'tnum';
+  }
+  .clock .date { font-size: .75rem; color: var(--text-muted); margin-top:.2rem; letter-spacing:1.5px; }
+  .big-btn {
+    width: 170px; height: 170px; border-radius: 50%; margin: 1.5rem auto;
+    background: radial-gradient(circle at 50% 40%, var(--accent), #a00c00);
+    color: white; font-weight: 700; font-size: 1.1rem; letter-spacing:1.5px;
+    box-shadow: 0 20px 40px rgba(213,43,30,.4), inset 0 -8px 20px rgba(0,0,0,.25);
+    transition: transform .15s;
+  }
+  .big-btn.on {
+    background: radial-gradient(circle at 50% 40%, #22c55e, #0c7a33);
+    box-shadow: 0 20px 40px rgba(34,197,94,.35), inset 0 -8px 20px rgba(0,0,0,.25);
+  }
+  .big-btn:active { transform: scale(.96); }
+  .status-chip { margin: 0 auto; display:flex; align-items:center; gap:.4rem; padding:.35rem .8rem; border-radius:999px; font-size:.75rem; background:var(--bg-card); border:1px solid var(--border); width:fit-content; }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .3rem; margin-top: .8rem; }
+  .week-grid .day { aspect-ratio: 1; border-radius: 6px; background: var(--bg-card); display:flex; align-items:center; justify-content:center; font-size:.65rem; color:var(--text-muted); }
+  .week-grid .day.filled { background: rgba(213,43,30,.4); color:white; }
+  .week-grid .day.full { background: var(--accent); color:white; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">TimeTrack PWA</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Temps de travail · PWA mobile</div>
+    <h1>TimeTrack — pointage mobile pour équipes terrain</h1>
+    <p class="tag-desc">Application PWA installable sans app store : pointage géolocalisé, détection auto du chantier, temps de pause, dashboard RH et export timesheets vers paie.</p>
+    <div class="meta-row">
+      <span class="tag accent">PWA offline</span>
+      <span class="tag">Géolocalisation</span>
+      <span class="tag">Push notifications</span>
+      <span class="tag">API timetrack</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="device-wrap">
+    <div class="phone">
+      <div class="screen">
+        <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);margin-bottom:.8rem">
+          <span>TimeTrack</span>
+          <span id="signal">⚡ En ligne</span>
+        </div>
+        <div class="clock" id="clock">14:32:07</div>
+        <div class="clock date" id="today">VENDREDI 24 AVRIL</div>
+        <button class="big-btn" id="pointBtn" onclick="toggle()">POINTER</button>
+        <div class="status-chip" id="status">● Prêt à pointer</div>
+        <div style="margin-top:auto;font-size:.75rem;color:var(--text-muted)">
+          <div style="display:flex;justify-content:space-between;padding:.4rem 0;border-top:1px solid var(--border)">
+            <span>Aujourd'hui</span><span class="mono" id="todayTime">00:00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:.4rem 0;border-top:1px solid var(--border)">
+            <span>Semaine</span><span class="mono">32:18</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:.4rem 0;border-top:1px solid var(--border)">
+            <span>Chantier détecté</span><span>Sion Centre</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="panel">
+        <h3>Dashboard RH <span class="hint">Semaine du 20 avril</span></h3>
+        <div class="grid cols-3">
+          <div class="card"><div class="card-label">Heures cumulées</div><div class="card-value">742h</div></div>
+          <div class="card"><div class="card-label">Collaborateurs actifs</div><div class="card-value">28</div></div>
+          <div class="card"><div class="card-label">Retards</div><div class="card-value">2</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Heatmap équipe</h3>
+        <table class="vir">
+          <thead><tr><th>Collaborateur</th><th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Semaine</th></tr></thead>
+          <tbody id="heatmap"></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h3>Exports prêts</h3>
+        <div class="stack">
+          <div class="row between" style="padding:.5rem 0;border-bottom:1px solid var(--border)">
+            <div><div style="font-weight:600;font-size:.85rem">timesheet_2026_S16.xlsx</div><div class="muted" style="font-size:.72rem">28 collab. · 1 082 h · généré il y a 12 min</div></div>
+            <button class="btn sm">Télécharger</button>
+          </div>
+          <div class="row between" style="padding:.5rem 0">
+            <div><div style="font-weight:600;font-size:.85rem">swissdec_ELM_042026.xml</div><div class="muted" style="font-size:.72rem">Export paie · mensuel</div></div>
+            <button class="btn sm">Télécharger</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>timetrack</code>, <code>timetrack-pwa</code>, <code>timetrack-api</code>, <code>timetrack-perso</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+function tick() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('clock').textContent = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  const days = ['DIMANCHE','LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI'];
+  const months = ['JAN','FÉV','MARS','AVRIL','MAI','JUIN','JUIL','AOÛT','SEPT','OCT','NOV','DÉC'];
+  document.getElementById('today').textContent = `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+  if (window._on) {
+    window._seconds = (window._seconds||0) + 1;
+    const s = window._seconds, h = Math.floor(s/3600), m = Math.floor((s%3600)/60);
+    document.getElementById('todayTime').textContent = `${pad(h)}:${pad(m)}`;
+  }
+}
+setInterval(tick, 1000); tick();
+
+function toggle() {
+  window._on = !window._on;
+  const btn = document.getElementById('pointBtn');
+  const st = document.getElementById('status');
+  if (window._on) {
+    btn.textContent = 'EN COURS…'; btn.classList.add('on');
+    st.innerHTML = '<span style="width:8px;height:8px;background:var(--success);border-radius:50%;animation:pulse 1.5s infinite"></span> Pointage en cours · GPS OK';
+    if (!window._seconds) window._seconds = 0;
+  } else {
+    btn.textContent = 'POINTER'; btn.classList.remove('on');
+    st.innerHTML = '● Prêt à pointer';
+  }
+}
+
+// heatmap
+const names = ['Moreau J.','Voide A.','Delez P.','Lüthi S.','Rossi M.','Novak A.','Clerc B.'];
+const hours = [[8,8.5,7.5,8,8,40],[7,8,8,7.5,6.5,37],[8,8,8,8,0,32],[8,6,8.5,8,8,38.5],[4,8,8,8,8,36],[8,8,8,8,8,40],[0,8,8,8,4,28]];
+const heat = (v, max=9) => `<td><div style="background:rgba(213,43,30,${Math.min(v/max,1)*0.8});padding:.3rem .4rem;border-radius:4px;text-align:center;font-size:.78rem;color:${v>0?'white':'var(--text-dim)'}">${v||'—'}</div></td>`;
+document.getElementById('heatmap').innerHTML = names.map((n,i)=>`<tr><td>${n}</td>${hours[i].slice(0,5).map(v=>heat(v)).join('')}<td><b>${hours[i][5]}h</b></td></tr>`).join('');
+</script>
+</body>
+</html>

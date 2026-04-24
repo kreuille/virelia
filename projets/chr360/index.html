@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHR360 — Dashboard santé | Virelia Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+  @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+  .dept-row { display: grid; grid-template-columns: 120px 1fr 60px; align-items: center; gap: .8rem; padding: .7rem 0; border-bottom: 1px solid var(--border); }
+  .dept-row:last-child { border-bottom: none; }
+  .dept-name { font-size: .85rem; }
+  .heart-line path { stroke: var(--accent); stroke-width: 2; fill: none; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">CHR360</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Santé / Hospitalier</div>
+    <h1>CHR360 — la performance hospitalière en un écran</h1>
+    <p class="tag-desc">Plateforme de pilotage 360° pour centres hospitaliers : tableau de bord temps réel, suivi des admissions, capacité lits, indicateurs qualité et transformation automatisée des flux de données cliniques (HL7, FHIR, CSV patient).</p>
+    <div class="meta-row">
+      <span class="tag accent">Dashboard</span>
+      <span class="tag">HL7 / FHIR</span>
+      <span class="tag">Temps réel</span>
+      <span class="tag">ETL médical</span>
+      <span class="tag">Exports Excel</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="kpi-grid">
+    <div class="card">
+      <div class="card-label">Admissions 24h</div>
+      <div class="card-value">127</div>
+      <div class="card-trend up">▲ +8% vs hier</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Taux d'occupation</div>
+      <div class="card-value">84.2%</div>
+      <div class="card-trend up">▲ +2.1 pts</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Durée moy. séjour</div>
+      <div class="card-value">4.3j</div>
+      <div class="card-trend down">▼ -0.2j</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Patients critiques</div>
+      <div class="card-value">12</div>
+      <div class="card-trend" style="color:var(--warning)">● Stable</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="panel">
+      <h3>Flux admissions par service <span class="hint">Aujourd'hui — mise à jour 14:32</span></h3>
+      <svg class="chart-svg heart-line" viewBox="0 0 600 220" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#d52b1e" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#d52b1e" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+          <line x1="0" y1="50" x2="600" y2="50"/>
+          <line x1="0" y1="110" x2="600" y2="110"/>
+          <line x1="0" y1="170" x2="600" y2="170"/>
+        </g>
+        <path d="M0,170 L40,145 L80,130 L120,150 L160,95 L200,80 L240,100 L280,60 L320,75 L360,40 L400,65 L440,55 L480,90 L520,70 L560,110 L600,85 L600,220 L0,220 Z" fill="url(#g1)"/>
+        <path d="M0,170 L40,145 L80,130 L120,150 L160,95 L200,80 L240,100 L280,60 L320,75 L360,40 L400,65 L440,55 L480,90 L520,70 L560,110 L600,85" stroke="#d52b1e" stroke-width="2" fill="none"/>
+        <g fill="#d52b1e">
+          <circle cx="360" cy="40" r="4"/><circle cx="280" cy="60" r="3"/>
+        </g>
+        <g fill="#8a8a9a" font-size="10" font-family="Inter">
+          <text x="0" y="210">00h</text><text x="150" y="210">06h</text><text x="300" y="210">12h</text><text x="450" y="210">18h</text><text x="560" y="210">24h</text>
+        </g>
+      </svg>
+
+      <h3 class="mt-3">Charge par service</h3>
+      <div>
+        <div class="dept-row"><span class="dept-name">Urgences</span>
+          <div class="progress"><span style="width:92%"></span></div><span class="mono" style="text-align:right">92%</span></div>
+        <div class="dept-row"><span class="dept-name">Cardiologie</span>
+          <div class="progress"><span style="width:78%"></span></div><span class="mono" style="text-align:right">78%</span></div>
+        <div class="dept-row"><span class="dept-name">Pédiatrie</span>
+          <div class="progress"><span style="width:64%"></span></div><span class="mono" style="text-align:right">64%</span></div>
+        <div class="dept-row"><span class="dept-name">Oncologie</span>
+          <div class="progress"><span style="width:83%"></span></div><span class="mono" style="text-align:right">83%</span></div>
+        <div class="dept-row"><span class="dept-name">Chirurgie</span>
+          <div class="progress"><span style="width:71%"></span></div><span class="mono" style="text-align:right">71%</span></div>
+        <div class="dept-row"><span class="dept-name">Maternité</span>
+          <div class="progress"><span style="width:56%"></span></div><span class="mono" style="text-align:right">56%</span></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="panel">
+        <h3>Alertes actives</h3>
+        <div class="stack">
+          <div style="padding:.7rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px">
+            <div style="font-size:.75rem;color:var(--danger);font-weight:700;letter-spacing:1px">● CRITIQUE</div>
+            <div class="mt-1" style="font-size:.85rem">Saturation Urgences — 92% capacité</div>
+            <div class="muted" style="font-size:.72rem;margin-top:.3rem">il y a 4 minutes</div>
+          </div>
+          <div style="padding:.7rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px">
+            <div style="font-size:.75rem;color:var(--warning);font-weight:700;letter-spacing:1px">● AVERTISSEMENT</div>
+            <div class="mt-1" style="font-size:.85rem">Stock morphine Pharma-B sous seuil</div>
+            <div class="muted" style="font-size:.72rem;margin-top:.3rem">il y a 23 minutes</div>
+          </div>
+          <div style="padding:.7rem;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:8px">
+            <div style="font-size:.75rem;color:var(--info);font-weight:700;letter-spacing:1px">● INFO</div>
+            <div class="mt-1" style="font-size:.85rem">Transformation CSV Pathologie → FHIR OK</div>
+            <div class="muted" style="font-size:.72rem;margin-top:.3rem">il y a 1h</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Clinical Data Transformer</h3>
+        <p class="muted" style="font-size:.8rem">Pipeline ETL des données cliniques hétérogènes.</p>
+        <div class="timeline mt-2">
+          <div class="step"><div class="t">14:32</div><div class="e">Import HL7 v2 — 1 248 messages</div></div>
+          <div class="step"><div class="t">14:30</div><div class="e">Validation FHIR R4 — 100% conformes</div></div>
+          <div class="step"><div class="t">14:28</div><div class="e">Déduplication patients — 12 fusions</div></div>
+          <div class="step"><div class="t">14:25</div><div class="e">Export Datamart — 3,2 Go</div></div>
+        </div>
+        <button class="btn primary mt-2" onclick="runPipeline(event)">Relancer le pipeline</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>chr360_dashboard</code>, <code>chr360_admin</code>, <code>clinical-data-transformer</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+function runPipeline(e) {
+  const btn = e.target;
+  const orig = btn.textContent;
+  btn.textContent = 'Pipeline en cours…'; btn.disabled = true;
+  setTimeout(() => { btn.textContent = '✓ Pipeline terminé'; }, 1600);
+  setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 3500);
+}
+</script>
+</body>
+</html>

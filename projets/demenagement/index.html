@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Déménagement Pro — Suivi missions | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 1000px) { .kanban { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .kanban { grid-template-columns: 1fr; } }
+  .col { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; min-height: 280px; }
+  .col h4 { font-size: .78rem; color: var(--text-muted); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: .8rem; display:flex; justify-content:space-between; }
+  .mission {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+    padding: .8rem; margin-bottom: .6rem; cursor: grab; transition: var(--transition-fast);
+  }
+  .mission:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+  .mission .head { display:flex; justify-content:space-between; font-size:.72rem; color:var(--text-muted); }
+  .mission .addr { font-size:.85rem; margin:.3rem 0; font-weight:600; color:var(--white); }
+  .mission .sub { font-size:.72rem; color:var(--text-muted); }
+  .mission .tags { margin-top:.5rem; display:flex; gap:.3rem; flex-wrap:wrap; }
+  .map { height: 260px; background: #0d0d14; border-radius: 12px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+  .pin { position:absolute; width:24px; height:24px; background:var(--accent); border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; font-size:.6rem; font-weight:700; color:white; box-shadow: 0 0 0 4px rgba(213,43,30,.15); }
+  .pin::after { content:''; position:absolute; inset:5px; background:white; border-radius:50%; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Déménagement Pro</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Logistique · Déménagement</div>
+    <h1>Suivi et planification de missions de déménagement</h1>
+    <p class="tag-desc">Plateforme tout-en-un : devis en ligne client, planification équipes & camions, suivi temps réel GPS, check-lists inventaire photo, bon de livraison signé et facturation auto.</p>
+    <div class="meta-row">
+      <span class="tag accent">GPS temps réel</span>
+      <span class="tag">Signature BL</span>
+      <span class="tag">Inventaire photo</span>
+      <span class="tag">Devis en ligne</span>
+      <span class="tag">PWA équipes</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="grid cols-4 mb-2">
+    <div class="card"><div class="card-label">Missions semaine</div><div class="card-value">34</div><div class="card-trend up">▲ 7 vs 7j</div></div>
+    <div class="card"><div class="card-label">Km parcourus</div><div class="card-value">2 840</div><div class="card-trend up">▲ +12%</div></div>
+    <div class="card"><div class="card-label">m³ transportés</div><div class="card-value">412</div><div class="card-trend up">▲ +5%</div></div>
+    <div class="card"><div class="card-label">Taux satisfaction</div><div class="card-value">4.8/5</div><div class="card-trend up">▲ 0.2</div></div>
+  </div>
+
+  <div class="panel mt-2">
+    <h3>Pipeline des missions <span class="hint">glisser-déposer pour avancer</span></h3>
+    <div class="kanban">
+      <div class="col">
+        <h4>Devis <span class="badge muted">3</span></h4>
+        <div class="mission">
+          <div class="head"><span>DM-2041</span><span>28 avril</span></div>
+          <div class="addr">Sion → Lausanne</div>
+          <div class="sub">3.5 pièces · 42 m³</div>
+          <div class="tags"><span class="badge info">À confirmer</span></div>
+        </div>
+        <div class="mission">
+          <div class="head"><span>DM-2042</span><span>02 mai</span></div>
+          <div class="addr">Monthey → Martigny</div>
+          <div class="sub">Studio · 18 m³</div>
+          <div class="tags"><span class="badge muted">Nouveau</span></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <h4>Planifié <span class="badge muted">5</span></h4>
+        <div class="mission">
+          <div class="head"><span>DM-2037</span><span>25 avril</span></div>
+          <div class="addr">Genève → Sierre</div>
+          <div class="sub">5 pièces · Camion 35 m³ · Équipe A</div>
+          <div class="tags"><span class="badge ok">Réservé</span><span class="badge info">Piano</span></div>
+        </div>
+        <div class="mission">
+          <div class="head"><span>DM-2038</span><span>26 avril</span></div>
+          <div class="addr">Sion (interne)</div>
+          <div class="sub">Bureau · 28 m³ · Équipe B</div>
+          <div class="tags"><span class="badge ok">Confirmé</span></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <h4>En cours <span class="badge warn">2</span></h4>
+        <div class="mission" style="border-color:var(--warning)">
+          <div class="head"><span>DM-2036</span><span>Aujourd'hui</span></div>
+          <div class="addr">Sion → Fribourg</div>
+          <div class="sub">GPS · Équipe A · ETA 15:40</div>
+          <div class="tags"><span class="badge warn">En route</span></div>
+          <div class="progress mt-1"><span style="width:62%"></span></div>
+        </div>
+        <div class="mission" style="border-color:var(--warning)">
+          <div class="head"><span>DM-2035</span><span>Aujourd'hui</span></div>
+          <div class="addr">Vevey → Sion</div>
+          <div class="sub">Déchargement en cours</div>
+          <div class="tags"><span class="badge warn">Arrivée</span></div>
+          <div class="progress mt-1"><span style="width:88%"></span></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <h4>Terminé <span class="badge ok">12</span></h4>
+        <div class="mission">
+          <div class="head"><span>DM-2034</span><span>Hier</span></div>
+          <div class="addr">Martigny → Vevey</div>
+          <div class="sub">BL signé · CHF 2 840</div>
+          <div class="tags"><span class="badge ok">Facturé</span></div>
+        </div>
+        <div class="mission">
+          <div class="head"><span>DM-2033</span><span>Hier</span></div>
+          <div class="addr">Sierre → Sion</div>
+          <div class="sub">BL signé · CHF 1 260</div>
+          <div class="tags"><span class="badge ok">Facturé</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid cols-2 mt-3">
+    <div class="panel">
+      <h3>Suivi GPS équipes</h3>
+      <div class="map">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.35" viewBox="0 0 400 260">
+          <path d="M20,140 Q80,90 160,110 T320,100 L380,130" stroke="#d52b1e" stroke-width="2" stroke-dasharray="5,4" fill="none"/>
+          <path d="M50,200 Q150,170 250,190 T360,200" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,4" fill="none"/>
+          <g stroke="rgba(255,255,255,.06)" stroke-width="1">
+            <line x1="0" y1="50" x2="400" y2="50"/>
+            <line x1="0" y1="130" x2="400" y2="130"/>
+            <line x1="0" y1="210" x2="400" y2="210"/>
+          </g>
+        </svg>
+        <div class="pin" style="top:40px;left:40px"></div>
+        <div class="pin" style="top:90px;left:180px;background:var(--warning)"></div>
+        <div class="pin" style="top:150px;left:290px;background:var(--info)"></div>
+        <div class="pin" style="top:190px;left:90px;background:var(--success)"></div>
+      </div>
+      <div class="row mt-2" style="font-size:.75rem;gap:1.2rem">
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);margin-right:.4rem"></span>Équipe A · Sion → Fribourg</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--warning);margin-right:.4rem"></span>Équipe B · Sion</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--info);margin-right:.4rem"></span>Équipe C · Fribourg</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Inventaire photo en cours <span class="hint">DM-2036 Équipe A</span></h3>
+      <div class="grid cols-3" style="gap:.4rem" id="photoGrid"></div>
+      <div class="row mt-2" style="font-size:.78rem">
+        <div>28 objets scannés · 42 m³ estimés</div>
+        <button class="btn primary sm" style="margin-left:auto">+ Ajouter photo</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>demenagement</code>, <code>moving</code>, <code>suivi_demenagement</code>, <code>weconnect</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+const photoGrid = document.getElementById('photoGrid');
+const photoIcons = ['📦','🪑','🛋️','🖼️','🪴','📚'];
+photoGrid.innerHTML = photoIcons.map(ic => `<div style="aspect-ratio:1;background:linear-gradient(135deg,#1a1a24,#0d0d14);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2rem;opacity:.6">${ic}</div>`).join('');
+
+document.querySelectorAll('.mission').forEach(m => {
+  m.addEventListener('click', () => {
+    m.style.transition = 'transform .15s';
+    m.style.transform = 'scale(.98)';
+    setTimeout(() => m.style.transform = '', 150);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interim Agency System — Plateforme intérim | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .candidate-card { display:grid; grid-template-columns: 48px 1fr auto; gap: 1rem; align-items:center; padding: .9rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); transition: var(--transition-fast); }
+  .candidate-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
+  .avatar { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; background: linear-gradient(135deg, #d52b1e, #ff4438); color:white; }
+  .match-chip { padding: .25rem .5rem; border-radius: 6px; font-size: .7rem; font-weight: 700; }
+  .match-chip.hi { background: rgba(34,197,94,.15); color: var(--success); }
+  .match-chip.md { background: rgba(245,158,11,.15); color: var(--warning); }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Interim Agency</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">RH · Ressources Humaines</div>
+    <h1>Interim Agency System</h1>
+    <p class="tag-desc">Plateforme complète pour agences d'intérim : gestion candidats, missions, contrats, matching automatique sur compétences, time-sheets mobiles et facturation multi-client.</p>
+    <div class="meta-row">
+      <span class="tag accent">Matching IA</span>
+      <span class="tag">Contrats</span>
+      <span class="tag">Timesheets</span>
+      <span class="tag">Facturation</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="split">
+    <aside class="sidebar">
+      <div class="section-title">Pilotage</div>
+      <div class="nav-item active"><span class="dot" style="color:var(--accent)"></span>Tableau de bord</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Missions ouvertes <span style="margin-left:auto;font-size:.7rem;color:var(--accent-soft)">24</span></div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Candidats</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Clients</div>
+      <div class="section-title">Exploitation</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Timesheets</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Contrats</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Facturation</div>
+      <div class="section-title">Admin</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Utilisateurs</div>
+      <div class="nav-item"><span class="dot" style="color:#8a8a9a"></span>Paramètres</div>
+    </aside>
+
+    <div class="stack">
+      <div class="grid cols-4">
+        <div class="card"><div class="card-label">Missions ouvertes</div><div class="card-value">24</div><div class="card-trend up">▲ +3 cette semaine</div></div>
+        <div class="card"><div class="card-label">Candidats actifs</div><div class="card-value">312</div><div class="card-trend up">▲ +18</div></div>
+        <div class="card"><div class="card-label">Chiffre affaires mois</div><div class="card-value">CHF 184k</div><div class="card-trend up">▲ +12%</div></div>
+        <div class="card"><div class="card-label">Taux de placement</div><div class="card-value">73%</div><div class="card-trend up">▲ +4 pts</div></div>
+      </div>
+
+      <div class="panel">
+        <h3>Recherche de candidats <span class="hint">matching automatique</span></h3>
+        <div class="row">
+          <input class="input" id="search" placeholder="Ex: soudeur MIG/MAG, permis cat. B, Valais"/>
+          <button class="btn primary" onclick="simulateSearch()">Lancer le matching</button>
+        </div>
+        <div class="stack mt-3" id="results">
+          <div class="candidate-card">
+            <div class="avatar">JM</div>
+            <div>
+              <div style="font-weight:600">Jean Moreau · Soudeur MIG/MAG senior</div>
+              <div class="muted" style="font-size:.78rem;margin-top:.25rem">8 ans · Permis B · Disponible lun. 28 avril · Sion</div>
+            </div>
+            <div style="text-align:right">
+              <div class="match-chip hi">Match 94%</div>
+              <div class="muted" style="font-size:.7rem;margin-top:.3rem">CHF 38/h</div>
+            </div>
+          </div>
+          <div class="candidate-card">
+            <div class="avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">SL</div>
+            <div>
+              <div style="font-weight:600">Sarah Lüthi · Soudeuse tous procédés</div>
+              <div class="muted" style="font-size:.78rem;margin-top:.25rem">5 ans · Permis B+E · Disponible mer. 30 avril · Martigny</div>
+            </div>
+            <div style="text-align:right">
+              <div class="match-chip hi">Match 88%</div>
+              <div class="muted" style="font-size:.7rem;margin-top:.3rem">CHF 36/h</div>
+            </div>
+          </div>
+          <div class="candidate-card">
+            <div class="avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">MR</div>
+            <div>
+              <div style="font-weight:600">Marco Rossi · Soudeur TIG uniquement</div>
+              <div class="muted" style="font-size:.78rem;margin-top:.25rem">3 ans · Permis B · Disponible immédiate · Sierre</div>
+            </div>
+            <div style="text-align:right">
+              <div class="match-chip md">Match 72%</div>
+              <div class="muted" style="font-size:.7rem;margin-top:.3rem">CHF 32/h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="panel">
+          <h3>Missions en attente de placement</h3>
+          <table class="vir">
+            <thead><tr><th>Client</th><th>Poste</th><th>Priorité</th></tr></thead>
+            <tbody>
+              <tr><td>ConstructSA</td><td>Électricien</td><td><span class="badge err">Urgente</span></td></tr>
+              <tr><td>LogiPro</td><td>Cariste CACES 3</td><td><span class="badge warn">Haute</span></td></tr>
+              <tr><td>MediCare</td><td>Aide-soignant·e</td><td><span class="badge warn">Haute</span></td></tr>
+              <tr><td>TechBuild</td><td>Menuisier</td><td><span class="badge muted">Normale</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h3>Timesheets à valider <span class="hint">cette semaine</span></h3>
+          <div class="stack">
+            <div class="row between" style="padding:.6rem 0;border-bottom:1px solid var(--border)">
+              <div><div style="font-weight:600;font-size:.85rem">Jean Moreau</div><div class="muted" style="font-size:.72rem">ConstructSA · 42h</div></div>
+              <button class="btn sm primary">Valider</button>
+            </div>
+            <div class="row between" style="padding:.6rem 0;border-bottom:1px solid var(--border)">
+              <div><div style="font-weight:600;font-size:.85rem">Pierre Delez</div><div class="muted" style="font-size:.72rem">LogiPro · 40h</div></div>
+              <button class="btn sm primary">Valider</button>
+            </div>
+            <div class="row between" style="padding:.6rem 0">
+              <div><div style="font-weight:600;font-size:.85rem">Amélie Voide</div><div class="muted" style="font-size:.72rem">MediCare · 36h</div></div>
+              <button class="btn sm primary">Valider</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur le repo <code>interim-agency-system</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+function simulateSearch() {
+  const r = document.getElementById('results');
+  r.style.opacity = '.4';
+  setTimeout(() => { r.style.opacity = '1'; }, 700);
+}
+</script>
+</body>
+</html>

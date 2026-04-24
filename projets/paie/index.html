@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paie & Salaires — Suisse romande | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .calc-grid { display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem; }
+  @media (max-width: 900px) { .calc-grid { grid-template-columns: 1fr; } }
+  .line { display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px dashed var(--border); font-size:.88rem; }
+  .line.total { border-top:2px solid var(--accent); border-bottom:none; margin-top:.5rem; padding-top:.8rem; font-weight:700; font-size:1.05rem; color: var(--white); }
+  .line .neg { color: var(--danger); }
+  .line .pos { color: var(--success); }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Paie & Salaires</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Paie · Administration RH</div>
+    <h1>Moteur de paie suisse — AVS, LPP, LAA, impôt source</h1>
+    <p class="tag-desc">Calculateur et gestionnaire de paie conçu pour les PME suisses : barèmes 2026, déductions cantonales, impôt à la source, certificats de salaire et export Swissdec ELM.</p>
+    <div class="meta-row">
+      <span class="tag accent">Barèmes 2026</span>
+      <span class="tag">Swissdec ELM 5</span>
+      <span class="tag">Cantonaux VS/VD/GE</span>
+      <span class="tag">Certificat salaire</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="calc-grid">
+    <div class="panel">
+      <h3>Simulateur salaire net — employé·e</h3>
+      <div class="grid cols-2">
+        <div>
+          <label class="label">Salaire brut annuel (CHF)</label>
+          <input class="input" id="brut" type="number" value="95000" oninput="compute()">
+        </div>
+        <div>
+          <label class="label">Canton</label>
+          <select class="input" id="canton" onchange="compute()">
+            <option value="VS">Valais</option>
+            <option value="VD">Vaud</option>
+            <option value="GE">Genève</option>
+            <option value="FR">Fribourg</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">État civil</label>
+          <select class="input" id="civil" onchange="compute()">
+            <option value="C">Célibataire sans enfant (barème A0)</option>
+            <option value="MSE">Marié·e un seul revenu</option>
+            <option value="MDE">Marié·e double revenu</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">Âge LPP</label>
+          <select class="input" id="age" onchange="compute()">
+            <option value="7">25-34 ans (7%)</option>
+            <option value="10" selected>35-44 ans (10%)</option>
+            <option value="15">45-54 ans (15%)</option>
+            <option value="18">55-65 ans (18%)</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">Taux d'occupation</label>
+          <input class="input" id="taux" type="number" value="100" min="10" max="100" oninput="compute()">
+        </div>
+        <div>
+          <label class="label">Enfants à charge</label>
+          <input class="input" id="enfants" type="number" value="0" min="0" max="8" oninput="compute()">
+        </div>
+      </div>
+      <button class="btn primary mt-3" onclick="generateCert()">Générer certificat de salaire</button>
+      <span id="certMsg" class="muted" style="margin-left:.7rem;font-size:.8rem"></span>
+    </div>
+
+    <div class="panel">
+      <h3>Décompte mensuel</h3>
+      <div id="breakdown">
+        <div class="line"><span>Salaire brut mensuel</span><span class="mono" id="brutM">—</span></div>
+        <div class="line"><span>AVS / AI / APG (5.3%)</span><span class="mono neg" id="avs">—</span></div>
+        <div class="line"><span>AC (1.1% jusqu'à 148 200)</span><span class="mono neg" id="ac">—</span></div>
+        <div class="line"><span>LPP (part employé)</span><span class="mono neg" id="lpp">—</span></div>
+        <div class="line"><span>LAA / LAAC (0.8%)</span><span class="mono neg" id="laa">—</span></div>
+        <div class="line"><span>Impôt à la source</span><span class="mono neg" id="is">—</span></div>
+        <div class="line"><span>Allocations familiales</span><span class="mono pos" id="af">—</span></div>
+        <div class="line total"><span>Net à verser</span><span class="mono" id="net">—</span></div>
+      </div>
+      <div class="muted mt-3" style="font-size:.72rem">Barèmes simplifiés à but de démo. Production : API Swissdec ELM officielle.</div>
+    </div>
+  </div>
+
+  <div class="panel mt-3">
+    <h3>Bulletins du mois <span class="hint">Avril 2026 · 18 collaborateurs</span></h3>
+    <table class="vir">
+      <thead><tr><th>Collaborateur</th><th>Poste</th><th>Brut</th><th>Charges sociales</th><th>Impôt source</th><th>Net</th><th>Bulletin</th></tr></thead>
+      <tbody>
+        <tr><td>Moreau Jean</td><td>Technicien</td><td class="mono">7 916</td><td class="mono neg">-1 089</td><td class="mono neg">-672</td><td class="mono">6 155</td><td><span class="badge ok">Envoyé</span></td></tr>
+        <tr><td>Voide Amélie</td><td>Comptable</td><td class="mono">8 500</td><td class="mono neg">-1 167</td><td class="mono neg">-743</td><td class="mono">6 590</td><td><span class="badge ok">Envoyé</span></td></tr>
+        <tr><td>Delez Pierre</td><td>Cariste</td><td class="mono">5 900</td><td class="mono neg">-810</td><td class="mono neg">-402</td><td class="mono">4 688</td><td><span class="badge warn">À relire</span></td></tr>
+        <tr><td>Lüthi Sarah</td><td>Soudeuse</td><td class="mono">7 100</td><td class="mono neg">-975</td><td class="mono neg">-544</td><td class="mono">5 581</td><td><span class="badge muted">Brouillon</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>Paie</code> et <code>salaires</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+function fmt(n) { return n.toLocaleString('fr-CH', {maximumFractionDigits: 0}); }
+function compute() {
+  const brut = +document.getElementById('brut').value || 0;
+  const taux = (+document.getElementById('taux').value || 100) / 100;
+  const age = +document.getElementById('age').value;
+  const canton = document.getElementById('canton').value;
+  const civil = document.getElementById('civil').value;
+  const enfants = +document.getElementById('enfants').value || 0;
+
+  const brutA = brut * taux;
+  const brutM = brutA / 12;
+  const avs = brutM * 0.053;
+  const ac  = brutM * (brutA < 148200 ? 0.011 : 0);
+  const lpp = brutM * (age/100) / 2; // part employé ≈ moitié
+  const laa = brutM * 0.008;
+
+  const cantonRate = {VS:0.09, VD:0.105, GE:0.12, FR:0.095}[canton];
+  const civilAdj = {C:1.0, MSE:0.78, MDE:0.92}[civil];
+  const enfAdj = Math.max(0.55, 1 - enfants*0.08);
+  const is = brutM * cantonRate * civilAdj * enfAdj;
+
+  const af = enfants * 215;
+  const net = brutM - avs - ac - lpp - laa - is + af;
+
+  document.getElementById('brutM').textContent = 'CHF ' + fmt(brutM);
+  document.getElementById('avs').textContent = '- CHF ' + fmt(avs);
+  document.getElementById('ac').textContent = '- CHF ' + fmt(ac);
+  document.getElementById('lpp').textContent = '- CHF ' + fmt(lpp);
+  document.getElementById('laa').textContent = '- CHF ' + fmt(laa);
+  document.getElementById('is').textContent = '- CHF ' + fmt(is);
+  document.getElementById('af').textContent = '+ CHF ' + fmt(af);
+  document.getElementById('net').textContent = 'CHF ' + fmt(net);
+}
+function generateCert() {
+  const msg = document.getElementById('certMsg');
+  msg.textContent = '✓ Certificat PDF généré (démo)';
+  setTimeout(() => msg.textContent = '', 3000);
+}
+compute();
+</script>
+</body>
+</html>

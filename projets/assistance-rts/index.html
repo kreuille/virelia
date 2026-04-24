@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assistance RTS — Help Desk | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .chat-wrap { display: grid; grid-template-columns: 280px 1fr 320px; gap: 1rem; height: 72vh; }
+  @media (max-width: 1100px) { .chat-wrap { grid-template-columns: 1fr; height: auto; } }
+  .ticket-list { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: .5rem; overflow-y: auto; }
+  .ticket-item { padding: .8rem; border-radius: 10px; margin-bottom: .3rem; cursor: pointer; transition: var(--transition-fast); }
+  .ticket-item:hover { background: var(--bg-card); }
+  .ticket-item.active { background: var(--bg-card); border-left: 3px solid var(--accent); }
+  .conv { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); display:flex; flex-direction:column; }
+  .conv-head { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
+  .conv-body { flex:1; padding: 1.2rem; overflow-y: auto; display:flex; flex-direction:column; gap: 1rem; }
+  .msg { max-width: 70%; padding: .7rem 1rem; border-radius: 14px; font-size: .88rem; line-height:1.5; }
+  .msg.from-them { background: var(--bg-card); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg.from-me { background: var(--accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .msg .meta { font-size: .65rem; opacity: .7; margin-top: .3rem; }
+  .composer { padding: 1rem; border-top: 1px solid var(--border); display:flex; gap:.5rem; }
+  .side { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Assistance RTS</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Help Desk · Support média</div>
+    <h1>Portail support — tickets, SLA et base de connaissance</h1>
+    <p class="tag-desc">Solution d'assistance sur-mesure pour studios et régies média : tickets multi-canaux (mail, téléphone, Teams), SLA contractuels, base de connaissance partagée et escalade automatique.</p>
+    <div class="meta-row">
+      <span class="tag accent">SLA temps réel</span>
+      <span class="tag">Multi-canaux</span>
+      <span class="tag">Base connaissance</span>
+      <span class="tag">Escalade auto</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="grid cols-4 mb-2">
+    <div class="card"><div class="card-label">Tickets ouverts</div><div class="card-value">47</div><div class="card-trend down">▼ -6</div></div>
+    <div class="card"><div class="card-label">SLA respecté</div><div class="card-value">96%</div><div class="card-trend up">▲ +2 pts</div></div>
+    <div class="card"><div class="card-label">Temps moyen réponse</div><div class="card-value">12 min</div><div class="card-trend down">▼ -4 min</div></div>
+    <div class="card"><div class="card-label">Satisfaction</div><div class="card-value">4.7/5</div><div class="card-trend up">▲ 0.3</div></div>
+  </div>
+
+  <div class="chat-wrap">
+    <div class="ticket-list">
+      <div style="padding:.5rem .7rem;font-size:.7rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase">Prioritaires</div>
+      <div class="ticket-item active">
+        <div class="row between"><span style="font-weight:600;font-size:.85rem">#4821</span><span class="badge err">P1</span></div>
+        <div style="font-size:.8rem;margin-top:.3rem">Régie 3 — pas de son tour Forum</div>
+        <div class="muted" style="font-size:.7rem;margin-top:.2rem">il y a 4 min</div>
+      </div>
+      <div class="ticket-item">
+        <div class="row between"><span style="font-weight:600;font-size:.85rem">#4820</span><span class="badge err">P1</span></div>
+        <div style="font-size:.8rem;margin-top:.3rem">Flux streaming Play RTS 503</div>
+        <div class="muted" style="font-size:.7rem;margin-top:.2rem">il y a 12 min</div>
+      </div>
+      <div style="padding:.5rem .7rem;font-size:.7rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:.8rem">Haute</div>
+      <div class="ticket-item">
+        <div class="row between"><span style="font-weight:600;font-size:.85rem">#4818</span><span class="badge warn">P2</span></div>
+        <div style="font-size:.8rem;margin-top:.3rem">Sous-titres TV SRF 2 décalés</div>
+        <div class="muted" style="font-size:.7rem;margin-top:.2rem">il y a 38 min</div>
+      </div>
+      <div class="ticket-item">
+        <div class="row between"><span style="font-weight:600;font-size:.85rem">#4817</span><span class="badge warn">P2</span></div>
+        <div style="font-size:.8rem;margin-top:.3rem">Routeur MAM bureau Lausanne</div>
+        <div class="muted" style="font-size:.7rem;margin-top:.2rem">il y a 1h</div>
+      </div>
+      <div style="padding:.5rem .7rem;font-size:.7rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:.8rem">Normale</div>
+      <div class="ticket-item">
+        <div class="row between"><span style="font-weight:600;font-size:.85rem">#4815</span><span class="badge info">P3</span></div>
+        <div style="font-size:.8rem;margin-top:.3rem">Demande accès archives</div>
+        <div class="muted" style="font-size:.7rem;margin-top:.2rem">il y a 2h</div>
+      </div>
+      <div class="ticket-item">
+        <div class="row between"><span style="font-weight:600;font-size:.85rem">#4814</span><span class="badge info">P3</span></div>
+        <div style="font-size:.8rem;margin-top:.3rem">Réglage colorimétrie studio 1</div>
+        <div class="muted" style="font-size:.7rem;margin-top:.2rem">il y a 3h</div>
+      </div>
+    </div>
+
+    <div class="conv">
+      <div class="conv-head">
+        <div class="row between">
+          <div>
+            <div style="font-weight:700;font-size:1.05rem">#4821 — Régie 3 : pas de son tour Forum</div>
+            <div class="muted" style="font-size:.78rem;margin-top:.2rem">Ouvert par <b>Marc Bourquin</b> · il y a 4 min · SLA 30 min</div>
+          </div>
+          <div class="row"><span class="badge err">P1</span><button class="btn sm">Escalader</button><button class="btn sm primary" onclick="closeTicket()">Clôturer</button></div>
+        </div>
+      </div>
+      <div class="conv-body" id="convBody">
+        <div class="msg from-them">
+          Bonjour, aucune sortie audio depuis la régie 3 — on est à 12 min du direct. J'ai déjà redémarré le switch audio.
+          <div class="meta">Marc Bourquin · 14:18</div>
+        </div>
+        <div class="msg from-me">
+          Bien reçu. Je bascule sur la route de secours B pendant que je check la prise principale. Vous devriez avoir le son dans 30 secondes max.
+          <div class="meta">Agent · 14:19</div>
+        </div>
+        <div class="msg from-them">
+          ✓ Son revenu. Pour le direct on est safe. Par contre j'aimerais comprendre ce qui a lâché.
+          <div class="meta">Marc Bourquin · 14:20</div>
+        </div>
+        <div class="msg from-me">
+          Le port 14 du switch Riedel MN-32 a marqué un flap à 14:16. Je programme remplacement sur fenêtre maintenance dimanche 04h. Je vous envoie le ticket de suivi.
+          <div class="meta">Agent · 14:21</div>
+        </div>
+      </div>
+      <div class="composer">
+        <input class="input" id="composer" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter') send()">
+        <button class="btn primary" onclick="send()">Envoyer</button>
+      </div>
+    </div>
+
+    <div class="side">
+      <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase">Contrat & SLA</div>
+      <div style="margin-top:.5rem">
+        <div style="font-weight:700">RTS Production</div>
+        <div class="muted" style="font-size:.78rem">Contrat Premium 24/7</div>
+      </div>
+      <div class="mt-3" style="padding:.8rem;background:var(--bg-card);border-radius:10px">
+        <div style="font-size:.72rem;color:var(--text-muted)">SLA P1 restant</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--success);margin-top:.2rem">26 min</div>
+      </div>
+
+      <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:1.2rem">Base de connaissance</div>
+      <div class="stack mt-2">
+        <a class="row" style="padding:.5rem;border-radius:8px;background:var(--bg-card);font-size:.82rem">
+          📘 Procédure bascule audio régie
+        </a>
+        <a class="row" style="padding:.5rem;border-radius:8px;background:var(--bg-card);font-size:.82rem">
+          📘 Troubleshoot switch Riedel
+        </a>
+        <a class="row" style="padding:.5rem;border-radius:8px;background:var(--bg-card);font-size:.82rem">
+          📘 Relance flux streaming
+        </a>
+      </div>
+
+      <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:1.2rem">Historique</div>
+      <div class="timeline mt-2">
+        <div class="step"><div class="t">14:18</div><div class="e">Ticket ouvert</div></div>
+        <div class="step"><div class="t">14:18</div><div class="e">Assigné à Agent 07</div></div>
+        <div class="step"><div class="t">14:19</div><div class="e">Réponse envoyée</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>assistance.rts</code>, <code>support</code>, <code>help_me</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+function send() {
+  const c = document.getElementById('composer');
+  if (!c.value.trim()) return;
+  const body = document.getElementById('convBody');
+  const m = document.createElement('div');
+  m.className = 'msg from-me';
+  m.innerHTML = c.value + '<div class="meta">Agent · à l\'instant</div>';
+  body.appendChild(m);
+  body.scrollTop = body.scrollHeight;
+  c.value = '';
+}
+function closeTicket() {
+  alert('Ticket #4821 clôturé. SLA respecté (8 min). Satisfaction envoyée au client.');
+}
+</script>
+</body>
+</html>

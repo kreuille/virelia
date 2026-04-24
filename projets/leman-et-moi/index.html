@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Léman et Moi — Annuaire local | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .hero-search {
+    background: radial-gradient(800px 300px at 70% 30%, rgba(213,43,30,.18), transparent 60%), var(--bg-secondary);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 3rem 2rem; text-align: center; margin-bottom: 2rem;
+  }
+  .hero-search h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: .5rem; }
+  .hero-search p { color: var(--text-muted); margin-bottom: 1.5rem; }
+  .search-bar {
+    display: flex; max-width: 640px; margin: 0 auto; gap: .5rem;
+    background: var(--bg-primary); padding: .5rem; border: 1px solid var(--border); border-radius: 999px;
+  }
+  .search-bar input { flex: 1; border: none; background: transparent; padding: .6rem 1rem; font-size: .95rem; color: var(--white); }
+  .search-bar input:focus { outline: none; }
+  .cat-pills { display: flex; justify-content: center; gap: .5rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .cat-pill { padding: .5rem 1rem; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: .78rem; cursor: pointer; transition: var(--transition-fast); }
+  .cat-pill:hover, .cat-pill.on { background: var(--accent); border-color: var(--accent); color: white; }
+
+  .biz-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; transition: var(--transition-fast);
+  }
+  .biz-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .biz-cover {
+    height: 140px;
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+    display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: .75;
+  }
+  .biz-body { padding: 1rem; }
+  .stars { color: #f59e0b; font-size: .85rem; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Léman et Moi</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Annuaire local · Romandie</div>
+    <h1>Léman et Moi — l'annuaire local du bassin lémanique</h1>
+    <p class="tag-desc">Plateforme de découverte des commerces, artisans et services de Suisse romande : fiches complètes, avis, réservation, et mise en avant géolocalisée pour les pros locaux.</p>
+    <div class="meta-row">
+      <span class="tag accent">Géolocalisation</span>
+      <span class="tag">Avis vérifiés</span>
+      <span class="tag">Réservation</span>
+      <span class="tag">SEO local</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="hero-search">
+    <h2>Trouvez votre pro local</h2>
+    <p>Artisans, restaurants, services, loisirs — de Genève à Montreux en passant par le Valais</p>
+    <div class="search-bar">
+      <input placeholder="Ex: ferblantier, pizzeria, ostéopathe…">
+      <button class="btn primary">Rechercher</button>
+    </div>
+    <div class="cat-pills">
+      <span class="cat-pill on">Tous</span>
+      <span class="cat-pill">🍽 Restauration</span>
+      <span class="cat-pill">🔧 Artisanat</span>
+      <span class="cat-pill">💼 Services</span>
+      <span class="cat-pill">💆 Bien-être</span>
+      <span class="cat-pill">🎨 Loisirs</span>
+      <span class="cat-pill">🛒 Commerces</span>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem">À la une cette semaine</h3>
+  <div class="grid cols-3">
+    <div class="biz-card">
+      <div class="biz-cover">🍽</div>
+      <div class="biz-body">
+        <div class="row between">
+          <div style="font-weight:700">Le P'tit Clos du Léman</div>
+          <div class="stars">★ 4.8</div>
+        </div>
+        <div class="muted" style="font-size:.78rem;margin-top:.2rem">Restaurant gastronomique · Vevey</div>
+        <div class="row mt-2" style="gap:.4rem"><span class="badge ok">Ouvert</span><span class="badge info">Terrasse</span></div>
+        <button class="btn primary sm mt-2" style="width:100%">Réserver une table</button>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-cover">🔧</div>
+      <div class="biz-body">
+        <div class="row between">
+          <div style="font-weight:700">Ferblanterie Délèze</div>
+          <div class="stars">★ 4.9</div>
+        </div>
+        <div class="muted" style="font-size:.78rem;margin-top:.2rem">Couvreur · Sion · depuis 1962</div>
+        <div class="row mt-2" style="gap:.4rem"><span class="badge ok">Intervient urgences</span></div>
+        <button class="btn sm mt-2" style="width:100%">Demander un devis</button>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-cover">💆</div>
+      <div class="biz-body">
+        <div class="row between">
+          <div style="font-weight:700">FB Massothérapie</div>
+          <div class="stars">★ 5.0</div>
+        </div>
+        <div class="muted" style="font-size:.78rem;margin-top:.2rem">Cabinet thérapeutique · Monthey</div>
+        <div class="row mt-2" style="gap:.4rem"><span class="badge ok">Agréé assurances</span></div>
+        <button class="btn primary sm mt-2" style="width:100%">Prendre RDV</button>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-cover">🎨</div>
+      <div class="biz-body">
+        <div class="row between">
+          <div style="font-weight:700">Atelier Chablais</div>
+          <div class="stars">★ 4.7</div>
+        </div>
+        <div class="muted" style="font-size:.78rem;margin-top:.2rem">Poterie & céramique · Aigle</div>
+        <div class="row mt-2" style="gap:.4rem"><span class="badge info">Cours adultes</span></div>
+        <button class="btn sm mt-2" style="width:100%">Voir agenda</button>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-cover">🍞</div>
+      <div class="biz-body">
+        <div class="row between">
+          <div style="font-weight:700">Boulangerie du Village</div>
+          <div class="stars">★ 4.9</div>
+        </div>
+        <div class="muted" style="font-size:.78rem;margin-top:.2rem">Boulangerie bio · Conthey</div>
+        <div class="row mt-2" style="gap:.4rem"><span class="badge ok">Livraison</span><span class="badge info">Bio</span></div>
+        <button class="btn sm mt-2" style="width:100%">Commander en ligne</button>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-cover">💼</div>
+      <div class="biz-body">
+        <div class="row between">
+          <div style="font-weight:700">Fiduciaire Pellet &amp; Cie</div>
+          <div class="stars">★ 4.8</div>
+        </div>
+        <div class="muted" style="font-size:.78rem;margin-top:.2rem">Comptabilité & fiscalité · Martigny</div>
+        <div class="row mt-2" style="gap:.4rem"><span class="badge info">Consultation gratuite</span></div>
+        <button class="btn sm mt-2" style="width:100%">Contacter</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mt-3">
+    <h3>Panel pro — je suis une entreprise</h3>
+    <div class="grid cols-3 mt-2">
+      <div class="card">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🚀</div>
+        <div style="font-weight:600">Visibilité locale</div>
+        <div class="muted" style="font-size:.78rem;margin-top:.3rem">Fiche optimisée SEO + Google Maps connecté</div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+        <div style="font-weight:600">Statistiques</div>
+        <div class="muted" style="font-size:.78rem;margin-top:.3rem">Vues fiche, appels, itinéraires, pic d'activité</div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🗓</div>
+        <div style="font-weight:600">Réservation en ligne</div>
+        <div class="muted" style="font-size:.78rem;margin-top:.3rem">Agenda synchronisé Google / Outlook</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>leman-et-moi</code> (kreuille + solutionspelichet)</div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+</body>
+</html>

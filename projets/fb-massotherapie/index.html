@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FB Massothérapie — Site vitrine | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* Cabinet identity override */
+  .site-wrap { --accent: #c89f5e; --accent-soft: #d9b678; --accent-glow: rgba(200,159,94,.15); }
+  .site-wrap .hero-cabinet {
+    min-height: 420px; padding: 4rem 1.5rem;
+    background:
+      radial-gradient(600px 300px at 80% 30%, rgba(200,159,94,.2), transparent 60%),
+      linear-gradient(180deg, #0d0d14, #12121a);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .site-wrap .hero-cabinet::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(200,159,94,.08), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(200,159,94,.06), transparent 40%);
+  }
+  .cabinet-hero { text-align: center; max-width: 700px; position: relative; z-index: 1; }
+  .cabinet-hero h2 { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; }
+  .cabinet-hero h2 b { font-weight: 800; color: #c89f5e; }
+  .cabinet-hero p { color: var(--text-muted); margin: 1.5rem 0 2rem; font-size: 1.05rem; }
+  .btn.gold {
+    background: #c89f5e; border-color: #c89f5e; color: #1a1208;
+    padding: .9rem 1.6rem; font-weight: 700;
+  }
+  .btn.gold:hover { background: #d9b678; }
+  .svc-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 1.6rem; transition: var(--transition-fast);
+  }
+  .svc-card:hover { transform: translateY(-4px); border-color: #c89f5e; background: var(--bg-card-hover); }
+  .svc-card .icon { width: 50px; height: 50px; border-radius: 12px; background: rgba(200,159,94,.15); display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom: 1rem; }
+  .price { font-size: 1.4rem; font-weight: 800; color: #c89f5e; margin-top: .5rem; }
+  .price span { font-size: .75rem; color: var(--text-muted); font-weight: 500; letter-spacing:1px; }
+  .slot { padding:.7rem 1rem; border-radius:8px; background:var(--bg-card); border:1px solid var(--border); text-align:center; cursor:pointer; transition:var(--transition-fast); font-size:.85rem; }
+  .slot:hover { background: #c89f5e; color: #1a1208; border-color: #c89f5e; }
+  .slot.booked { opacity:.4; text-decoration: line-through; cursor:not-allowed; }
+  .testimonial { padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; }
+</style>
+</head>
+<body class="site-wrap">
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">FB Massothérapie</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="hero-cabinet">
+  <div class="cabinet-hero">
+    <div style="font-size:.75rem;letter-spacing:3px;color:#c89f5e;margin-bottom:1.2rem">FB MASSOTHÉRAPIE · MONTHEY</div>
+    <h2>Votre corps vous parle. <b>Écoutons-le ensemble.</b></h2>
+    <p>Massothérapie thérapeutique agréée ASCA · RME · soins ciblés pour douleurs musculaires, tensions chroniques et récupération sportive.</p>
+    <div class="row" style="justify-content:center;gap:.8rem">
+      <button class="btn gold">Prendre rendez-vous</button>
+      <button class="btn ghost">Voir les prestations</button>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="grid cols-3" style="gap:1rem">
+    <div class="svc-card">
+      <div class="icon">💆</div>
+      <h3 style="font-size:1.1rem">Massage thérapeutique</h3>
+      <p class="muted" style="font-size:.82rem;margin-top:.5rem">Libération des tensions musculaires, soulagement des douleurs dorsales et cervicales.</p>
+      <div class="price">CHF 120 <span>/ 60 min</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="icon">🌿</div>
+      <h3 style="font-size:1.1rem">Drainage lymphatique</h3>
+      <p class="muted" style="font-size:.82rem;margin-top:.5rem">Méthode Vodder. Stimulation douce de la circulation lymphatique, post-opératoire.</p>
+      <div class="price">CHF 130 <span>/ 60 min</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="icon">🔥</div>
+      <h3 style="font-size:1.1rem">Massage sportif profond</h3>
+      <p class="muted" style="font-size:.82rem;margin-top:.5rem">Préparation et récupération, détente des chaînes musculaires sur-sollicitées.</p>
+      <div class="price">CHF 140 <span>/ 75 min</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="icon">🪨</div>
+      <h3 style="font-size:1.1rem">Pierres chaudes</h3>
+      <p class="muted" style="font-size:.82rem;margin-top:.5rem">Relaxation profonde par la chaleur, idéal stress chronique et insomnie.</p>
+      <div class="price">CHF 150 <span>/ 75 min</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="icon">🧘</div>
+      <h3 style="font-size:1.1rem">Énergie & réflexologie</h3>
+      <p class="muted" style="font-size:.82rem;margin-top:.5rem">Approche globale corps-esprit, points réflexes, harmonisation.</p>
+      <div class="price">CHF 120 <span>/ 60 min</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="icon">👶</div>
+      <h3 style="font-size:1.1rem">Femmes enceintes</h3>
+      <p class="muted" style="font-size:.82rem;margin-top:.5rem">Installation adaptée, soulagement lombaire et circulation, dès le 2ᵉ trimestre.</p>
+      <div class="price">CHF 130 <span>/ 60 min</span></div>
+    </div>
+  </div>
+
+  <div class="panel mt-3">
+    <h3>Prendre rendez-vous en ligne <span class="hint">Réservation confirmée par email</span></h3>
+    <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:1rem">Lundi 27 avril 2026</div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap:.5rem">
+      <div class="slot">09:00</div>
+      <div class="slot booked">10:30</div>
+      <div class="slot">11:30</div>
+      <div class="slot booked">13:30</div>
+      <div class="slot">14:30</div>
+      <div class="slot">15:30</div>
+      <div class="slot booked">16:30</div>
+      <div class="slot">17:30</div>
+      <div class="slot">18:30</div>
+    </div>
+  </div>
+
+  <div class="grid cols-3 mt-3">
+    <div class="testimonial">
+      <div style="color:#c89f5e;font-size:.9rem">★★★★★</div>
+      <p class="mt-1" style="font-size:.85rem">"Des mains en or. Après 3 séances, mes douleurs cervicales post-burn-out ont disparu. Écoute et pro à tous les niveaux."</p>
+      <div class="muted mt-2" style="font-size:.75rem">— Sandrine M., Monthey</div>
+    </div>
+    <div class="testimonial">
+      <div style="color:#c89f5e;font-size:.9rem">★★★★★</div>
+      <p class="mt-1" style="font-size:.85rem">"Cadre apaisant, réel souci du détail. Je recommande la préparation sportive avant trails longue distance."</p>
+      <div class="muted mt-2" style="font-size:.75rem">— Thomas B., Saint-Maurice</div>
+    </div>
+    <div class="testimonial">
+      <div style="color:#c89f5e;font-size:.9rem">★★★★★</div>
+      <p class="mt-1" style="font-size:.85rem">"Drainage post-op remarquable. Remboursement assurance complémentaire facile grâce à l'agrément ASCA."</p>
+      <div class="muted mt-2" style="font-size:.75rem">— Isabelle V., Collombey</div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur le repo <code>FB-massotherapie</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+</body>
+</html>

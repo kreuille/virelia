@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de Devis | Virelia Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .devis-grid { display:grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+  @media (max-width:1000px) { .devis-grid { grid-template-columns: 1fr; } }
+  .line-row { display:grid; grid-template-columns: 2fr 90px 110px 110px 32px; gap:.5rem; align-items:center; padding:.4rem 0; }
+  .line-row input { padding:.5rem .65rem !important; font-size:.82rem !important; }
+  .tot-line { display:flex; justify-content:space-between; padding:.35rem 0; font-size:.9rem; }
+  .tot-line.big { border-top:2px solid var(--accent); margin-top:.5rem; padding-top:.7rem; font-size:1.15rem; font-weight:700; color:var(--white); }
+  .preview {
+    background:#fff; color:#111; border-radius:8px; padding:1.8rem; font-size:.82rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    line-height:1.5;
+  }
+  .preview h4 { color:#d52b1e; font-size:1.3rem; margin-bottom:.4rem; }
+  .preview table { width:100%; border-collapse:collapse; margin:.8rem 0; }
+  .preview th, .preview td { padding:.5rem .3rem; text-align:left; border-bottom:1px solid #eee; font-size:.78rem; }
+  .preview th { background:#f6f6f8; font-size:.68rem; letter-spacing:.5px; text-transform:uppercase; color:#555; }
+  .preview .right { text-align:right; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Devis</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Commerce · Facturation</div>
+    <h1>Générateur de devis — prêt en 2 minutes</h1>
+    <p class="tag-desc">Outil de création de devis pour PME, artisans et prestataires : lignes dynamiques, TVA CH 8.1%, acompte, marge, modèles ré-utilisables et export PDF signé.</p>
+    <div class="meta-row">
+      <span class="tag accent">PDF signé</span>
+      <span class="tag">TVA CH</span>
+      <span class="tag">Modèles</span>
+      <span class="tag">Signature e-mail</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="devis-grid">
+    <div class="panel">
+      <h3>Composition du devis</h3>
+      <div class="grid cols-2">
+        <div><label class="label">Client</label><input class="input" id="client" value="Restaurant du Lac SA" oninput="render()"></div>
+        <div><label class="label">Référence</label><input class="input" id="ref" value="DEV-2026-0427" oninput="render()"></div>
+      </div>
+
+      <h3 class="mt-3">Lignes</h3>
+      <div id="lines"></div>
+      <button class="btn mt-2" onclick="addLine()">+ Ajouter une ligne</button>
+
+      <h3 class="mt-3">Totaux</h3>
+      <div>
+        <div class="tot-line"><span>Sous-total HT</span><span class="mono" id="ht">—</span></div>
+        <div class="tot-line"><span>Rabais (<input style="width:50px;padding:.2rem;background:transparent;border:none;color:var(--white);border-bottom:1px solid var(--border)" type="number" id="rabais" value="5" oninput="render()">%)</span><span class="mono" id="rabaisAmt">—</span></div>
+        <div class="tot-line"><span>TVA 8.1%</span><span class="mono" id="tva">—</span></div>
+        <div class="tot-line big"><span>Total TTC</span><span class="mono" id="ttc">—</span></div>
+        <div class="tot-line"><span>Acompte demandé (30%)</span><span class="mono" id="acompte">—</span></div>
+      </div>
+
+      <div class="row mt-3">
+        <button class="btn primary" onclick="exportPdf()">Générer PDF</button>
+        <button class="btn">Envoyer par e-mail</button>
+        <button class="btn ghost">Enregistrer modèle</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel" style="background:transparent;padding:0;border:none">
+        <h3 style="margin-bottom:.8rem">Aperçu en direct</h3>
+        <div class="preview" id="preview"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur le repo <code>devis</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+const initial = [
+  { label: 'Installation bornes Wi-Fi (x4)', qty: 4, unit: 'u.', price: 280 },
+  { label: 'Câblage RJ45 cat.6A', qty: 85, unit: 'm', price: 12 },
+  { label: 'Configuration routeur + VLAN', qty: 1, unit: 'forfait', price: 650 },
+  { label: 'Main d\'œuvre', qty: 6, unit: 'h', price: 115 }
+];
+let lines = [...initial];
+
+function render() {
+  const box = document.getElementById('lines');
+  box.innerHTML = '';
+  lines.forEach((l, i) => {
+    const row = document.createElement('div');
+    row.className = 'line-row';
+    row.innerHTML = `
+      <input class="input" value="${l.label.replace(/"/g,'&quot;')}" onchange="lines[${i}].label=this.value; render()">
+      <input class="input" type="number" value="${l.qty}" onchange="lines[${i}].qty=+this.value; render()">
+      <input class="input" value="${l.unit}" onchange="lines[${i}].unit=this.value; render()">
+      <input class="input" type="number" value="${l.price}" onchange="lines[${i}].price=+this.value; render()">
+      <button class="btn ghost" onclick="lines.splice(${i},1); render()" title="Supprimer">×</button>
+    `;
+    box.appendChild(row);
+  });
+
+  const ht = lines.reduce((s,l) => s + l.qty*l.price, 0);
+  const rab = (+document.getElementById('rabais').value || 0) / 100;
+  const rabAmt = ht * rab;
+  const htNet = ht - rabAmt;
+  const tva = htNet * 0.081;
+  const ttc = htNet + tva;
+  const ac = ttc * 0.30;
+
+  const fmt = n => 'CHF ' + n.toLocaleString('fr-CH', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('ht').textContent = fmt(ht);
+  document.getElementById('rabaisAmt').textContent = '- ' + fmt(rabAmt);
+  document.getElementById('tva').textContent = fmt(tva);
+  document.getElementById('ttc').textContent = fmt(ttc);
+  document.getElementById('acompte').textContent = fmt(ac);
+
+  const client = document.getElementById('client').value;
+  const ref = document.getElementById('ref').value;
+  document.getElementById('preview').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start">
+      <div>
+        <h4>DEVIS</h4>
+        <div style="color:#777;font-size:.75rem">Référence ${ref}</div>
+      </div>
+      <div style="text-align:right;font-size:.78rem;color:#444">
+        <div style="font-weight:700">SOLUTIONS PELICHET</div>
+        <div>Rue de l'Industrie 12</div>
+        <div>1950 Sion, Suisse</div>
+      </div>
+    </div>
+    <div style="margin-top:1rem;font-size:.78rem">À l'attention de <b>${client}</b></div>
+    <table>
+      <thead><tr><th>Désignation</th><th class="right">Qté</th><th class="right">PU</th><th class="right">Montant</th></tr></thead>
+      <tbody>
+        ${lines.map(l => `<tr><td>${l.label}</td><td class="right">${l.qty} ${l.unit}</td><td class="right">${l.price.toFixed(2)}</td><td class="right">${(l.qty*l.price).toFixed(2)}</td></tr>`).join('')}
+      </tbody>
+    </table>
+    <div style="text-align:right;font-size:.8rem;line-height:1.7">
+      <div>Sous-total : <b>${fmt(ht)}</b></div>
+      <div>Rabais : ${fmt(rabAmt)}</div>
+      <div>TVA 8.1% : ${fmt(tva)}</div>
+      <div style="border-top:2px solid #d52b1e;margin-top:.4rem;padding-top:.3rem;font-size:.95rem">Total TTC : <b>${fmt(ttc)}</b></div>
+    </div>
+    <div style="margin-top:1rem;font-size:.72rem;color:#666">Devis valable 30 jours. Acompte de 30% à la commande.</div>
+  `;
+}
+function addLine() { lines.push({label:'Nouvelle prestation', qty:1, unit:'u.', price:100}); render(); }
+function exportPdf() { alert('✓ PDF généré (démo) — prêt pour signature numérique.'); }
+render();
+</script>
+</body>
+</html>

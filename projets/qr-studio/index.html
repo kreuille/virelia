@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Studio — Générateur de codes | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .studio { display: grid; grid-template-columns: 1fr 420px; gap: 1.5rem; }
+  @media (max-width: 1000px) { .studio { grid-template-columns: 1fr; } }
+  .qr-preview {
+    aspect-ratio: 1; width: 100%; max-width: 340px; margin: 0 auto;
+    background: #fff; border-radius: 16px; padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  }
+  .qr-preview svg { width: 100%; height: 100%; }
+  .type-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin-bottom: 1.2rem; }
+  .type-tab { padding: .7rem .4rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; text-align: center; font-size: .75rem; cursor: pointer; transition: var(--transition-fast); }
+  .type-tab:hover { background: var(--bg-card-hover); }
+  .type-tab.on { background: var(--accent); border-color: var(--accent); color: white; }
+  .type-tab .ic { font-size: 1.3rem; display: block; margin-bottom: .3rem; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">QR Studio</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Marketing · Print · Signalétique</div>
+    <h1>QR Studio — générateur de codes QR & EAN branded</h1>
+    <p class="tag-desc">Studio complet : génération QR (URL, vCard, WiFi, SEPA), codes-barres EAN13/Code128, personnalisation couleur & logo, export SVG/PNG/PDF et statistiques de scan.</p>
+    <div class="meta-row">
+      <span class="tag accent">QR & EAN</span>
+      <span class="tag">Logo centré</span>
+      <span class="tag">Export SVG</span>
+      <span class="tag">Stats scan</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="studio">
+    <div class="panel">
+      <h3>Type de contenu</h3>
+      <div class="type-tabs">
+        <div class="type-tab on" data-type="url" onclick="setType('url')"><span class="ic">🔗</span>URL</div>
+        <div class="type-tab" data-type="vcard" onclick="setType('vcard')"><span class="ic">👤</span>vCard</div>
+        <div class="type-tab" data-type="wifi" onclick="setType('wifi')"><span class="ic">📶</span>WiFi</div>
+        <div class="type-tab" data-type="sepa" onclick="setType('sepa')"><span class="ic">💳</span>SEPA</div>
+      </div>
+
+      <div id="urlForm">
+        <label class="label">URL de destination</label>
+        <input class="input" id="urlInput" value="https://virelia.ch/" oninput="regen()">
+      </div>
+      <div id="vcardForm" style="display:none">
+        <div class="grid cols-2">
+          <div><label class="label">Nom</label><input class="input" id="vName" value="Jean Pelichet" oninput="regen()"></div>
+          <div><label class="label">Entreprise</label><input class="input" id="vOrg" value="Solutions Pelichet" oninput="regen()"></div>
+          <div><label class="label">Email</label><input class="input" id="vEmail" value="j@pelichet.ch" oninput="regen()"></div>
+          <div><label class="label">Téléphone</label><input class="input" id="vTel" value="+41 27 555 00 00" oninput="regen()"></div>
+        </div>
+      </div>
+      <div id="wifiForm" style="display:none">
+        <div class="grid cols-2">
+          <div><label class="label">SSID</label><input class="input" id="wSsid" value="MaisonPelichet" oninput="regen()"></div>
+          <div><label class="label">Mot de passe</label><input class="input" id="wPwd" value="Alpes2026!" oninput="regen()"></div>
+        </div>
+      </div>
+      <div id="sepaForm" style="display:none">
+        <div class="grid cols-2">
+          <div><label class="label">IBAN</label><input class="input" id="sIban" value="CH93 0076 2011 6238 5295 7" oninput="regen()"></div>
+          <div><label class="label">Montant (CHF)</label><input class="input" id="sAmount" value="100" type="number" oninput="regen()"></div>
+          <div style="grid-column:1/-1"><label class="label">Libellé</label><input class="input" id="sLabel" value="Facture DEV-2026-0427" oninput="regen()"></div>
+        </div>
+      </div>
+
+      <h3 class="mt-3">Style</h3>
+      <div class="grid cols-3">
+        <div><label class="label">Couleur avant</label><input class="input" id="cFg" type="color" value="#0a0a0f" onchange="regen()"></div>
+        <div><label class="label">Couleur arrière</label><input class="input" id="cBg" type="color" value="#ffffff" onchange="regen()"></div>
+        <div><label class="label">Taille (px)</label><input class="input" id="cSize" type="number" value="300" onchange="regen()"></div>
+      </div>
+
+      <h3 class="mt-3">Export</h3>
+      <div class="row">
+        <button class="btn primary" onclick="exportPng()">Télécharger PNG</button>
+        <button class="btn" onclick="exportSvg()">Télécharger SVG</button>
+        <button class="btn ghost">Copier le lien suivi</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel" style="background:transparent;padding:0;border:none;text-align:center">
+        <h3 style="justify-content:center">Aperçu en direct</h3>
+        <div class="qr-preview" id="qrBox"><div id="qr"></div></div>
+        <div class="muted mt-3" style="font-size:.8rem">Scan trackable · redirection <code>virelia.ch/r/x29f</code></div>
+
+        <div class="panel mt-3" style="padding:1rem">
+          <div style="font-size:.7rem;color:var(--text-muted);letter-spacing:1.5px">STATS · 30 DERNIERS JOURS</div>
+          <div class="row between mt-2">
+            <div><div style="font-size:1.4rem;font-weight:800">1 284</div><div class="muted" style="font-size:.7rem">scans</div></div>
+            <div><div style="font-size:1.4rem;font-weight:800">68%</div><div class="muted" style="font-size:.7rem">iOS</div></div>
+            <div><div style="font-size:1.4rem;font-weight:800">CH</div><div class="muted" style="font-size:.7rem">top pays</div></div>
+          </div>
+          <svg viewBox="0 0 300 60" style="width:100%;margin-top:.6rem">
+            <polyline points="0,45 25,40 50,28 75,32 100,18 125,25 150,12 175,20 200,8 225,15 250,22 275,10 300,18" stroke="#d52b1e" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>qr_codes</code>, <code>generateur_code</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+let currentType = 'url';
+let qrInstance = null;
+
+function setType(t) {
+  currentType = t;
+  document.querySelectorAll('.type-tab').forEach(el => el.classList.toggle('on', el.dataset.type === t));
+  ['urlForm','vcardForm','wifiForm','sepaForm'].forEach(id => {
+    document.getElementById(id).style.display = id.startsWith(t) ? '' : 'none';
+  });
+  regen();
+}
+
+function getPayload() {
+  if (currentType === 'url') return document.getElementById('urlInput').value;
+  if (currentType === 'vcard') {
+    const n = document.getElementById('vName').value;
+    const o = document.getElementById('vOrg').value;
+    const e = document.getElementById('vEmail').value;
+    const t = document.getElementById('vTel').value;
+    return `BEGIN:VCARD\nVERSION:3.0\nFN:${n}\nORG:${o}\nTEL:${t}\nEMAIL:${e}\nEND:VCARD`;
+  }
+  if (currentType === 'wifi') {
+    return `WIFI:T:WPA;S:${document.getElementById('wSsid').value};P:${document.getElementById('wPwd').value};;`;
+  }
+  if (currentType === 'sepa') {
+    return `BCD\n002\n1\nSCT\n\n${document.getElementById('sIban').value.replace(/\s+/g,'')}\n\nCHF${document.getElementById('sAmount').value}\n\n\n${document.getElementById('sLabel').value}`;
+  }
+}
+
+function regen() {
+  const box = document.getElementById('qr');
+  box.innerHTML = '';
+  const size = +document.getElementById('cSize').value || 300;
+  const fg = document.getElementById('cFg').value;
+  const bg = document.getElementById('cBg').value;
+  qrInstance = new QRCode(box, {
+    text: getPayload() || ' ',
+    width: size, height: size,
+    colorDark: fg, colorLight: bg,
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+
+function exportPng() {
+  const img = document.querySelector('#qr img') || document.querySelector('#qr canvas');
+  if (!img) return;
+  const url = img.toDataURL ? img.toDataURL('image/png') : img.src;
+  const a = document.createElement('a'); a.href = url; a.download = 'qr-virelia.png'; a.click();
+}
+function exportSvg() { alert('Export SVG (démo). En production : génération vectorielle native.'); }
+
+regen();
+</script>
+</body>
+</html>

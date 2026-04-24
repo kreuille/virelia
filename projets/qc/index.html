@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quality Control terrain | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .check-item { display:grid; grid-template-columns: 40px 1fr auto; gap:.8rem; align-items:center; padding:.8rem; border-radius:10px; background:var(--bg-card); border:1px solid var(--border); margin-bottom:.5rem; transition:var(--transition-fast); cursor:pointer; }
+  .check-item:hover { background: var(--bg-card-hover); }
+  .check-item.done { border-color: var(--success); background: rgba(34,197,94,.06); }
+  .check-item.fail { border-color: var(--danger); background: rgba(239,68,68,.06); }
+  .check-box { width:28px; height:28px; border-radius:8px; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .check-item.done .check-box { background:var(--success); border-color:var(--success); color:white; }
+  .check-item.fail .check-box { background:var(--danger); border-color:var(--danger); color:white; }
+  .gauge { width:200px; height:100px; position:relative; margin:0 auto; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Quality Control</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Qualité · Contrôle terrain</div>
+    <h1>QC — Contrôle qualité terrain mobile</h1>
+    <p class="tag-desc">Application de check-lists qualité à remplir sur le terrain : parcours dynamiques, photos horodatées, blocage si non-conformité critique, rapport PDF signé et tableau de bord direction.</p>
+    <div class="meta-row">
+      <span class="tag accent">Check-lists dynamiques</span>
+      <span class="tag">Photos horodatées</span>
+      <span class="tag">Non-conformités</span>
+      <span class="tag">Rapport PDF</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="grid cols-2">
+    <div class="panel">
+      <h3>Contrôle en cours <span class="hint">Chantier Sion — Bâtiment B</span></h3>
+      <div class="row between mb-2">
+        <div>
+          <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px">CONTRÔLEUR</div>
+          <div style="font-size:.95rem;font-weight:600">Jean Moreau</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px">PROGRESSION</div>
+          <div id="progTxt" style="font-size:.95rem;font-weight:600">0 / 8</div>
+        </div>
+      </div>
+      <div class="progress mb-2"><span id="progBar" style="width:0%"></span></div>
+
+      <div id="checklist">
+        <div class="check-item" data-idx="0" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Sécurité — EPI tous présents</div><div class="muted" style="font-size:.72rem">Casque, chaussures, harnais si &gt;2m</div></div><span class="badge muted">EHS</span></div>
+        <div class="check-item" data-idx="1" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Balisage chantier conforme</div><div class="muted" style="font-size:.72rem">Rubans, panneaux, éclairage provisoire</div></div><span class="badge muted">EHS</span></div>
+        <div class="check-item" data-idx="2" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Qualité béton étage 2</div><div class="muted" style="font-size:.72rem">Photo fissures + mesure humidité</div></div><span class="badge muted">Structure</span></div>
+        <div class="check-item" data-idx="3" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Installation électrique RDC</div><div class="muted" style="font-size:.72rem">Test continuité + étiquetage tableau</div></div><span class="badge muted">Électrique</span></div>
+        <div class="check-item" data-idx="4" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Étanchéité toiture terrasse</div><div class="muted" style="font-size:.72rem">Test eau + inspection joints</div></div><span class="badge muted">Enveloppe</span></div>
+        <div class="check-item" data-idx="5" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Isolation thermique conforme</div><div class="muted" style="font-size:.72rem">Épaisseur + raccords</div></div><span class="badge muted">Thermique</span></div>
+        <div class="check-item" data-idx="6" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Propreté & tri déchets</div><div class="muted" style="font-size:.72rem">Bennes séparées, évacuation</div></div><span class="badge muted">Environnement</span></div>
+        <div class="check-item" data-idx="7" onclick="toggle(this, 'ok')"><div class="check-box">—</div><div><div style="font-weight:600;font-size:.9rem">Documents plan & carnets</div><div class="muted" style="font-size:.72rem">Présence plans à jour sur site</div></div><span class="badge muted">Admin</span></div>
+      </div>
+
+      <div class="row mt-3">
+        <button class="btn primary" onclick="finishAudit()">Clôturer & générer rapport</button>
+        <button class="btn">Ajouter photo</button>
+        <button class="btn ghost" onclick="reportNC()">⚠ Signaler non-conformité</button>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="panel">
+        <h3>Indicateur qualité global</h3>
+        <div class="gauge">
+          <svg viewBox="0 0 200 100">
+            <path d="M10,90 A90,90 0 0 1 190,90" stroke="#1a1a24" stroke-width="12" fill="none"/>
+            <path d="M10,90 A90,90 0 0 1 190,90" stroke="#d52b1e" stroke-width="12" fill="none"
+              stroke-dasharray="180" stroke-dashoffset="40" />
+          </svg>
+          <div style="position:absolute;inset:0;top:50%;text-align:center">
+            <div style="font-size:2.2rem;font-weight:800">87%</div>
+            <div class="muted" style="font-size:.7rem;letter-spacing:1.5px">CONFORMITÉ 30j</div>
+          </div>
+        </div>
+        <div class="row mt-3" style="justify-content:space-around;text-align:center">
+          <div><div class="muted" style="font-size:.7rem">Audits</div><div style="font-size:1.3rem;font-weight:700">142</div></div>
+          <div><div class="muted" style="font-size:.7rem">NC ouvertes</div><div style="font-size:1.3rem;font-weight:700;color:var(--warning)">18</div></div>
+          <div><div class="muted" style="font-size:.7rem">NC critiques</div><div style="font-size:1.3rem;font-weight:700;color:var(--danger)">2</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Non-conformités ouvertes</h3>
+        <table class="vir">
+          <thead><tr><th>Réf</th><th>Chantier</th><th>Gravité</th><th>Échéance</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">NC-2026-044</td><td>Sion B · Structure</td><td><span class="badge err">Critique</span></td><td>24 avril</td></tr>
+            <tr><td class="mono">NC-2026-043</td><td>Martigny · EHS</td><td><span class="badge err">Critique</span></td><td>25 avril</td></tr>
+            <tr><td class="mono">NC-2026-042</td><td>Sion A · Isolation</td><td><span class="badge warn">Majeure</span></td><td>30 avril</td></tr>
+            <tr><td class="mono">NC-2026-041</td><td>Sierre · Électrique</td><td><span class="badge warn">Majeure</span></td><td>02 mai</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>QC</code>, <code>QC2</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+let done = 0;
+function toggle(el, mode) {
+  if (el.classList.contains('done') || el.classList.contains('fail')) {
+    el.classList.remove('done', 'fail'); el.querySelector('.check-box').textContent = '—';
+    done--;
+  } else {
+    el.classList.add(mode);
+    el.querySelector('.check-box').textContent = mode === 'ok' ? '✓' : '✕';
+    done++;
+  }
+  document.getElementById('progTxt').textContent = done + ' / 8';
+  document.getElementById('progBar').style.width = (done*12.5) + '%';
+}
+function reportNC() {
+  const items = document.querySelectorAll('.check-item:not(.done):not(.fail)');
+  if (items.length) toggle(items[0], 'fail');
+}
+function finishAudit() {
+  alert('✓ Rapport PDF généré et envoyé au conducteur de travaux (démo).');
+}
+</script>
+</body>
+</html>

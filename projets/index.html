@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio des solutions développées — Virelia Solutions">
+<meta name="theme-color" content="#D52B1E">
+<title>Portfolio — Virelia Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-hero {
+    padding: 5rem 1.5rem 3rem;
+    background:
+      radial-gradient(700px 300px at 15% 20%, var(--accent-glow), transparent 60%),
+      radial-gradient(500px 250px at 85% 70%, rgba(59,130,246,.08), transparent 60%);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .page-hero .kicker { font-size: .72rem; color: var(--accent-soft); letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+  .page-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.05; margin: 1rem auto .8rem; max-width: 860px;
+  }
+  .page-hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto; }
+  .page-hero .stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .page-hero .stats .stat { text-align: center; }
+  .page-hero .stats .stat .n { font-size: 2rem; font-weight: 800; color: var(--white); }
+  .page-hero .stats .stat .l { font-size: .72rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: .3rem; }
+
+  .pf-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.2rem;
+  }
+  .pf-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px;
+    overflow: hidden; transition: var(--transition);
+    display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  }
+  .pf-card:hover {
+    transform: translateY(-6px); border-color: var(--accent);
+    box-shadow: 0 20px 60px rgba(213,43,30,.1);
+  }
+  .pf-thumb {
+    aspect-ratio: 16/9; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-tertiary), #080810);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .pf-thumb::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(213,43,30,.15), transparent 50%);
+  }
+  .pf-thumb .illus { font-size: 3.5rem; opacity: .5; position: relative; z-index: 1; }
+  .pf-body { padding: 1.3rem; flex: 1; display: flex; flex-direction: column; }
+  .pf-cat { font-size: .68rem; color: var(--accent-soft); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .pf-title { font-size: 1.1rem; font-weight: 700; margin: .4rem 0 .5rem; letter-spacing: -0.01em; }
+  .pf-desc { color: var(--text-muted); font-size: .84rem; flex: 1; }
+  .pf-meta { margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: .72rem; color: var(--text-dim); }
+  .pf-tags { display: flex; gap: .3rem; flex-wrap: wrap; margin-top: .8rem; }
+
+  .section-title-row {
+    display: flex; justify-content: space-between; align-items: baseline; margin: 3rem 0 1.5rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 1rem;
+  }
+  .section-title-row h2 {
+    font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em;
+  }
+  .section-title-row .sub { color: var(--text-muted); font-size: .85rem; }
+
+  .mini-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: .8rem;
+  }
+  .mini-card {
+    padding: 1rem; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; transition: var(--transition-fast);
+  }
+  .mini-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
+  .mini-card .ic { font-size: 1.4rem; margin-bottom: .5rem; }
+  .mini-card .ttl { font-weight: 600; font-size: .9rem; }
+  .mini-card .sub { color: var(--text-muted); font-size: .72rem; margin-top: .2rem; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge muted">Portfolio</span>
+  </div>
+  <a href="../index.html" class="back">← virelia.ch</a>
+</header>
+
+<section class="page-hero">
+  <div class="kicker">Portfolio 2024 — 2026</div>
+  <h1>Des solutions logicielles pour les pros qui ne peuvent pas se permettre d'attendre</h1>
+  <p>14 plateformes livrées pour le secteur santé, RH, logistique, institutions internationales, PME romandes et artisans. Un aperçu interactif de ce que nos équipes peuvent construire pour vous.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">14</div><div class="l">Solutions</div></div>
+    <div class="stat"><div class="n">51</div><div class="l">Dépôts GitHub</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">Secteurs couverts</div></div>
+    <div class="stat"><div class="n">∞</div><div class="l">Possibilités</div></div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="section-title-row">
+    <h2>Solutions mises en avant</h2>
+    <div class="sub">Cliquer pour ouvrir la maquette interactive</div>
+  </div>
+
+  <div class="pf-grid">
+
+    <a class="pf-card" href="chr360/index.html">
+      <div class="pf-thumb"><div class="illus">🏥</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Santé · Dashboard</div>
+        <div class="pf-title">CHR360 — Pilotage hospitalier</div>
+        <div class="pf-desc">Dashboard temps réel, admissions, capacité lits, ETL HL7/FHIR et indicateurs qualité pour centres hospitaliers.</div>
+        <div class="pf-tags">
+          <span class="tag">Dashboard</span><span class="tag">FHIR</span><span class="tag">Temps réel</span>
+        </div>
+        <div class="pf-meta"><span>chr360_dashboard · clinical-data-transformer</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="interim/index.html">
+      <div class="pf-thumb"><div class="illus">👥</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">RH · Intérim</div>
+        <div class="pf-title">Interim Agency System</div>
+        <div class="pf-desc">Plateforme complète agences intérim : matching IA candidat-poste, timesheets mobiles, contrats et facturation multi-client.</div>
+        <div class="pf-tags"><span class="tag">Matching</span><span class="tag">Contrats</span><span class="tag">Facturation</span></div>
+        <div class="pf-meta"><span>interim-agency-system</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="zenadmin/index.html">
+      <div class="pf-thumb"><div class="illus">⚙️</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Back-office</div>
+        <div class="pf-title">ZenAdmin — Admin panel universel</div>
+        <div class="pf-desc">Panel admin pré-connecté sur n'importe quelle base : CRUD auto-généré, permissions fines, audit log et métriques.</div>
+        <div class="pf-tags"><span class="tag">TypeScript</span><span class="tag">Multi-tenant</span><span class="tag">Audit</span></div>
+        <div class="pf-meta"><span>zenadmin</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="paie/index.html">
+      <div class="pf-thumb"><div class="illus">💰</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Paie · Suisse</div>
+        <div class="pf-title">Moteur de paie suisse</div>
+        <div class="pf-desc">AVS, LPP, LAA, impôt source, barèmes 2026 par canton, certificats de salaire et export Swissdec ELM 5.</div>
+        <div class="pf-tags"><span class="tag">Swissdec</span><span class="tag">Cantonal</span><span class="tag">ELM</span></div>
+        <div class="pf-meta"><span>Paie · salaires</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="devis/index.html">
+      <div class="pf-thumb"><div class="illus">📄</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Commerce · Facturation</div>
+        <div class="pf-title">Générateur de devis</div>
+        <div class="pf-desc">Création de devis en 2 minutes : lignes dynamiques, TVA CH 8.1%, aperçu live, PDF signé, modèles réutilisables.</div>
+        <div class="pf-tags"><span class="tag">PDF</span><span class="tag">TVA CH</span><span class="tag">Signature</span></div>
+        <div class="pf-meta"><span>devis</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="demenagement/index.html">
+      <div class="pf-thumb"><div class="illus">🚚</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Logistique · Déménagement</div>
+        <div class="pf-title">Déménagement Pro</div>
+        <div class="pf-desc">Gestion complète : devis client en ligne, planning équipes/camions, GPS temps réel, inventaire photo, BL signé.</div>
+        <div class="pf-tags"><span class="tag">GPS</span><span class="tag">PWA</span><span class="tag">Signature</span></div>
+        <div class="pf-meta"><span>demenagement · moving · suivi_demenagement · weconnect</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="timetrack/index.html">
+      <div class="pf-thumb"><div class="illus">⏱</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Temps de travail</div>
+        <div class="pf-title">TimeTrack PWA</div>
+        <div class="pf-desc">Pointage mobile géolocalisé pour équipes terrain : PWA offline, détection auto chantier, dashboard RH, export paie.</div>
+        <div class="pf-tags"><span class="tag">PWA</span><span class="tag">GPS</span><span class="tag">Offline</span></div>
+        <div class="pf-meta"><span>timetrack · timetrack-pwa · timetrack-api</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="inventaire-onu/index.html">
+      <div class="pf-thumb"><div class="illus">📦</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Asset management · ONU</div>
+        <div class="pf-title">Inventaire ONU</div>
+        <div class="pf-desc">Gestion d'actifs pour organisations multi-sites : scan QR/EAN, mouvements, affectations bureau, dépréciation, rapport conformité.</div>
+        <div class="pf-tags"><span class="tag">Scan QR</span><span class="tag">Multi-sites</span><span class="tag">Conformité</span></div>
+        <div class="pf-meta"><span>inventaire · inventaire_onu · stock_onu · inventaire-assets</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="qc/index.html">
+      <div class="pf-thumb"><div class="illus">✅</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Qualité · Terrain</div>
+        <div class="pf-title">Quality Control terrain</div>
+        <div class="pf-desc">Check-lists mobiles, photos horodatées, non-conformités bloquantes, rapport PDF signé, dashboard direction.</div>
+        <div class="pf-tags"><span class="tag">Check-list</span><span class="tag">Photo</span><span class="tag">PDF signé</span></div>
+        <div class="pf-meta"><span>QC · QC2</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="assistance-rts/index.html">
+      <div class="pf-thumb"><div class="illus">🎧</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Help Desk · Média</div>
+        <div class="pf-title">Assistance RTS</div>
+        <div class="pf-desc">Portail support multi-canaux : tickets mail/phone/Teams, SLA contractuels, base de connaissance, escalade automatique.</div>
+        <div class="pf-tags"><span class="tag">SLA</span><span class="tag">Multi-canal</span><span class="tag">KB</span></div>
+        <div class="pf-meta"><span>assistance.rts · support · help_me</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="workflow-auto/index.html">
+      <div class="pf-thumb"><div class="illus">🔀</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">No-code · Automatisation</div>
+        <div class="pf-title">Workflow Auto</div>
+        <div class="pf-desc">Éditeur visuel d'automatisations façon Zapier, self-hosted : 80+ connecteurs, cron, webhooks, monitoring exécutions.</div>
+        <div class="pf-tags"><span class="tag">Self-hosted</span><span class="tag">Connecteurs</span><span class="tag">Monitoring</span></div>
+        <div class="pf-meta"><span>worflow-auto</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="leman-et-moi/index.html">
+      <div class="pf-thumb"><div class="illus">🗺</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Annuaire local</div>
+        <div class="pf-title">Léman et Moi</div>
+        <div class="pf-desc">Annuaire de commerces et artisans du bassin lémanique : fiches pros, avis, réservation, SEO local, statistiques de visibilité.</div>
+        <div class="pf-tags"><span class="tag">SEO local</span><span class="tag">Avis</span><span class="tag">Réservation</span></div>
+        <div class="pf-meta"><span>leman-et-moi</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="fb-massotherapie/index.html">
+      <div class="pf-thumb"><div class="illus">💆</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Santé · Vitrine pro</div>
+        <div class="pf-title">FB Massothérapie</div>
+        <div class="pf-desc">Site vitrine haut de gamme pour cabinet thérapeutique : prestations, tarifs, réservation en ligne, témoignages, SEO local.</div>
+        <div class="pf-tags"><span class="tag">Vitrine</span><span class="tag">Réservation</span><span class="tag">SEO</span></div>
+        <div class="pf-meta"><span>FB-massotherapie</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+    <a class="pf-card" href="qr-studio/index.html">
+      <div class="pf-thumb"><div class="illus">▨</div></div>
+      <div class="pf-body">
+        <div class="pf-cat">Marketing · Print</div>
+        <div class="pf-title">QR Studio</div>
+        <div class="pf-desc">Générateur QR/EAN/Code128 branded : URL/vCard/WiFi/SEPA, personnalisation couleur et logo, export PNG/SVG, stats scan.</div>
+        <div class="pf-tags"><span class="tag">QR</span><span class="tag">Export vectoriel</span><span class="tag">Tracking</span></div>
+        <div class="pf-meta"><span>qr_codes · generateur_code</span><span>Ouvrir →</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-title-row">
+    <h2>Autres projets & briques réutilisables</h2>
+    <div class="sub">Prototypes, composants et modules maison</div>
+  </div>
+
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ic">📚</div><div class="ttl">Library ONU</div><div class="sub">Gestion bibliothèque — library, library_un, library_un2</div></div>
+    <div class="mini-card"><div class="ic">📂</div><div class="ttl">Suivi dossiers</div><div class="sub">Pipeline cas & échéances — suivi_dossiers</div></div>
+    <div class="mini-card"><div class="ic">🎴</div><div class="ttl">Business Card</div><div class="sub">Carte de visite numérique — businesscard</div></div>
+    <div class="mini-card"><div class="ic">🧮</div><div class="ttl">Calculator</div><div class="sub">Calculateur métier embarquable — calculator</div></div>
+    <div class="mini-card"><div class="ic">📷</div><div class="ttl">Scanner</div><div class="sub">App scan documents — scanner</div></div>
+    <div class="mini-card"><div class="ic">🗺</div><div class="ttl">Mapping</div><div class="sub">Outil cartographique — mapping</div></div>
+    <div class="mini-card"><div class="ic">💡</div><div class="ttl">LED</div><div class="sub">Affichage dynamique — led</div></div>
+    <div class="mini-card"><div class="ic">🏰</div><div class="ttl">Arcania Dashboard</div><div class="sub">Dashboard thématique — arcania-dashboard</div></div>
+    <div class="mini-card"><div class="ic">🧀</div><div class="ttl">Gouda</div><div class="sub">Module expérimental — Gouda</div></div>
+  </div>
+
+  <div class="panel mt-3" style="margin-top:3rem;text-align:center;padding:3rem 1.5rem;background:radial-gradient(600px 200px at 50% 50%, var(--accent-glow), transparent 70%);border:1px solid var(--border)">
+    <div style="font-size:.72rem;color:var(--accent-soft);letter-spacing:3px;text-transform:uppercase;font-weight:700">Prochain projet</div>
+    <h2 style="font-size:1.8rem;font-weight:800;margin:1rem 0 .7rem;letter-spacing:-0.02em">Le vôtre.</h2>
+    <p class="muted" style="max-width:520px;margin:0 auto 1.5rem">On développe sur-mesure des solutions comme celles-ci pour des équipes pressées. Démarrage sous 2 semaines, architecture claire, propriété totale du code.</p>
+    <button class="btn primary" onclick="alert('Formulaire de contact — démo')">Parlons de votre projet</button>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>© 2026 Virelia Solutions · 14 solutions · GitHub <code>kreuille</code> + <code>solutionspelichet</code></div>
+  <a href="../index.html">virelia.ch ↗</a>
+</footer>
+
+</body>
+</html>

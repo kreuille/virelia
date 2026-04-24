@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Auto — Automatisations no-code | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .flow-canvas {
+    min-height: 420px; background:
+      radial-gradient(circle at 2px 2px, rgba(255,255,255,.05) 1px, transparent 1px) 0 0 / 24px 24px,
+      var(--bg-secondary);
+    border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 2rem; position: relative; overflow: auto;
+  }
+  .node {
+    position: absolute; width: 220px; padding: 1rem;
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  }
+  .node .type { font-size: .65rem; color: var(--accent-soft); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+  .node .title { font-weight: 600; margin-top: .35rem; font-size: .88rem; }
+  .node .desc { color: var(--text-muted); font-size: .72rem; margin-top: .2rem; }
+  .node.trigger { border-left: 3px solid var(--accent); }
+  .node.action  { border-left: 3px solid var(--info); }
+  .node.filter  { border-left: 3px solid var(--warning); }
+  .node.final   { border-left: 3px solid var(--success); }
+  .flow-svg { position: absolute; inset: 0; pointer-events: none; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Workflow Auto</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">No-code · Automatisation</div>
+    <h1>Workflow Auto — constructeur d'automatisations visuelles</h1>
+    <p class="tag-desc">Moteur d'automatisations glisser-déposer façon Zapier, hébergé sur votre infra : connecteurs mail, Slack, bases de données, API REST, planification cron et monitoring d'exécutions.</p>
+    <div class="meta-row">
+      <span class="tag accent">+80 connecteurs</span>
+      <span class="tag">Self-hosted</span>
+      <span class="tag">Cron & webhooks</span>
+      <span class="tag">Monitoring</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="grid cols-4 mb-2">
+    <div class="card"><div class="card-label">Workflows actifs</div><div class="card-value">38</div></div>
+    <div class="card"><div class="card-label">Exécutions / jour</div><div class="card-value">12 480</div><div class="card-trend up">▲ +8%</div></div>
+    <div class="card"><div class="card-label">Taux réussite</div><div class="card-value">99.4%</div></div>
+    <div class="card"><div class="card-label">Temps économisé</div><div class="card-value">214h/mois</div></div>
+  </div>
+
+  <div class="panel">
+    <h3>Éditeur visuel <span class="hint">Workflow : "Facture reçue → paiement planifié"</span></h3>
+    <div class="flow-canvas">
+      <svg class="flow-svg">
+        <path d="M230 80 Q270 80, 270 155 T320 230" stroke="#d52b1e" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+        <path d="M320 270 Q390 270, 420 270 T510 270" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+        <path d="M510 310 Q510 360, 510 380 T510 400" stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+        <path d="M620 270 Q680 270, 720 270 T780 270" stroke="#22c55e" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+      </svg>
+
+      <div class="node trigger" style="top:30px; left:10px">
+        <div class="type">▶ Déclencheur</div>
+        <div class="title">Email reçu</div>
+        <div class="desc">compta@acme.ch<br>Pièce jointe PDF</div>
+      </div>
+
+      <div class="node action" style="top:200px; left:140px">
+        <div class="type">◎ Action</div>
+        <div class="title">Extraire facture (OCR)</div>
+        <div class="desc">IBAN, montant, échéance</div>
+      </div>
+
+      <div class="node filter" style="top:240px; left:400px">
+        <div class="type">⚖ Filtre</div>
+        <div class="title">Montant &gt; CHF 5 000 ?</div>
+        <div class="desc">Branches oui/non</div>
+      </div>
+
+      <div class="node final" style="top:100px; left:700px">
+        <div class="type">✓ Action finale</div>
+        <div class="title">Enregistrer Abacus</div>
+        <div class="desc">Comptabilité fournisseur</div>
+      </div>
+
+      <div class="node" style="top:380px; left:450px; border-left: 3px solid var(--warning)">
+        <div class="type">💬 Notification</div>
+        <div class="title">Demande validation</div>
+        <div class="desc">Slack #finance</div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <button class="btn primary">▶ Exécuter une fois</button>
+      <button class="btn">Planifier (cron)</button>
+      <button class="btn ghost">+ Ajouter une étape</button>
+      <span class="muted" style="margin-left:auto;font-size:.8rem">Dernière exécution réussie · il y a 17 min</span>
+    </div>
+  </div>
+
+  <div class="grid cols-2 mt-3">
+    <div class="panel">
+      <h3>Exécutions récentes</h3>
+      <table class="vir">
+        <thead><tr><th>Workflow</th><th>Durée</th><th>Statut</th><th>Quand</th></tr></thead>
+        <tbody>
+          <tr><td>Facture → paiement</td><td class="mono">2.4s</td><td><span class="badge ok">OK</span></td><td>il y a 4 min</td></tr>
+          <tr><td>Lead form → CRM</td><td class="mono">0.8s</td><td><span class="badge ok">OK</span></td><td>il y a 8 min</td></tr>
+          <tr><td>Export paie → sFTP</td><td class="mono">12s</td><td><span class="badge ok">OK</span></td><td>il y a 22 min</td></tr>
+          <tr><td>Sync stocks → ecomm</td><td class="mono">5.1s</td><td><span class="badge err">Échec</span></td><td>il y a 1h</td></tr>
+          <tr><td>Rapport hebdo</td><td class="mono">48s</td><td><span class="badge ok">OK</span></td><td>il y a 3h</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <h3>Connecteurs populaires</h3>
+      <div class="grid cols-3" style="gap:.5rem">
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">📧</div><div style="font-size:.75rem;margin-top:.3rem">Gmail</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">💬</div><div style="font-size:.75rem;margin-top:.3rem">Slack</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">📊</div><div style="font-size:.75rem;margin-top:.3rem">Sheets</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">💾</div><div style="font-size:.75rem;margin-top:.3rem">Postgres</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">🔗</div><div style="font-size:.75rem;margin-top:.3rem">Webhook</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">📅</div><div style="font-size:.75rem;margin-top:.3rem">Calendar</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">🗂️</div><div style="font-size:.75rem;margin-top:.3rem">Drive</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">💳</div><div style="font-size:.75rem;margin-top:.3rem">Stripe</div></div>
+        <div class="card" style="text-align:center;padding:.8rem"><div style="font-size:1.6rem">✉</div><div style="font-size:.75rem;margin-top:.3rem">SMTP</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur le repo <code>worflow-auto</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+</body>
+</html>

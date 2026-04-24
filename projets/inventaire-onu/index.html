@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventaire ONU — Gestion d'actifs | Virelia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .scanner-box {
+    aspect-ratio: 16/9; border: 2px dashed var(--border); border-radius: 16px;
+    display: flex; align-items:center; justify-content:center; flex-direction:column;
+    background: radial-gradient(circle, #1a1a24 0%, #0a0a0f 100%);
+    position: relative; overflow: hidden;
+  }
+  .scanner-box::before {
+    content:''; position:absolute; left:10%; right:10%; top:50%; height:2px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: scanline 2.5s ease-in-out infinite;
+  }
+  @keyframes scanline {
+    0%, 100% { transform: translateY(-60px); opacity:.3 }
+    50% { transform: translateY(60px); opacity:1 }
+  }
+</style>
+</head>
+<body>
+<header class="vir-topbar">
+  <div style="display:flex; align-items:center; gap:1.5rem">
+    <a href="../index.html" class="brand"><span class="plus"></span>VIRELIA <span class="sub">/ SOLUTIONS</span></a>
+    <span class="badge info">Inventaire ONU</span>
+  </div>
+  <a href="../index.html" class="back">← Portfolio</a>
+</header>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="kicker">Institutions internationales · Asset management</div>
+    <h1>Inventaire ONU — assets, stock et mouvements</h1>
+    <p class="tag-desc">Plateforme de gestion d'actifs pour organisations multi-sites : scan code-barres / QR, suivi mouvements, affectations bureau-utilisateur, dépréciation et rapport annuel conformité.</p>
+    <div class="meta-row">
+      <span class="tag accent">Scan QR / EAN</span>
+      <span class="tag">Multi-sites</span>
+      <span class="tag">Dépréciation</span>
+      <span class="tag">Rapports conformité</span>
+    </div>
+  </div>
+</section>
+
+<main class="app-shell">
+  <div class="grid cols-4 mb-2">
+    <div class="card"><div class="card-label">Actifs enregistrés</div><div class="card-value">18 472</div></div>
+    <div class="card"><div class="card-label">Valeur totale</div><div class="card-value">CHF 4.2M</div></div>
+    <div class="card"><div class="card-label">Mouvements / mois</div><div class="card-value">842</div><div class="card-trend up">▲ +11%</div></div>
+    <div class="card"><div class="card-label">Taux de localisation</div><div class="card-value">98.4%</div><div class="card-trend up">▲ +1.2 pts</div></div>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="panel">
+      <h3>Scanner un actif</h3>
+      <div class="scanner-box">
+        <div style="font-size:3rem;opacity:.4">📷</div>
+        <div style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem">Pointez la caméra vers un code-barres ou QR</div>
+      </div>
+      <div class="row mt-2" style="gap:.5rem">
+        <input class="input" placeholder="ou entrer ID : UN-LT-…" onkeydown="if(event.key==='Enter') lookup(this.value)">
+        <button class="btn primary" onclick="lookup('UN-LT-04821')">Rechercher</button>
+      </div>
+      <div id="result" class="mt-2"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Mouvements récents</h3>
+      <table class="vir">
+        <thead><tr><th>ID</th><th>Désignation</th><th>De</th><th>Vers</th><th>Statut</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">UN-LT-04821</td><td>Dell Latitude 7440</td><td>Genève B2-304</td><td>Genève B2-312</td><td><span class="badge ok">Validé</span></td></tr>
+          <tr><td class="mono">UN-PR-00918</td><td>HP LaserJet Pro</td><td>Stock central</td><td>New York · 8F</td><td><span class="badge warn">En transit</span></td></tr>
+          <tr><td class="mono">UN-DP-00247</td><td>Écran Dell 27"</td><td>Genève B1-117</td><td>Rebut</td><td><span class="badge err">Mis au rebut</span></td></tr>
+          <tr><td class="mono">UN-CH-12044</td><td>Chaise ergo Herman Miller</td><td>Stock Vienne</td><td>Vienne · R2</td><td><span class="badge ok">Validé</span></td></tr>
+          <tr><td class="mono">UN-LT-04822</td><td>MacBook Pro 14 M3</td><td>Réception</td><td>Genève A4-008</td><td><span class="badge info">Attribué</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel mt-3">
+    <h3>Répartition par site <span class="hint">valeur nette comptable</span></h3>
+    <div class="grid cols-2">
+      <svg viewBox="0 0 500 220" class="chart-svg" preserveAspectRatio="xMinYMin meet">
+        <g font-family="Inter" font-size="11" fill="#8a8a9a">
+          <text x="10" y="30">Genève</text>
+          <rect x="80" y="20" width="340" height="18" fill="#d52b1e" opacity="1"/>
+          <text x="428" y="33" fill="#fff">CHF 1.8M</text>
+          <text x="10" y="62">New York</text>
+          <rect x="80" y="52" width="220" height="18" fill="#d52b1e" opacity="0.88"/>
+          <text x="308" y="65" fill="#fff">CHF 1.2M</text>
+          <text x="10" y="94">Vienne</text>
+          <rect x="80" y="84" width="180" height="18" fill="#d52b1e" opacity="0.76"/>
+          <text x="268" y="97" fill="#fff">CHF 0.9M</text>
+          <text x="10" y="126">Nairobi</text>
+          <rect x="80" y="116" width="120" height="18" fill="#d52b1e" opacity="0.64"/>
+          <text x="208" y="129" fill="#fff">CHF 0.6M</text>
+          <text x="10" y="158">Bangkok</text>
+          <rect x="80" y="148" width="90" height="18" fill="#d52b1e" opacity="0.52"/>
+          <text x="178" y="161" fill="#fff">CHF 0.45M</text>
+          <text x="10" y="190">Santiago</text>
+          <rect x="80" y="180" width="60" height="18" fill="#d52b1e" opacity="0.40"/>
+          <text x="148" y="193" fill="#fff">CHF 0.3M</text>
+        </g>
+      </svg>
+      <div class="stack">
+        <div class="panel" style="padding:1rem">
+          <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase">Top catégories</div>
+          <div class="stack mt-2" style="gap:.4rem">
+            <div class="row between"><span>Informatique</span><span class="mono">42% · CHF 1.8M</span></div>
+            <div class="row between"><span>Mobilier</span><span class="mono">28% · CHF 1.2M</span></div>
+            <div class="row between"><span>Véhicules</span><span class="mono">15% · CHF 640k</span></div>
+            <div class="row between"><span>AV / Conf.</span><span class="mono">9% · CHF 380k</span></div>
+            <div class="row between"><span>Autres</span><span class="mono">6% · CHF 250k</span></div>
+          </div>
+        </div>
+        <div class="panel" style="padding:1rem">
+          <div style="font-size:.72rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase">Alertes conformité</div>
+          <div class="stack mt-2">
+            <div class="row between"><span class="badge warn">Audit</span><span style="font-size:.8rem">142 actifs non revus depuis 12 mois</span></div>
+            <div class="row between"><span class="badge err">Manquants</span><span style="font-size:.8rem">8 actifs introuvables au dernier pointage</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pfooter">
+  <div>Mockup portfolio · Virelia Solutions · basé sur les repos <code>inventaire</code>, <code>inventaire_onu</code>, <code>inventaire_onu2</code>, <code>inventaire-assets</code>, <code>stock_onu</code>, <code>stock_onu2</code></div>
+  <a href="../index.html">Retour portfolio →</a>
+</footer>
+
+<script>
+function lookup(id) {
+  const r = document.getElementById('result');
+  r.innerHTML = `
+    <div class="panel" style="padding:1rem;background:var(--bg-card)">
+      <div style="font-size:.7rem;color:var(--text-muted);letter-spacing:1.2px">ACTIF TROUVÉ</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-top:.3rem">${id} · Dell Latitude 7440</div>
+      <div class="muted mt-1" style="font-size:.8rem">Acquis 12.06.2024 · CHF 1 480 · Emplacement actuel : Genève B2-312</div>
+      <div class="row mt-2"><span class="badge ok">En service</span><span class="badge info">Amortissement 3 ans</span></div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
